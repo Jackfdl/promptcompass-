@@ -9,7 +9,7 @@
   "use strict";
 
   var Bench = {
-    updated: "July 13, 2026",
+    updated: "July 19, 2026",
 
     disclaimer:
       "Snapshot curated from public leaderboards and comparisons. Rankings shift fast — treat this as guidance, not gospel.",
@@ -55,7 +55,10 @@
       { id: "cw", label: "Creative-writing model guide (July 2026)", url: "https://www.buildmvpfast.com/articles/best-llms-2026-guide/creative-writing-ai" },
       { id: "pplx", label: "Perplexity plans, features and Sonar (2026)", url: "https://suprmind.ai/hub/perplexity/pricing/" },
       { id: "open", label: "Open-weight model benchmarks (2026)", url: "https://benchlm.ai/blog/posts/best-chinese-llm" },
-      { id: "subs", label: "AI subscription pricing comparison (2026)", url: "https://www.sentisight.ai/ai-price-comparison-gemini-chatgpt-claude-grok/" }
+      { id: "subs", label: "AI subscription pricing comparison (2026)", url: "https://www.sentisight.ai/ai-price-comparison-gemini-chatgpt-claude-grok/" },
+      { id: "aidx", label: "AA Intelligence Index snapshot, July 16, 2026 (BenchLM mirror)", url: "https://benchlm.ai/benchmarks/artificialAnalysis" },
+      { id: "orfree", label: "OpenRouter free-model list (July 2026)", url: "https://costgoat.com/pricing/openrouter-free-models" },
+      { id: "price", label: "Vendor API pricing mirror (July 2026)", url: "https://benchlm.ai/anthropic/api-pricing" }
     ],
 
     taskTypes: {
@@ -75,14 +78,14 @@
       coding: {
         confidence: "high",
         summary:
-          "It is nearly a tie at the top: Claude (Opus 4.8) leads the toughest real-repo benchmark by a hair over GPT-5.5, while GPT-5.6 Sol tops the new Coding Agent Index (80) and Gemini 3.1 Pro wins the community coding arena. Open models (GLM-5.2, Kimi K2.6) are now close behind at a fraction of the cost.",
+          "It is nearly a tie at the top: Claude leads the toughest real-repo benchmark and now also LMArena's coding board (July 16), while GPT-5.6 Sol tops the new Coding Agent Index (80). Kimi K3 debuted #1 on the Frontend Code Arena — open-ish challengers now sit a fraction of the cost behind.",
         ranking: [
-          { app: "claude", note: "Leads SWE-bench Pro (uncontaminated, real repositories) at 69.2% and sits at the top of SWE-bench Verified (88.6%) — strongest at multi-file, real-project work." },
+          { app: "claude", note: "Leads SWE-bench Pro (uncontaminated, real repositories) at 69.2%, sits at the top of SWE-bench Verified (88.6%), and Fable 5 now leads LMArena's coding board (July 16 snapshot) — strongest at multi-file, real-project work." },
           { app: "chatgpt", note: "Statistically tied on SWE-bench Verified (88.7%); the Codex variant is built specifically for coding workflows." },
-          { app: "gemini", note: "Gemini 3.1 Pro ranks #1 in LMArena's coding category — developers rate its answers highest in head-to-head votes." },
+          { app: "gemini", note: "Gemini 3.1 Pro long led LMArena's coding arena and stays top-tier in head-to-head developer votes — the July 16 snapshot has Claude Fable 5 ahead." },
           { app: "perplexity", note: "Useful for looking up current docs, APIs and error messages with sources — pair it with a coding model." }
         ],
-        sourceIds: ["swebench", "lmarena", "open"]
+        sourceIds: ["swebench", "lmarena", "open", "aidx"]
       },
 
       analysis: {
@@ -90,7 +93,7 @@
         summary:
           "The top models are close on reasoning. Claude leads the overall intelligence index, Gemini 3.1 Pro leads several reasoning boards, and ChatGPT has the most mature built-in tools for uploaded data files.",
         ranking: [
-          { app: "claude", note: "Tops the rebased AA intelligence index at max reasoning effort (Fable 5 = 60, Opus 4.8 = 56) with careful, assumption-stating reasoning — a good default for rigorous analysis." },
+          { app: "claude", note: "Tops the July 16 AA index snapshot (Fable 5 = 59.9, Opus 4.8 = 55.7) with careful, assumption-stating reasoning — a good default for rigorous analysis." },
           { app: "gemini", note: "Leads several reasoning benchmarks and handles very long documents well." },
           { app: "chatgpt", note: "Best built-in tooling for spreadsheets and data files you upload directly in chat." },
           { app: "perplexity", note: "Good for pulling in current external data and benchmarks to feed the analysis, with citations." }
@@ -153,14 +156,14 @@
       general: {
         confidence: "high",
         summary:
-          "The top tier has never been closer — the leaders sit within about 55 Elo points on LMArena, the tightest spread on record. Claude holds #1 overall, with GPT-5.5 and Gemini 3.1 Pro right behind; Perplexity is the specialist you add for anything that needs sources.",
+          "The top tier has never been closer — the top ten sit within about 28 Elo points on LMArena (July 16 update). Claude holds #1 overall, GPT-5.6 is right behind, and the July surprise Kimi K3 joined the leaders; Perplexity is the specialist you add for anything that needs sources.",
         ranking: [
-          { app: "claude", note: "#1 on the LMArena overall leaderboard, and Fable 5 tops the rebased AA index at max effort (60) — GPT-5.6 Sol at max effort sits one point behind (59) while leading the Coding Agent Index (80) at about a third of the cost per task." },
+          { app: "claude", note: "#1 on the LMArena overall leaderboard, and Fable 5 tops the July 16 AA snapshot (59.9) — GPT-5.6 Sol sits one point behind (58.9) while leading the Coding Agent Index (80) at about a third of the cost per task; Moonshot's new Kimi K3 (57.1) is now the closest outside challenger." },
           { app: "chatgpt", note: "A hair behind on aggregate scores, and the most complete all-round app." },
           { app: "gemini", note: "Close third, with the most generous free tier of the three." },
           { app: "perplexity", note: "Not a generalist — but the first stop whenever the answer must be current and cited." }
         ],
-        sourceIds: ["lmarena", "aa", "tiers"]
+        sourceIds: ["lmarena", "aa", "aidx", "tiers"]
       }
     },
 
@@ -175,7 +178,8 @@
           { name: "Claude Opus 4.8", vendor: "Anthropic", access: "Claude Pro ($20/mo); limited on free tier", note: "#1 on LMArena overall, top-3 on the Artificial Analysis index (56); leads real-repo coding (SWE-bench Pro 69.2%)." },
           { name: "GPT-5.5 Pro", vendor: "OpenAI", access: "ChatGPT Pro ($200/mo); standard GPT-5.5 on Plus ($20/mo)", note: "OpenAI's maximum-reasoning tier, statistically tied with Opus on many boards — and the new GPT-5.6 series (Sol/Terra/Luna, July 9) sits one point behind Fable 5 at max effort — Sol leads the Coding Agent Index." },
           { name: "Gemini 3.1 Pro", vendor: "Google", access: "Google AI Pro ($19.99/mo); also inside Perplexity Pro", note: "#1 in LMArena's coding arena, top-tier reasoning, deep Google Workspace integration." },
-          { name: "Claude Fable 5", vendor: "Anthropic", access: "Claude Pro / Max plans", note: "Anthropic's newest flagship, purpose-built for creative work — tops creative-writing benchmarks for voice and subtext." }
+          { name: "Claude Fable 5", vendor: "Anthropic", access: "Claude Pro / Max plans · API $10/$50 per 1M", note: "Anthropic's newest flagship, purpose-built for creative work — tops creative-writing benchmarks and the July 16 AA index (59.9)." },
+          { name: "Kimi K3", vendor: "Moonshot AI", access: "API $3/$15 per 1M · open weights announced for July 27", note: "July 16 surprise: 2.8T-parameter MoE, 1M context, native vision — #3 on the AA index (57.1), best published BrowseComp (91.2%), #1 Frontend Code Arena at launch." }
         ]
       },
       {
@@ -216,12 +220,13 @@
         label: "Open-weight models",
         blurb: "Downloadable and cheap or free to run via hosts like Groq and OpenRouter — a step below the frontier, and closing fast.",
         models: [
-          { name: "GLM-5.2", vendor: "Z.ai", access: "Open weights; low-cost API hosts", note: "Best open-weight coder (SWE-bench Pro 62.1%) and #4 overall on the Artificial Analysis index — a genuine frontier challenger." },
-          { name: "Kimi K2.6", vendor: "Moonshot AI", access: "Open weights; API hosts", note: "Tops open-weight intelligence indexes (~54 AA); near-first on SWE-bench Verified (80.2%) among open models; strong on long agentic tasks." },
-          { name: "Nemotron 3 Ultra", vendor: "NVIDIA", access: "FREE on OpenRouter; open weights on Hugging Face", note: "Strongest US open model (AA 47.7) and extremely fast — 400+ tokens/second on some hosts." },
+          { name: "GLM-5.2", vendor: "Z.ai", access: "Open weights; low-cost API hosts", note: "Best open-weight coder (SWE-bench Pro 62.1%) and the top open-weight score on the July 16 AA snapshot (51.1) — a genuine frontier challenger." },
+          { name: "Kimi K2.6", vendor: "Moonshot AI", access: "Open weights; API hosts", note: "Strong open all-rounder (AA 44.2 on the July 16 rebased snapshot; SWE-bench Verified 80.2%) — now overshadowed by its flagship sibling K3." },
+          { name: "Nemotron 3 Ultra", vendor: "NVIDIA", access: "FREE on OpenRouter; open weights on Hugging Face", note: "Extremely fast US open model (AA 37.8 on the July 16 rebased snapshot; 400+ tokens/second on some hosts) — still free on OpenRouter." },
           { name: "Llama 4", vendor: "Meta", access: "Free tier on Groq (near-instant)", note: "The classic open workhorse — great for fast drafts and iteration." },
-          { name: "DeepSeek V4", vendor: "DeepSeek", access: "Free chat app; open weights", note: "Top-tier open reasoning (~52 AA); the most popular free alternative worldwide." },
-          { name: "Qwen 3.6", vendor: "Alibaba", access: "Free chat app; open weights", note: "Among the strongest open-weight lines for coding and multilingual work." }
+          { name: "DeepSeek V4", vendor: "DeepSeek", access: "Free chat app; open weights", note: "Solid open reasoning (V4 Pro at AA 44.3 on the July 16 snapshot); the most popular free alternative worldwide — currently no free OpenRouter route." },
+          { name: "Qwen 3.7 Max", vendor: "Alibaba", access: "Free chat app · API; open weights for smaller Qwen tiers", note: "Alibaba's strongest line (AA 46.0) for coding and multilingual work; Qwen3 Coder remains the best free coding route on OpenRouter." },
+          { name: "Inkling", vendor: "Thinking Machines Lab", access: "Open weights (Apache 2.0) on Hugging Face · Tinker API", note: "July 15 debut: 975B-parameter multimodal MoE (41B active), 1M context — the new leading US open-weights base for customization (AA 40.7)." }
         ]
       }
     ],

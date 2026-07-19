@@ -40,7 +40,7 @@
           <path class="brand-needle" d="M15.5 8.5l-2.2 5-5 2.2 2.2-5z" fill="currentColor" stroke="none"></path>
         </svg>
         <span class="brand-name">WhichAI</span>
-        <span class="badge">v0.21 · Growth</span>
+        <span class="badge">v0.22 · Growth</span>
         <span class="badge badge-privacy" title="Runs entirely in your browser. No account, no server, no tracking. API keys stay on your device."><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg><span id="privacy-text">Private by design</span></span>
       </div>
       <nav class="site-nav" aria-label="Views">
@@ -60,6 +60,11 @@
 
   <!-- ============ Generator view ============ -->
   <main class="layout view" id="generator-view">
+    <div class="mode-switch" id="gen-mode-switch" role="tablist" aria-label="Generator modes">
+      <button id="mode-goal" class="mode-btn active" type="button" role="tab" aria-selected="true">Describe a goal</button>
+      <button id="mode-finder" class="mode-btn" type="button" role="tab" aria-selected="false">Guided finder — no prompt needed</button>
+    </div>
+    <section id="finder-wrap" class="finder-wrap" hidden></section>
     <section class="card form-card" aria-labelledby="form-title">
       <h1 id="form-title" class="card-title">Describe your goal</h1>
       <p class="card-subtitle">WhichAI turns it into a prompt tailored to each AI model — and tells you which model is the best fit for the job, in plain language.</p>
@@ -206,6 +211,15 @@
       <div id="db-detail" hidden></div>
     </div>
 
+    <section class="insights" id="insights-wrap" hidden>
+      <h2 id="insights-title">Market at a glance</h2>
+      <p class="guide-updated" id="insights-note"></p>
+      <div class="insights-grid">
+        <div class="card insight-card"><h3 id="chart-top-title">Top models — intelligence index</h3><div id="chart-top" class="chart-box"></div></div>
+        <div class="card insight-card"><h3 id="chart-pp-title">Price vs performance</h3><div id="chart-pp" class="chart-box"></div><p class="router-meta" id="chart-pp-note"></p></div>
+      </div>
+    </section>
+
     <div class="guide-grid" id="guide-grid"></div>
 
     <section class="catalog" id="catalog-wrap" hidden>
@@ -219,10 +233,16 @@
   <!-- ============ Compare view ============ -->
   <main class="layout-guide view" id="compare-view" hidden>
     <div class="guide-head">
-      <h1>Compare outputs</h1>
+      <h1>Compare</h1>
       <p>Run the same optimized prompt in each AI app, paste (or auto-run) the answers, and score them side by side. Everything stays in your browser.</p>
     </div>
 
+    <div class="subtabs" role="tablist" aria-label="Compare modes">
+      <button id="cmp-tab-outputs" class="subtab active" type="button" role="tab" aria-selected="true">Output comparison</button>
+      <button id="cmp-tab-specs" class="subtab" type="button" role="tab" aria-selected="false">Model comparison</button>
+    </div>
+
+    <div id="cmp-outputs-wrap">
     <div id="compare-empty" class="empty-state compare-empty">
       <p>No active comparison. Generate prompts first, then click "Compare outputs" to bring them here. <a href="#">Go to the Generator</a></p>
     </div>
@@ -243,6 +263,9 @@
       <h2>Saved comparisons</h2>
       <div id="history-list"></div>
     </section>
+    </div>
+
+    <div id="cmp-specs-wrap" hidden></div>
   </main>
 
   <!-- ============ Merge studio view ============ -->
@@ -305,12 +328,17 @@
     </div>
 
     <div id="chain-steps-wrap" hidden>
+      <div class="chain-map-wrap">
+        <p class="finder-block-title" id="chain-map-title">Workflow roadmap</p>
+        <div id="chain-map" class="chain-map" role="list"></div>
+      </div>
       <div id="chain-steps"></div>
       <div class="compare-actions">
         <button id="chain-save" class="btn-primary btn-inline" type="button">Save chain</button>
         <button id="chain-runall" class="btn-copy" type="button">Run all steps</button>
         <button id="chain-export" class="btn-copy" type="button">Export .md</button>
         <button id="chain-share" class="btn-copy" type="button">Share link</button>
+        <button id="chain-addstep" class="btn-copy" type="button">+ Add step</button>
         <span class="field-hint" id="chain-saved" hidden></span>
       </div>
       <p class="run-status" id="chain-runall-status" hidden></p>
@@ -416,7 +444,7 @@
       <p>An open, free, sincere project with one goal: reduce the uncertainty of using AI — which model, which prompt, with evidence.</p>
     </div>
 
-    <div class="card about-card">
+    <div class="card about-card" id="about-faq">
       <h2 class="card-title">FAQ</h2>
       <details class="faq"><summary>Is WhichAI really free?</summary><p>Yes, completely. No account, no subscription, no ads, no tracking. It runs on free hosting and the optional auto-run features use your own free API keys (Google AI Studio, Groq). There is nothing to sell you.</p></details>
       <details class="faq"><summary>Where do my data and API keys go?</summary><p>Nowhere. Everything — goals, prompts, comparisons, chains, keys — lives in your browser's local storage. There is no WhichAI server. API keys are sent only to the provider you call (Google, Groq or OpenRouter), directly from your browser.</p></details>
@@ -428,7 +456,7 @@
       <details class="faq"><summary>Can I contribute?</summary><p>Please do — see below. Ideas, corrections, new models for the database, translations: everything helps.</p></details>
     </div>
 
-    <div class="card about-card">
+    <div class="card about-card" id="about-similar">
       <h2 class="card-title">Similar tools — and what they do better</h2>
       <p class="router-summary">WhichAI is not the only prompting tool. In the spirit of openness, here is the honest landscape:</p>
       <ul class="catalog-list">
@@ -441,7 +469,7 @@
       <p class="router-meta">What WhichAI offers instead: prompts for 13 models from a single goal, benchmark-based model recommendations, side-by-side comparison and multi-step chains — 100% free, no account, everything in your browser.</p>
     </div>
 
-    <div class="card about-card">
+    <div class="card about-card" id="about-contribute">
       <h2 class="card-title">Contribute &amp; contact</h2>
       <p class="about-text">WhichAI is open source and built in public. Suggest features, report wrong data, add models to the database, improve translations — or just say what confused you:</p>
       <ul class="catalog-list about-links">
@@ -451,8 +479,25 @@
     </div>
   </main>
 
+  <!-- ============ Glossary view ============ -->
+  <main class="layout-guide view" id="glossary-view" hidden>
+    <div class="guide-head">
+      <h1 id="glossary-title">AI glossary</h1>
+      <p id="glossary-sub">Every AI term in plain words — one sentence each, examples included.</p>
+    </div>
+    <input type="text" id="glossary-search" class="db-search db-search-hero" placeholder="Search terms…" autocomplete="off" />
+    <p class="field-hint" id="glossary-count"></p>
+    <div id="glossary-list" class="glossary-list"></div>
+  </main>
+
   <footer class="site-footer">
-    <p>WhichAI v0.21 — Growth · Runs entirely in your browser: no account, no server, your keys and data never leave your device.</p>
+    <nav class="footer-links" aria-label="More from WhichAI">
+      <a href="#about-faq" id="foot-faq">FAQ</a>
+      <a href="#about-similar" id="foot-similar">Similar tools</a>
+      <a href="#about-contribute" id="foot-contribute">Contribute</a>
+      <a href="#glossary" id="foot-glossary">Glossary</a>
+    </nav>
+    <p>WhichAI v0.22 — Growth · Runs entirely in your browser: no account, no server, your keys and data never leave your device.</p>
   </footer>
 
   <noscript><p style="text-align:center;padding:24px;">WhichAI needs JavaScript to run.</p></noscript>
@@ -463,6 +508,10 @@
   <script src="js/i18n.js"></script>
   <script src="js/models-db.js"></script>
   <script src="js/merge.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/glossary.js"></script>
+  <script src="js/finder.js"></script>
+  <script src="js/modelcompare.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

@@ -94,6 +94,8 @@
   var $refineStatus = document.getElementById("refine-status");
 
   var results = [];
+  var dbShowDetail = null;
+  var GENMODE_KEY = "pc_genmode";
   var recommendedAppId = null;
   var guideBuilt = false;
   var lastGen = null;
@@ -109,7 +111,7 @@
   var THEME_KEY = "pc_theme";
   var DEFAULT_GEMINI_MODEL = "gemini-3.5-flash";
   var DEFAULT_GROQ_MODEL = "llama-3.3-70b-versatile";
-  var APP_VERSION = "v0.21";
+  var APP_VERSION = "v0.22";
   var BRAND = "WhichAI";
   var TASK_ICONS = {
     writing: '<svg class="guide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z"/><path d="M13.5 7.5l3 3"/></svg>',
@@ -271,6 +273,28 @@
     setText("#merge-src-add", "mergeSourceAdd");
     if ($themeToggle) { $themeToggle.title = T("themeTip"); $themeToggle.setAttribute("aria-label", T("themeTip")); }
     if (window.WhichAIMerge) window.WhichAIMerge.onLanguageChange();
+
+    setText("#foot-faq", "footFaq");
+    setText("#foot-similar", "footSimilar");
+    setText("#foot-contribute", "footContribute");
+    setText("#foot-glossary", "footGlossary");
+    setText("#mode-goal", "modeGoal");
+    setText("#mode-finder", "modeFinder");
+    setText("#cmp-tab-outputs", "cmpTabOutputs");
+    setText("#cmp-tab-specs", "cmpTabSpecs");
+    setText("#glossary-title", "glossTitle");
+    setText("#glossary-sub", "glossSub");
+    var gse = document.getElementById("glossary-search");
+    if (gse) gse.placeholder = T("glossSearchPh");
+    setText("#insights-title", "insightsTitle");
+    setText("#chart-top-title", "chartTopTitle");
+    setText("#chart-pp-title", "chartPpTitle");
+    setText("#chain-map-title", "chainMapTitle");
+    setText("#chain-addstep", "chainAddStep");
+    if (window.WhichAIFinder) window.WhichAIFinder.rerender();
+    if (window.WhichAIModelCompare) window.WhichAIModelCompare.rerender();
+    var glv = document.getElementById("glossary-view");
+    if (glv && !glv.hidden) initGlossary();
 
     var optMap = { none: "optNone", prose: "optProse", markdown: "optMarkdown", bullets: "optBullets", table: "optTable", json: "optJson", code: "optCode", short: "optShort", medium: "optMedium", long: "optLong", professional: "optProfessional", friendly: "optFriendly", casual: "optCasual", persuasive: "optPersuasive", academic: "optAcademic" };
     [$format, $length, $tone].forEach(function (sel) {
@@ -693,6 +717,8 @@
     $chainsView.hidden = name !== "chains";
     $aboutView.hidden = name !== "about";
     $settingsView.hidden = name !== "settings";
+    var glossaryView = document.getElementById("glossary-view");
+    if (glossaryView) glossaryView.hidden = name !== "glossary";
     if ($mergeView) $mergeView.hidden = name !== "merge";
     $navGenerator.classList.toggle("active", name === "generator");
     $navGuide.classList.toggle("active", name === "guide");
@@ -703,6 +729,7 @@
     if (name === "guide" && !guideBuilt) buildGuide();
     if (name === "compare") renderCompare();
     if (name === "chains") renderChainHistory();
+    if (name === "glossary") initGlossary();
     if (name === "merge" && window.WhichAIMerge) window.WhichAIMerge.render();
     if (viewInitDone) window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -711,8 +738,253 @@
     var h = location.hash;
     var isChains = h.indexOf("#chains") === 0;
     var isMerge = h.indexOf("#merge") === 0;
-    setView(h === "#guide" ? "guide" : h === "#compare" ? "compare" : isChains ? "chains" : isMerge ? "merge" : h === "#about" ? "about" : h === "#settings" ? "settings" : "generator");
+    var isAbout = h.indexOf("#about") === 0;
+    var isGlossary = h.indexOf("#glossary") === 0;
+    var isCompare = h.indexOf("#compare") === 0;
+    var isFinder = h.indexOf("#finder") === 0;
+    setView(h === "#guide" ? "guide" : isCompare ? "compare" : isChains ? "chains" : isMerge ? "merge" : isAbout ? "about" : isGlossary ? "glossary" : h === "#settings" ? "settings" : "generator");
     if (isChains) importChainFromHash();
+    if (isCompare) setCompareTab(h.indexOf("#compare-specs") === 0 ? "specs" : "outputs");
+    if (isFinder) setGenMode("finder", false);
+    if (isAbout && h.length > "#about".length) {
+      var anchor = document.getElementById(h.slice(1));
+      if (anchor) setTimeout(function () { anchor.scrollIntoView({ behavior: "smooth", block: "start" }); }, 160);
+    }
+  }
+
+  /* ---------- v0.22: generator mode (goal vs guided finder) ---------- */
+
+  function setGenMode(mode, persist) {
+    var isFinder = mode === "finder";
+    $generatorView.classList.toggle("finder-on", isFinder);
+    var fw = document.getElementById("finder-wrap");
+    if (fw) fw.hidden = !isFinder;
+    var mg = document.getElementById("mode-goal");
+    var mf = document.getElementById("mode-finder");
+    if (mg) { mg.classList.toggle("active", !isFinder); mg.setAttribute("aria-selected", String(!isFinder)); }
+    if (mf) { mf.classList.toggle("active", isFinder); mf.setAttribute("aria-selected", String(isFinder)); }
+    if (isFinder && window.WhichAIFinder && fw) {
+      window.WhichAIFinder.init(fw, {
+        T: T,
+        openModel: openModelById,
+        useModel: function (family, task) {
+          var cb = document.querySelector('.model-check input[value="' + family + '"]');
+          if (cb) cb.checked = true;
+          if (task && Engine.TASK_TYPES[task]) { $taskType.value = task; $detectHint.hidden = true; }
+          setGenMode("goal", true);
+          if (location.hash) location.hash = ""; else setView("generator");
+          $goal.focus();
+        },
+        switchToGoal: function () { setGenMode("goal", true); }
+      });
+    }
+    if (persist) { try { localStorage.setItem(GENMODE_KEY, mode); } catch (e) { /* ignore */ } }
+  }
+
+  /* ---------- v0.22: compare subtabs (outputs vs specs) ---------- */
+
+  function setCompareTab(which) {
+    var ow = document.getElementById("cmp-outputs-wrap");
+    var swp = document.getElementById("cmp-specs-wrap");
+    var bo = document.getElementById("cmp-tab-outputs");
+    var bs = document.getElementById("cmp-tab-specs");
+    var specs = which === "specs";
+    if (ow) ow.hidden = specs;
+    if (swp) swp.hidden = !specs;
+    if (bo) { bo.classList.toggle("active", !specs); bo.setAttribute("aria-selected", String(!specs)); }
+    if (bs) { bs.classList.toggle("active", specs); bs.setAttribute("aria-selected", String(specs)); }
+    if (specs && window.WhichAIModelCompare && swp) {
+      window.WhichAIModelCompare.init(swp, { T: T, openModel: openModelById });
+    }
+  }
+
+  /* ---------- v0.22: open a model detail from anywhere ---------- */
+
+  function openModelById(id) {
+    var DBx = window.PromptCompassModelsDB || null;
+    if (!DBx) return;
+    var m = null;
+    DBx.models.forEach(function (x) { if (x.id === id) m = x; });
+    if (!m) return;
+    if (location.hash !== "#guide") location.hash = "#guide"; else setView("guide");
+    if (!guideBuilt) buildGuide();
+    var s = document.getElementById("db-search");
+    if (s) {
+      s.value = m.name;
+      try { s.dispatchEvent(new Event("input")); } catch (e) { /* ignore */ }
+    }
+    if (dbShowDetail) dbShowDetail(m);
+    setTimeout(function () {
+      var d = document.getElementById("db-detail");
+      if (d && !d.hidden) d.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 180);
+  }
+
+  /* ---------- v0.22: glossary ---------- */
+
+  function initGlossary() {
+    var G = window.WhichAIGlossary || null;
+    var list = document.getElementById("glossary-list");
+    var search = document.getElementById("glossary-search");
+    var count = document.getElementById("glossary-count");
+    if (!G || !list) return;
+    function renderGl(q) {
+      var terms = G.filter(q);
+      list.innerHTML = "";
+      if (count) count.textContent = terms.length + " " + T("glossCount");
+      if (!terms.length) {
+        var p = document.createElement("p");
+        p.className = "router-meta";
+        p.textContent = T("glossNoRes");
+        list.appendChild(p);
+        return;
+      }
+      terms.forEach(function (t) {
+        var d = document.createElement("details");
+        d.className = "faq gl-item";
+        var s = document.createElement("summary");
+        s.textContent = t.term;
+        d.appendChild(s);
+        var def = document.createElement("p");
+        def.className = "gl-def";
+        def.textContent = t.def;
+        d.appendChild(def);
+        if (t.ex) {
+          var ex = document.createElement("p");
+          ex.className = "gl-ex";
+          ex.textContent = t.ex;
+          d.appendChild(ex);
+        }
+        if (t.link) {
+          var lp = document.createElement("p");
+          lp.className = "gl-link";
+          var a = document.createElement("a");
+          a.href = t.link.hash;
+          a.textContent = t.link.label + " \u2192";
+          lp.appendChild(a);
+          d.appendChild(lp);
+        }
+        list.appendChild(d);
+      });
+    }
+    if (search && !search.getAttribute("data-wired")) {
+      search.setAttribute("data-wired", "1");
+      search.addEventListener("input", function () { renderGl(search.value); });
+    }
+    renderGl(search ? search.value : "");
+  }
+
+  /* ---------- v0.22: market insight charts (Model guide) ---------- */
+
+  function renderInsights() {
+    var C = window.WhichAICharts || null;
+    var DBx = window.PromptCompassModelsDB || null;
+    var wrap = document.getElementById("insights-wrap");
+    if (!C || !DBx || !wrap) return;
+    wrap.hidden = false;
+    var note = document.getElementById("insights-note");
+    if (note) note.textContent = "Measured scores only (no estimates). " + DBx.scaleNote;
+
+    var top = DBx.models
+      .filter(function (m) { return m.score && m.score.aa && !m.score.est && (m.status === "public" || m.status === "preview"); })
+      .sort(function (a, b) { return b.score.aa - a.score.aa; })
+      .slice(0, 12);
+    var topEl = document.getElementById("chart-top");
+    if (topEl) {
+      topEl.innerHTML = C.barChart(top.map(function (m) {
+        return { label: m.name, value: m.score.aa };
+      }), { max: 65, aria: "Top 12 models by AA Intelligence Index" });
+    }
+
+    var pp = DBx.models.filter(function (m) {
+      return m.spec && m.spec.priceIn != null && m.spec.priceOut != null && m.score && m.score.aa && !m.score.est;
+    });
+    var ppEl = document.getElementById("chart-pp");
+    if (ppEl && pp.length >= 4) {
+      var pts = pp.map(function (m, i) {
+        return {
+          x: (3 * m.spec.priceIn + m.spec.priceOut) / 4,
+          y: m.score.aa,
+          label: m.name,
+          labelDy: (i % 2) ? 16 : 0
+        };
+      });
+      ppEl.innerHTML = C.scatter(pts, {
+        xLabel: "Blended API price, $ per 1M tokens (3:1 input:output)",
+        yLabel: "AA Intelligence Index",
+        aria: "Price versus performance scatter plot"
+      });
+      var ppNote = document.getElementById("chart-pp-note");
+      if (ppNote) ppNote.textContent = "Top-left = more intelligence per dollar. Prices from vendor pages (July 2026); index from the July 16 snapshot. Only models with published price AND measured score are plotted.";
+    }
+  }
+
+  /* ---------- v0.22: chains visual roadmap ---------- */
+
+  function renderChainMap() {
+    var map = document.getElementById("chain-map");
+    if (!map) return;
+    map.innerHTML = "";
+    if (!activeChain) return;
+    var total = activeChain.steps.length;
+    activeChain.steps.forEach(function (step, i) {
+      var node = document.createElement("div");
+      node.className = "chain-node" + ((step.output || "").trim() ? " done" : "");
+      node.setAttribute("role", "listitem");
+      var head = document.createElement("div");
+      head.className = "chain-node-head";
+      var n = document.createElement("span");
+      n.className = "step-n";
+      n.textContent = i + 1;
+      var nm = document.createElement("span");
+      nm.className = "chain-node-name";
+      nm.textContent = step.name;
+      head.appendChild(n);
+      head.appendChild(nm);
+      node.appendChild(head);
+      var modelLbl = Engine.MODELS[step.model] ? Engine.MODELS[step.model].label : step.model;
+      var mc = document.createElement("span");
+      mc.className = "chain-node-model";
+      mc.textContent = modelLbl + (RUNNERS[step.model] ? " \u00b7 auto-run" : "");
+      node.appendChild(mc);
+      var de = document.createElement("p");
+      de.className = "chain-node-desc";
+      de.textContent = trunc(step.description || "", 74);
+      node.appendChild(de);
+      var io = document.createElement("p");
+      io.className = "chain-io";
+      io.textContent = "In: " + (i === 0 ? "your goal" : "output of step " + i) +
+        " \u00b7 Out: " + (i === total - 1 ? "final result" : "feeds step " + (i + 2));
+      node.appendChild(io);
+      node.addEventListener("click", function () {
+        var card = $chainSteps.children[i];
+        if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      map.appendChild(node);
+    });
+  }
+
+  function moveChainStep(from, to) {
+    if (!activeChain) return;
+    if (to < 0 || to >= activeChain.steps.length) return;
+    var s = activeChain.steps.splice(from, 1)[0];
+    activeChain.steps.splice(to, 0, s);
+    renderChain();
+  }
+
+  function addChainStep() {
+    if (!activeChain) return;
+    var reco = Bench ? Bench.recommend(activeChain.taskType).ranking[0].app : "claude";
+    activeChain.steps.push({
+      tplId: "custom-" + Date.now(),
+      name: "Custom step",
+      description: "Your own step \u2014 edit the instruction below ({goal} inserts your goal).",
+      instruction: "Continue working toward this goal: \"{goal}\". Describe here what this step must deliver.",
+      model: reco,
+      output: "",
+      custom: true
+    });
+    renderChain();
   }
 
   window.addEventListener("hashchange", syncViewToHash);
@@ -999,6 +1271,7 @@
 
     buildCatalog();
     buildModelDb();
+    renderInsights();
   }
 
   function buildCatalog() {
@@ -1102,6 +1375,39 @@
       });
       card.appendChild(chips);
 
+      if (m.spec) {
+        var sp = document.createElement("div");
+        sp.className = "db-specs";
+        [["released", "mcReleased"], ["ctx", "mcCtx"], ["modal", "mcModal"], ["speed", "mcSpeed"]].forEach(function (f) {
+          if (m.spec[f[0]] == null) return;
+          var cell = document.createElement("div");
+          cell.className = "db-spec";
+          var b = document.createElement("b");
+          b.textContent = T(f[1]);
+          cell.appendChild(b);
+          cell.appendChild(document.createTextNode(m.spec[f[0]]));
+          sp.appendChild(cell);
+        });
+        if (m.spec.priceIn != null && m.spec.priceOut != null) {
+          var pc = document.createElement("div");
+          pc.className = "db-spec";
+          var pb = document.createElement("b");
+          pb.textContent = T("mcPrice");
+          pc.appendChild(pb);
+          pc.appendChild(document.createTextNode("$" + m.spec.priceIn + " / $" + m.spec.priceOut + (m.spec.note ? " \u00b7 " + m.spec.note : "")));
+          sp.appendChild(pc);
+        } else if (m.spec.note) {
+          var nc = document.createElement("div");
+          nc.className = "db-spec";
+          var nb = document.createElement("b");
+          nb.textContent = "Note";
+          nc.appendChild(nb);
+          nc.appendChild(document.createTextNode(m.spec.note));
+          sp.appendChild(nc);
+        }
+        if (sp.children.length) card.appendChild(sp);
+      }
+
       if (m.score && m.score.cat) {
         var cats = [["coding", "Coding"], ["reasoning", "Reasoning"], ["writing", "Writing"], ["agents", "Agents & tools"]];
         var bars = document.createElement("div");
@@ -1149,6 +1455,11 @@
       rev.textContent = m.review;
       card.appendChild(rev);
 
+      var srcLine = document.createElement("p");
+      srcLine.className = "router-meta";
+      srcLine.textContent = DB.scaleNote + (DB.specNote ? " " + DB.specNote : "");
+      card.appendChild(srcLine);
+
       if (m.score && m.score.est) {
         var est = document.createElement("p");
         est.className = "router-meta";
@@ -1172,6 +1483,15 @@
         });
         actions.appendChild(useBtn);
       }
+      var cmpBtn = document.createElement("button");
+      cmpBtn.type = "button";
+      cmpBtn.className = "btn-copy";
+      cmpBtn.textContent = T("specCompareBtn");
+      cmpBtn.addEventListener("click", function () {
+        if (window.WhichAIModelCompare) window.WhichAIModelCompare.compareWith(m.id);
+        location.hash = "#compare-specs";
+      });
+      actions.appendChild(cmpBtn);
       var closeBtn = document.createElement("button");
       closeBtn.type = "button";
       closeBtn.className = "btn-link";
@@ -1287,6 +1607,7 @@
       search.setAttribute("data-wired", "1");
       search.addEventListener("input", function () { render(search.value); });
     }
+    dbShowDetail = showDetail;
     render(search ? search.value : "");
   }
 
@@ -1709,13 +2030,43 @@
       });
       modelSel.value = step.model;
       head.appendChild(title);
-      head.appendChild(modelSel);
+      var headRight = document.createElement("div");
+      headRight.className = "chain-step-tools";
+      headRight.appendChild(modelSel);
+      function mkTool(txt, key, enabled, fn) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "btn-copy";
+        b.textContent = txt;
+        b.title = T(key);
+        b.setAttribute("aria-label", T(key));
+        b.disabled = !enabled;
+        b.addEventListener("click", fn);
+        headRight.appendChild(b);
+      }
+      mkTool("\u2191", "chainMoveUp", i > 0, function () { moveChainStep(i, i - 1); });
+      mkTool("\u2193", "chainMoveDown", i < activeChain.steps.length - 1, function () { moveChainStep(i, i + 1); });
+      mkTool("\u2715", "chainRemoveStep", activeChain.steps.length > 1, function () {
+        if (!window.confirm("Remove this step?")) return;
+        activeChain.steps.splice(i, 1);
+        renderChain();
+      });
+      head.appendChild(headRight);
       card.appendChild(head);
 
       var desc = document.createElement("p");
       desc.className = "chain-desc";
       desc.textContent = step.description;
       card.appendChild(desc);
+
+      if (step.custom) {
+        var instrTa = document.createElement("textarea");
+        instrTa.className = "chain-custom-instr";
+        instrTa.rows = 2;
+        instrTa.value = step.instruction;
+        instrTa.addEventListener("input", function () { step.instruction = instrTa.value; });
+        card.appendChild(instrTa);
+      }
 
       var det = document.createElement("details");
       det.className = "compare-prompt";
@@ -1785,18 +2136,21 @@
       ta.placeholder = "Paste this step's answer here (or use auto-run). It will be included in the next step's prompt.";
       ta.value = step.output;
       ta.addEventListener("input", function () { step.output = ta.value; });
+      ta.addEventListener("change", renderChainMap);
       card.appendChild(ta);
       card.appendChild(statusEl);
 
       modelSel.addEventListener("change", function () {
         step.model = modelSel.value;
         refreshRunBtn();
+        renderChainMap();
         if (det.open) pre.textContent = buildStepPrompt(i);
       });
 
       $chainSteps.appendChild(card);
     });
 
+    renderChainMap();
     renderChainHistory();
   }
 
@@ -1997,6 +2351,8 @@
     if ($chainRunAll) $chainRunAll.addEventListener("click", runAllSteps);
     if ($chainExport) $chainExport.addEventListener("click", exportChain);
     if ($chainShare) $chainShare.addEventListener("click", function () { shareChain($chainShare); });
+    var addBtn = document.getElementById("chain-addstep");
+    if (addBtn) addBtn.addEventListener("click", addChainStep);
   }
 
   /* ---------- Render prompts (with typewriter) ---------- */
@@ -2213,6 +2569,35 @@
     raf = requestAnimationFrame(tick);
   }
   initNavAutoScroll();
+
+  /* ---------- v0.22 init: modes, subtabs, footer ---------- */
+  (function initV22() {
+    var mg = document.getElementById("mode-goal");
+    var mf = document.getElementById("mode-finder");
+    if (mg) mg.addEventListener("click", function () { setGenMode("goal", true); });
+    if (mf) mf.addEventListener("click", function () { setGenMode("finder", true); });
+    var savedMode = "goal";
+    try { savedMode = localStorage.getItem(GENMODE_KEY) || "goal"; } catch (e) { /* ignore */ }
+    setGenMode(savedMode === "finder" ? "finder" : "goal", false);
+
+    var bo = document.getElementById("cmp-tab-outputs");
+    var bs = document.getElementById("cmp-tab-specs");
+    if (bo) bo.addEventListener("click", function () {
+      if (location.hash === "#compare") setCompareTab("outputs"); else location.hash = "#compare";
+    });
+    if (bs) bs.addEventListener("click", function () {
+      if (location.hash === "#compare-specs") setCompareTab("specs"); else location.hash = "#compare-specs";
+    });
+
+    // Footer links: force handling when the hash is already the target
+    Array.prototype.slice.call(document.querySelectorAll(".footer-links a")).forEach(function (a) {
+      a.addEventListener("click", function () {
+        var target = a.getAttribute("href");
+        if (location.hash === target) syncViewToHash();
+      });
+    });
+    window.WhichAIApp = { openModel: openModelById };
+  })();
 
   initSettingsForm();
   applyPrefs();

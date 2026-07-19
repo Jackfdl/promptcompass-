@@ -1,6 +1,6 @@
 /* WhichAI service worker — network-first, cache only as offline fallback.
    Bump CACHE on every release so old assets never linger. */
-var CACHE = "whichai-v0.21.0";
+var CACHE = "whichai-v0.22.0";
 
 self.addEventListener("install", function () {
   self.skipWaiting();
