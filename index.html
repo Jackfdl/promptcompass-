@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="styles.css" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"WhichAI","alternateName":"PromptCompass","url":"https://whichai.wiki/","description":"Which AI should do this? Turn a plain-language goal into prompts optimized for each AI model - and know which model to use, with benchmarks translated into plain language.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Giacomo Fedeli","url":"https://www.linkedin.com/in/giacomo-fedeli-277765239/"}}</script>
 </head>
-<body>
+<body class="welcome-active">
   <header class="site-header">
     <div class="header-inner">
       <div class="brand">
@@ -41,7 +41,7 @@
           <path class="brand-needle" d="M15.5 8.5l-2.2 5-5 2.2 2.2-5z" fill="currentColor" stroke="none"></path>
         </svg>
         <span class="brand-name">WhichAI</span>
-        <span class="badge">v0.25 · Growth</span>
+        <span class="badge">v0.26 · Growth</span>
         <span class="badge badge-privacy" title="Runs entirely in your browser. No account, no server, no tracking. API keys stay on your device."><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg><span id="privacy-text">Private by design</span></span>
       </div>
       <nav class="site-nav" aria-label="Views">
@@ -65,6 +65,37 @@
       </nav>
     </div>
   </header>
+
+  <!-- ============ Minimal welcome + shared-element entrance ============ -->
+  <section id="welcome" class="welcome" aria-labelledby="welcome-title">
+    <div class="welcome-orb welcome-orb-a" aria-hidden="true"></div>
+    <div class="welcome-orb welcome-orb-b" aria-hidden="true"></div>
+    <div class="welcome-stage">
+      <div id="welcome-brand" class="welcome-brand" aria-label="WhichAI">
+        <svg class="welcome-logo" viewBox="0 0 64 64" fill="none" stroke="currentColor" aria-hidden="true">
+          <circle cx="32" cy="32" r="25.5" stroke-width="2.4"></circle>
+          <circle cx="32" cy="32" r="19" stroke-width="1" opacity=".26"></circle>
+          <path class="welcome-needle" d="M43.5 20.5 36 36l-15.5 7.5L28 28z" fill="currentColor" stroke="none"></path>
+        </svg>
+        <span id="welcome-title" class="welcome-wordmark">WhichAI</span>
+      </div>
+      <p id="welcome-value" class="welcome-value">The right AI for the job. The right prompt for it.</p>
+      <nav class="welcome-menu" aria-label="Start with WhichAI">
+        <button class="welcome-action" type="button" data-welcome-target="nav-generator" data-welcome-route="">
+          <span id="welcome-generator">Create a prompt</span><span class="welcome-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button class="welcome-action" type="button" data-welcome-target="nav-guide" data-welcome-route="#guide">
+          <span id="welcome-guide">Choose an AI</span><span class="welcome-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button class="welcome-action" type="button" data-welcome-target="nav-compare" data-welcome-route="#compare">
+          <span id="welcome-compare">Compare models</span><span class="welcome-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button class="welcome-action" type="button" data-welcome-target="nav-more" data-welcome-route="more">
+          <span id="welcome-explore">Explore all tools</span><span class="welcome-arrow" aria-hidden="true">↗</span>
+        </button>
+      </nav>
+    </div>
+  </section>
 
   <div class="lang-note" id="lang-note" hidden></div>
 
@@ -152,25 +183,25 @@
         <div class="model-groups" role="group" aria-labelledby="models-label">
           <p class="model-group-label">AI assistants</p>
           <div class="model-checks">
-            <label class="model-check"><input type="checkbox" value="claude" checked /> <span>Claude <small>Anthropic</small></span></label>
-            <label class="model-check"><input type="checkbox" value="chatgpt" checked /> <span>ChatGPT <small>OpenAI</small></span></label>
-            <label class="model-check"><input type="checkbox" value="gemini" checked /> <span>Gemini <small>Google</small></span></label>
-            <label class="model-check"><input type="checkbox" value="perplexity" /> <span>Perplexity <small>search</small></span></label>
+            <label class="model-check" data-ai-brand="claude"><input type="checkbox" value="claude" checked /> <span>Claude <small>Anthropic</small></span></label>
+            <label class="model-check" data-ai-brand="chatgpt"><input type="checkbox" value="chatgpt" checked /> <span>ChatGPT <small>OpenAI</small></span></label>
+            <label class="model-check" data-ai-brand="gemini"><input type="checkbox" value="gemini" checked /> <span>Gemini <small>Google</small></span></label>
+            <label class="model-check" data-ai-brand="perplexity"><input type="checkbox" value="perplexity" /> <span>Perplexity <small>search</small></span></label>
           </div>
           <p class="model-group-label">Ecosystem assistants</p>
           <div class="model-checks">
-            <label class="model-check"><input type="checkbox" value="grok" /> <span>Grok <small>xAI</small></span></label>
-            <label class="model-check"><input type="checkbox" value="copilot" /> <span>Copilot <small>Microsoft</small></span></label>
-            <label class="model-check"><input type="checkbox" value="meta" /> <span>Meta AI <small>Meta</small></span></label>
+            <label class="model-check" data-ai-brand="grok"><input type="checkbox" value="grok" /> <span>Grok <small>xAI</small></span></label>
+            <label class="model-check" data-ai-brand="copilot"><input type="checkbox" value="copilot" /> <span>Copilot <small>Microsoft</small></span></label>
+            <label class="model-check" data-ai-brand="meta"><input type="checkbox" value="meta" /> <span>Meta AI <small>Meta</small></span></label>
           </div>
           <p class="model-group-label">Open models <small>free/cheap via Groq &amp; OpenRouter</small></p>
           <div class="model-checks">
-            <label class="model-check"><input type="checkbox" value="llama" /> <span>Llama <small>Meta</small></span></label>
-            <label class="model-check"><input type="checkbox" value="glm" /> <span>GLM <small>Z.ai</small></span></label>
-            <label class="model-check"><input type="checkbox" value="kimi" /> <span>Kimi <small>Moonshot</small></span></label>
-            <label class="model-check"><input type="checkbox" value="nemotron" /> <span>Nemotron <small>NVIDIA</small></span></label>
-            <label class="model-check"><input type="checkbox" value="deepseek" /> <span>DeepSeek <small>open</small></span></label>
-            <label class="model-check"><input type="checkbox" value="qwen" /> <span>Qwen <small>Alibaba</small></span></label>
+            <label class="model-check" data-ai-brand="llama"><input type="checkbox" value="llama" /> <span>Llama <small>Meta</small></span></label>
+            <label class="model-check" data-ai-brand="glm"><input type="checkbox" value="glm" /> <span>GLM <small>Z.ai</small></span></label>
+            <label class="model-check" data-ai-brand="kimi"><input type="checkbox" value="kimi" /> <span>Kimi <small>Moonshot</small></span></label>
+            <label class="model-check" data-ai-brand="nemotron"><input type="checkbox" value="nemotron" /> <span>Nemotron <small>NVIDIA</small></span></label>
+            <label class="model-check" data-ai-brand="deepseek"><input type="checkbox" value="deepseek" /> <span>DeepSeek <small>open</small></span></label>
+            <label class="model-check" data-ai-brand="qwen"><input type="checkbox" value="qwen" /> <span>Qwen <small>Alibaba</small></span></label>
           </div>
         </div>
         <p class="field-error" id="models-error" hidden>Select at least one target model.</p>
@@ -558,7 +589,7 @@
       <a href="#about-contribute" id="foot-contribute">Contribute</a>
       <a href="#glossary" id="foot-glossary">Glossary</a>
     </nav>
-    <p>WhichAI v0.25 · Growth · Runs entirely in your browser: no account, no server, your keys and data never leave your device.</p>
+    <p>WhichAI v0.26 · Growth · Runs entirely in your browser: no account, no server, your keys and data never leave your device.</p>
   </footer>
 
   <noscript><p style="text-align:center;padding:24px;">WhichAI needs JavaScript to run.</p></noscript>
@@ -578,6 +609,8 @@
   <script src="js/changes.js"></script>
   <script src="js/radar.js"></script>
   <script src="js/sharecard.js"></script>
+  <script src="js/brands.js"></script>
+  <script src="js/welcome.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

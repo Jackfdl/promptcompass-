@@ -172,14 +172,21 @@
     grid.appendChild(el("div", "mc-rowlabel", ""));
     models.forEach(function (m) {
       var cell = el("div", "mc-cell mc-name");
-      cell.appendChild(el("strong", null, m.name));
+      var modelTitle = el("strong", null, m.name);
+      if (window.WhichAIBrands) {
+        window.WhichAIBrands.setMark(modelTitle, m, m.name, { providerWordmark: true });
+      }
+      cell.appendChild(modelTitle);
       var open = el("button", "btn-link", deps.T("mcOpenGuide"));
       open.type = "button";
       open.addEventListener("click", function () { deps.openModel(m.id); });
       cell.appendChild(open);
       grid.appendChild(cell);
     });
-    row(deps.T("mcProvider"), models.map(function (m) { return m.vendor; }));
+    row(deps.T("mcProvider"), models.map(function (m) {
+      if (!window.WhichAIBrands) return m.vendor;
+      return window.WhichAIBrands.createMark(m.vendor, m.vendor, { wordmark: true, small: true }) || m.vendor;
+    }));
     row(deps.T("mcStatus"), models.map(function (m) {
       var s = el("span", "chip chip-" + m.status, m.status);
       return s;

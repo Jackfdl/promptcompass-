@@ -36,6 +36,12 @@
     return m ? m.name : id;
   }
 
+  function modelById(id) {
+    var db = DB();
+    if (!db) return null;
+    return db.models.filter(function (x) { return x.id === id; })[0] || null;
+  }
+
   function itemCard(c, isNew) {
     var card = el("div", "card radar-item" + (isNew ? " radar-new" : ""));
     var head = el("div", "radar-item-head");
@@ -56,7 +62,14 @@
       head.appendChild(star);
     }
     card.appendChild(head);
-    card.appendChild(el("p", "radar-title", c.title));
+    var title = el("p", "radar-title");
+    var radarModel = c.dbId ? modelById(c.dbId) : null;
+    if (radarModel && window.WhichAIBrands) {
+      var radarIcon = window.WhichAIBrands.createIcon(radarModel, "ai-brand-icon-sm");
+      if (radarIcon) title.appendChild(radarIcon);
+    }
+    title.appendChild(document.createTextNode(c.title));
+    card.appendChild(title);
     card.appendChild(el("p", "radar-note", c.note));
     var acts = el("div", "compare-actions radar-acts");
     if (c.dbId) {

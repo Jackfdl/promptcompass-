@@ -17,7 +17,7 @@ function check(name, cond, detail) {
 globalThis.window = globalThis;
 
 /* ---------- 1. Syntax of every shipped JS file ---------- */
-const jsFiles = ["js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js", "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/stack.js", "js/doctor.js", "js/changes.js", "js/radar.js", "js/sharecard.js", "js/app.js", "sw.js"];
+const jsFiles = ["js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js", "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/stack.js", "js/doctor.js", "js/changes.js", "js/radar.js", "js/sharecard.js", "js/brands.js", "js/welcome.js", "js/app.js", "sw.js"];
 for (const f of jsFiles) {
   try { execSync("node --check " + f, { stdio: "pipe" }); check("syntax " + f, true); }
   catch (e) { check("syntax " + f, false, String(e.stderr || e)); }
@@ -38,6 +38,7 @@ const Doctor = require("../js/doctor.js");
 const ChangesFeed = require("../js/changes.js");
 const Radar = require("../js/radar.js");
 const ShareCard = require("../js/sharecard.js");
+const Brands = require("../js/brands.js");
 
 /* ---------- 3. models-db integrity ---------- */
 {
@@ -71,6 +72,14 @@ const ShareCard = require("../js/sharecard.js");
   const specCount = DB.models.filter(m => m.spec).length;
   check("db: spec data on " + specCount + " models (>=15)", specCount >= 15);
   check("db: updated field refreshed", /July 19, 2026/.test(DB.updated));
+  const brandFiles = new Set();
+  Object.values(Brands.FAMILIES).concat(Object.values(Brands.VENDORS)).forEach(b => {
+    if (b.icon) brandFiles.add(b.icon);
+    if (b.wordmark) brandFiles.add(b.wordmark);
+  });
+  const missingBrandFiles = [...brandFiles].filter(f => !existsSync("assets/brands/" + f));
+  check("brands: all " + brandFiles.size + " registry assets exist", missingBrandFiles.length === 0, missingBrandFiles.join(", "));
+  check("brands: borrowed prompt families keep their real provider", Brands.resolve(DB.models.find(m => m.id === "inkling")).slug === "thinking-machines" && Brands.resolve(DB.models.find(m => m.id === "minimax-m3")).slug === "minimax");
 }
 
 /* ---------- 4. benchmarks integrity ---------- */
@@ -225,10 +234,13 @@ const ShareCard = require("../js/sharecard.js");
   const html = readFileSync("index.html", "utf8");
   const app = readFileSync("js/app.js", "utf8");
   const sw = readFileSync("sw.js", "utf8");
-  check("version: badge v0.25", html.includes(">v0.25 · Growth<"));
-  check("version: footer v0.25", html.includes("WhichAI v0.25"));
-  check("version: APP_VERSION v0.25", app.includes('APP_VERSION = "v0.25"'));
-  check("version: SW cache v0.25", sw.includes('"whichai-v0.25.0"'));
+  check("version: badge v0.26", html.includes(">v0.26 · Growth<"));
+  check("version: footer v0.26", html.includes("WhichAI v0.26"));
+  check("version: APP_VERSION v0.26", app.includes('APP_VERSION = "v0.26"'));
+  check("version: SW cache v0.26", sw.includes('"whichai-v0.26.0"'));
+  check("v0.26: welcome + morph scripts and markup", ["welcome", "welcome-brand", "welcome-generator", "welcome-guide", "welcome-compare", "welcome-explore"].every(id => html.includes('id="' + id + '"')) && html.includes("js/welcome.js"));
+  check("v0.26: 13 branded model controls", (html.match(/data-ai-brand=/g) || []).length === 13 && html.includes("js/brands.js"));
+  check("v0.26: SW precaches entrance + core brand assets", sw.includes("js/welcome.js") && sw.includes("js/brands.js") && sw.includes("assets/brands/claude-color.svg") && sw.includes("assets/brands/qwen-color.svg"));
   check("v0.25: radar ids + scripts", ["nav-radar", "radar-view", "radar-wrap"].every(id => html.includes('id="' + id + '"')) && ["changes.js", "radar.js", "sharecard.js"].every(s => html.includes("js/" + s)));
   check("v0.25: SW precaches radar + share", sw.includes("js/radar.js") && sw.includes("js/sharecard.js") && sw.includes("js/changes.js"));
   check("v0.24: nav More + new views ids", ["nav-more", "nav-more-panel", "nav-stack", "nav-doctor", "nav-glossary", "stack-view", "doctor-view", "stack-wrap", "doctor-wrap", "demo-card", "open-doctor"].every(id => html.includes('id="' + id + '"')));

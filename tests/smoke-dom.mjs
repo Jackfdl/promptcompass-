@@ -24,7 +24,7 @@ w.confirm = () => true;
 w.URL.createObjectURL = w.URL.createObjectURL || (() => "blob:test");
 w.URL.revokeObjectURL = w.URL.revokeObjectURL || (() => {});
 
-const scripts = ["js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js", "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/stack.js", "js/doctor.js", "js/changes.js", "js/radar.js", "js/sharecard.js", "js/app.js"];
+const scripts = ["js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js", "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/stack.js", "js/doctor.js", "js/changes.js", "js/radar.js", "js/sharecard.js", "js/brands.js", "js/welcome.js", "js/app.js"];
 let bootError = null;
 for (const s of scripts) {
   try { w.eval(readFileSync(s, "utf8")); }
@@ -35,6 +35,9 @@ if (bootError) { console.log("aborting"); process.exit(1); }
 
 check("boot: generator visible, nav active", !d.getElementById("generator-view").hidden && d.getElementById("nav-generator").classList.contains("active"));
 check("boot: footer links present", d.querySelectorAll(".footer-links a").length === 4);
+check("v0.26: welcome is minimal and has four staged actions", !!d.getElementById("welcome-brand") && d.querySelectorAll(".welcome-action").length === 4);
+check("v0.26: all 13 generator families have local brand icons", d.querySelectorAll(".model-check[data-ai-brand] .ai-brand-icon").length === 13);
+check("v0.26: native welcome controller initialized", !!w.WhichAIWelcome && typeof w.WhichAIWelcome.leave === "function");
 
 /* --- Guided finder --- */
 d.getElementById("mode-finder").click();

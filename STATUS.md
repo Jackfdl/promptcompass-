@@ -1,10 +1,20 @@
 # WhichAI (ex PromptCompass) — STATUS
 
-Ultimo aggiornamento: 2026-07-20 (sessione 25)
-Versione app: v0.25.0 (in cartella; live ancora v0.21: il prossimo deploy porta v0.22→v0.25 insieme)
+Ultimo aggiornamento: 2026-07-20 (sessione 27 - GPT-5.6)
+Versione app: v0.26.0 (in cartella; live ancora v0.21: il prossimo deploy porta v0.22→v0.26 insieme)
 Sito live: https://whichai.wiki · https://promptcompass.vercel.app resta come alias
 
 ## Fase corrente: Growth - fase 1 del piano brainstorming (SEO statico, sicurezza, retention di base)
+
+## Fatto (sessione 27, 2026-07-20 - GPT-5.6)
+
+- **WELCOME MINIMALE NATIVA**: nuova prima schermata full-screen con solo logo WhichAI, value proposition e quattro azioni centrali. Logo/testo entrano con respiro, i bottoni arrivano in sequenza dai lati; nessun video o dipendenza runtime. Layout verificato a 1440×1000, 768×1024 e 390×844, nei temi light/dark/sepia; supporto `prefers-reduced-motion` e deep link che saltano correttamente la welcome.
+- **MORPH VERSO L'APP** (`js/welcome.js`): al click logo e quattro pulsanti diventano shared-element clone e si ridimensionano verso brand/menu dell'header; insieme, i blocchi della vista scelta entrano da sinistra/destra/basso. Route Generator/Model guide/Compare/More, focus accessibile e header mobile verificati nel browser reale.
+- **BRANDING AI STANDARDIZZATO** (`js/brands.js`, `assets/brands/`): registro unico per 13 famiglie e 34 provider, 76 asset SVG locali/offline, altezza e peso ottico normalizzati. Nome modello resta testo leggibile; logo/wordmark ufficiale del prodotto o provider funge da fallback quando il font proprietario non è disponibile. Fonti/licenze documentate in `assets/brands/README.md`; corretto anche il caso dei modelli che riusano una famiglia di prompt ma devono mostrare il proprio vero provider (es. MiniMax/Inkling).
+- **COPERTURA COMPLETA**: marchi integrati in Generator, router, finder, Model guide, Compare, Chains, Stack Optimizer, Prompt Doctor, Merge e Model Radar. `tools/build-seo.mjs` aggiornato e wiki rigenerata: tutte le 156 pagine statiche usano gli stessi asset locali, senza immagini rotte.
+- **i18n/PWA/versione**: +6 chiavi welcome ×11 lingue (=275 chiavi allineate); v0.26 in badge/footer/`APP_VERSION`, cache `whichai-v0.26.0`, nuovi script e 24 asset core nel precache.
+- **TEST E QA**: 101 statici + 60 smoke DOM = **161/161 PASSATI**; controllo browser senza errori/immagini rotte su 3 temi e 3 breakpoint.
+- [ ] **Jack pubblica v0.26** (live fermo a v0.21: questo deploy porta v0.22→v0.26). File NUOVI principali: `js/welcome.js`, `js/brands.js`, `assets/brands/`; wiki statica rigenerata.
 
 ## Fatto (sessione 25, 2026-07-20)
 

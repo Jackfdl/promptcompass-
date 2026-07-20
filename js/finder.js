@@ -273,6 +273,15 @@
     var c = el("div", "card finder-result" + (isTop ? " finder-top" : ""));
     var head = el("div", "db-row-head");
     var name = el("span", "panel-model", offer.name);
+    var brandedSubject = offer.family;
+    if (offer.dbId && db) {
+      for (var bi = 0; bi < db.models.length; bi++) {
+        if (db.models[bi].id === offer.dbId) { brandedSubject = db.models[bi]; break; }
+      }
+    }
+    if (window.WhichAIBrands) {
+      window.WhichAIBrands.setMark(name, brandedSubject, offer.name, { providerWordmark: true });
+    }
     head.appendChild(name);
     if (isTop) head.appendChild(el("span", "win-badge", deps.T("finderTop")));
     else if (offer.score && offer.score.aa) {

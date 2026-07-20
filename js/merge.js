@@ -122,6 +122,12 @@
     head.className = "merge-source-head";
     var name = document.createElement("strong");
     name.textContent = src.label;
+    if (window.WhichAIBrands && window.PromptCompassModelsDB) {
+      var sourceModel = window.PromptCompassModelsDB.models.filter(function (m) {
+        return src.label === m.name || src.label.indexOf(m.name) !== -1;
+      })[0];
+      if (sourceModel) window.WhichAIBrands.setMark(name, sourceModel, src.label, { providerWordmark: true });
+    }
     head.appendChild(name);
 
     var actions = document.createElement("div");

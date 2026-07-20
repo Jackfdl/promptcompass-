@@ -164,6 +164,15 @@
         sel.appendChild(o);
       });
       sel.value = lastModel;
+      var selectedBrand = el("span", "doctor-selected-brand");
+      function refreshSelectedBrand() {
+        var label = eng.MODELS[sel.value] ? eng.MODELS[sel.value].label : sel.value;
+        if (window.WhichAIBrands) {
+          window.WhichAIBrands.setMark(selectedBrand, sel.value, label, { providerWordmark: true });
+        } else selectedBrand.textContent = label;
+      }
+      refreshSelectedBrand();
+      selRow.appendChild(selectedBrand);
       selRow.appendChild(sel);
       opt.appendChild(selRow);
 
@@ -211,7 +220,7 @@
         (out.why || []).slice(0, 3).forEach(function (w) { wUl.appendChild(el("li", null, w)); });
         whyBox.appendChild(wUl);
       }
-      sel.addEventListener("change", function () { lastModel = sel.value; build(); });
+      sel.addEventListener("change", function () { lastModel = sel.value; refreshSelectedBrand(); build(); });
       copyB.addEventListener("click", function () { deps.copy(current.prompt, copyB); });
       build();
       result.appendChild(opt);

@@ -285,7 +285,18 @@
     res.stack.forEach(function (s) {
       var c = el("div", "card finder-result");
       var h = el("div", "db-row-head");
-      h.appendChild(el("span", "panel-model", s.label));
+      var modelName = el("span", "panel-model", s.label);
+      var brandedSubject = s.app;
+      var DBx = DB();
+      if (s.dbId && DBx) {
+        for (var bi = 0; bi < DBx.models.length; bi++) {
+          if (DBx.models[bi].id === s.dbId) { brandedSubject = DBx.models[bi]; break; }
+        }
+      }
+      if (window.WhichAIBrands) {
+        window.WhichAIBrands.setMark(modelName, brandedSubject, s.label, { providerWordmark: true });
+      }
+      h.appendChild(modelName);
       h.appendChild(el("span", "badge", s.paid ? "$" + s.price + "/mo" + (s.priceApprox ? " ~" : "") : deps.T("stackFreeTier")));
       c.appendChild(h);
       var chips = el("div", "db-chips");
@@ -300,7 +311,7 @@
         open.type = "button";
         open.addEventListener("click", function () { deps.openModel(s.dbId); });
         actions.appendChild(open);
-        var DBx = DB();
+        DBx = DB();
         var url = DBx && DBx.links ? DBx.links[s.app] : null;
         if (url) {
           var oa = document.createElement("a");

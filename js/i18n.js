@@ -2625,6 +2625,30 @@
   S.ar.shareBtn = "شارك كصورة";
   S.ar.shareDone = "الصورة جاهزة";
 
+  /* v0.26: minimalist welcome screen */
+  var WELCOME = {
+    en: ["The right AI for the job. The right prompt for it.", "Create a prompt", "Choose an AI", "Compare models", "Explore all tools", "Start with WhichAI"],
+    it: ["L'AI giusta per ogni lavoro. Il prompt giusto per usarla.", "Crea un prompt", "Scegli un'AI", "Confronta i modelli", "Esplora tutti gli strumenti", "Inizia con WhichAI"],
+    fr: ["La bonne IA pour chaque tâche. Le bon prompt pour l'utiliser.", "Créer un prompt", "Choisir une IA", "Comparer les modèles", "Explorer tous les outils", "Commencer avec WhichAI"],
+    es: ["La IA adecuada para cada tarea. El prompt adecuado para usarla.", "Crear un prompt", "Elegir una IA", "Comparar modelos", "Explorar todas las herramientas", "Empezar con WhichAI"],
+    de: ["Die richtige KI für jede Aufgabe. Der richtige Prompt dafür.", "Prompt erstellen", "KI auswählen", "Modelle vergleichen", "Alle Werkzeuge entdecken", "Mit WhichAI starten"],
+    pt: ["A IA certa para cada tarefa. O prompt certo para usá-la.", "Criar um prompt", "Escolher uma IA", "Comparar modelos", "Explorar todas as ferramentas", "Começar com o WhichAI"],
+    zh: ["为每项任务选择合适的 AI，并获得合适的提示词。", "创建提示词", "选择 AI", "比较模型", "探索所有工具", "开始使用 WhichAI"],
+    hi: ["हर काम के लिए सही AI। उसे चलाने के लिए सही प्रॉम्प्ट।", "प्रॉम्प्ट बनाएँ", "AI चुनें", "मॉडल की तुलना करें", "सभी टूल देखें", "WhichAI के साथ शुरू करें"],
+    ru: ["Подходящий ИИ для каждой задачи. Подходящий промпт для него.", "Создать промпт", "Выбрать ИИ", "Сравнить модели", "Все инструменты", "Начать с WhichAI"],
+    ja: ["仕事に最適なAIを。使いこなすための最適なプロンプトを。", "プロンプトを作成", "AIを選ぶ", "モデルを比較", "すべてのツールを見る", "WhichAIを始める"],
+    ar: ["الذكاء الاصطناعي المناسب لكل مهمة، والموجّه المناسب لاستخدامه.", "أنشئ موجّهًا", "اختر ذكاءً اصطناعيًا", "قارن النماذج", "استكشف كل الأدوات", "ابدأ مع WhichAI"]
+  };
+  Object.keys(WELCOME).forEach(function (lang) {
+    var v = WELCOME[lang];
+    S[lang].welcomeValue = v[0];
+    S[lang].welcomeGenerator = v[1];
+    S[lang].welcomeGuide = v[2];
+    S[lang].welcomeCompare = v[3];
+    S[lang].welcomeExplore = v[4];
+    S[lang].welcomeNavLabel = v[5];
+  });
+
   var I18n = {
     LANGS: LANGS,
     STRINGS: S,

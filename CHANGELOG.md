@@ -2,6 +2,20 @@
 
 (Older release-by-release history lives in `STATUS.md`, the project's working memory.)
 
+## v0.26.0 (2026-07-20)
+
+A cinematic but lightweight first impression: native welcome entrance, shared-element morph into the app, and consistent local AI branding across the app and static wiki.
+
+### Added
+- **Minimal welcome** with a large WhichAI mark, one-line value proposition and four sequential off-screen menu entrances. Responsive across desktop/tablet/mobile and all three themes, with reduced-motion support.
+- **Native morph transition** (`js/welcome.js`): welcome controls shrink and move into their header counterparts while the selected view enters from multiple edges. Deep links still open directly.
+- **Central brand registry** (`js/brands.js`) covering all 13 prompt families and 34 database providers with 76 local SVG icons/wordmarks. Assets remain offline-capable and their sources are documented in `assets/brands/README.md`.
+- Branding in generator controls, recommendations, finder, model guide, both Compare modes, Chains, Stack, Doctor, Merge, Radar and all 156 generated SEO pages.
+- 6 new welcome i18n keys in all 11 languages (275 aligned keys total).
+
+### Tests
+- Static suite: 101 checks. DOM smoke: 60 checks. Browser QA at desktop, tablet and phone sizes across light, dark and sepia. **161/161 automated checks green.**
+
 ## v0.25.0 (2026-07-20)
 
 Retention and polish: Model Radar, inline model details, official app links everywhere, smarter Compare default, shareable result images.

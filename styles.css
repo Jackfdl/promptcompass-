@@ -2276,3 +2276,449 @@ a.btn-official {
   .radar-item-head { flex-direction: column; align-items: flex-start; }
   .panel-btns { justify-content: flex-start; }
 }
+
+/* ==========================================================
+   v0.26 · Minimal welcome + shared-element morph transition
+   ========================================================== */
+
+:root {
+  --welcome-bg: #f7f7f8;
+  --welcome-glow-a: rgba(37, 99, 235, 0.19);
+  --welcome-glow-b: rgba(124, 58, 237, 0.13);
+  --welcome-button: rgba(255, 255, 255, 0.72);
+}
+
+[data-theme="dark"] {
+  --welcome-bg: #0f1013;
+  --welcome-glow-a: rgba(96, 165, 250, 0.2);
+  --welcome-glow-b: rgba(167, 139, 250, 0.15);
+  --welcome-button: rgba(27, 29, 35, 0.76);
+}
+
+[data-theme="sepia"] {
+  --welcome-bg: #f1e5cd;
+  --welcome-glow-a: rgba(163, 88, 55, 0.17);
+  --welcome-glow-b: rgba(122, 77, 32, 0.13);
+  --welcome-button: rgba(253, 246, 230, 0.76);
+}
+
+body.welcome-active,
+body.welcome-leaving { overflow: hidden; }
+
+.welcome {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  min-height: 100dvh;
+  overflow: hidden;
+  color: var(--text);
+  background: var(--welcome-bg);
+  isolation: isolate;
+  transition: background-color 0.42s ease, opacity 0.42s ease;
+}
+
+body.welcome-active .welcome,
+body.welcome-leaving .welcome { display: grid; place-items: center; }
+
+body.welcome-active:not(.welcome-leaving) .site-header {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.site-header {
+  transition: opacity 0.3s ease, transform 0.5s cubic-bezier(.22, 1, .36, 1), background-color 0.35s ease;
+}
+
+body.welcome-leaving:not(.welcome-header-ready) .site-header {
+  opacity: 0;
+  transform: translateY(-16px);
+  pointer-events: none;
+}
+
+body.welcome-header-ready .site-header {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Programmatic focus announces the destination after the morph without drawing
+   the browser's default rectangle around a non-interactive heading. */
+.view h1[tabindex="-1"]:focus,
+.view h2[tabindex="-1"]:focus { outline: none; }
+
+.welcome-stage {
+  position: relative;
+  z-index: 2;
+  width: min(900px, calc(100% - 40px));
+  padding: clamp(26px, 5vw, 56px) 0;
+  text-align: center;
+}
+
+.welcome-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 2vw, 22px);
+  color: var(--text);
+  transform-origin: center;
+  animation: welcomeBrandIn 0.9s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.welcome-logo {
+  width: clamp(70px, 9vw, 108px);
+  height: clamp(70px, 9vw, 108px);
+  flex: none;
+  filter: drop-shadow(0 18px 28px rgba(37, 99, 235, 0.13));
+}
+
+.welcome-needle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: welcomeNeedle 4.2s ease-in-out 1s infinite alternate;
+}
+
+.welcome-wordmark {
+  font-size: clamp(54px, 9vw, 104px);
+  line-height: 0.94;
+  font-weight: 700;
+  letter-spacing: -0.072em;
+  padding-right: 0.07em;
+  background: linear-gradient(105deg, var(--text) 48%, var(--focus) 132%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.welcome-value {
+  max-width: 760px;
+  margin: clamp(26px, 4vw, 42px) auto clamp(30px, 5vw, 52px);
+  color: var(--muted);
+  font-size: clamp(20px, 3.2vw, 34px);
+  line-height: 1.22;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  animation: welcomeValueIn 0.8s 0.22s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.welcome-menu {
+  width: min(700px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.welcome-action,
+.welcome-morph-clone.welcome-action {
+  min-height: 68px;
+  border: 1px solid color-mix(in srgb, var(--border-strong) 74%, transparent);
+  border-radius: 18px;
+  padding: 15px 18px 15px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  background: var(--welcome-button);
+  color: var(--text);
+  box-shadow: 0 16px 46px rgba(20, 24, 33, 0.055), inset 0 1px rgba(255, 255, 255, 0.34);
+  backdrop-filter: blur(18px) saturate(125%);
+  -webkit-backdrop-filter: blur(18px) saturate(125%);
+  font: inherit;
+  font-size: clamp(15px, 1.8vw, 17px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  text-align: left;
+  cursor: pointer;
+  will-change: transform, opacity;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease, transform 0.22s ease;
+}
+
+.welcome-action:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--focus) 55%, var(--border));
+  box-shadow: 0 20px 55px color-mix(in srgb, var(--focus) 14%, transparent), inset 0 1px rgba(255, 255, 255, 0.42);
+}
+
+.welcome-action:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+}
+
+.welcome-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  color: var(--focus);
+  background: color-mix(in srgb, var(--focus) 10%, transparent);
+  transition: transform 0.22s ease, background-color 0.22s ease;
+}
+
+.welcome-action:hover .welcome-arrow { transform: translate(2px, -2px); background: color-mix(in srgb, var(--focus) 17%, transparent); }
+
+.welcome-action:nth-child(1) { animation: welcomeFromLeft 0.8s 0.4s cubic-bezier(.16, 1, .3, 1) both; }
+.welcome-action:nth-child(2) { animation: welcomeFromRight 0.8s 0.5s cubic-bezier(.16, 1, .3, 1) both; }
+.welcome-action:nth-child(3) { animation: welcomeFromLeft 0.8s 0.6s cubic-bezier(.16, 1, .3, 1) both; }
+.welcome-action:nth-child(4) { animation: welcomeFromRight 0.8s 0.7s cubic-bezier(.16, 1, .3, 1) both; }
+
+.welcome-orb {
+  position: absolute;
+  z-index: 0;
+  width: min(62vw, 760px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(20px);
+  opacity: 0.9;
+  pointer-events: none;
+  animation: welcomeOrb 8s ease-in-out infinite alternate;
+  transition: opacity 0.35s ease;
+}
+
+.welcome-orb-a { left: -24vw; top: -35vh; background: radial-gradient(circle, var(--welcome-glow-a), transparent 67%); }
+.welcome-orb-b { right: -26vw; bottom: -39vh; background: radial-gradient(circle, var(--welcome-glow-b), transparent 68%); animation-delay: -4s; }
+
+body.welcome-leaving .welcome {
+  background-color: transparent;
+  pointer-events: none;
+}
+
+body.welcome-leaving .welcome-value,
+body.welcome-leaving .welcome-orb { opacity: 0; }
+
+body.welcome-leaving .welcome-brand,
+body.welcome-leaving .welcome-action { opacity: 0; }
+
+.welcome-morph-clone {
+  position: fixed !important;
+  z-index: 130;
+  margin: 0 !important;
+  pointer-events: none !important;
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.welcome-morph-clone.welcome-brand {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+body.app-reveal .view:not([hidden]) > * {
+  animation: appEdgeFromBottom 0.72s 0.14s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+body.app-reveal .view:not([hidden]) > :nth-child(3n + 1) {
+  animation-name: appEdgeFromLeft;
+  animation-delay: 0.08s;
+}
+
+body.app-reveal .view:not([hidden]) > :nth-child(3n + 2) {
+  animation-name: appEdgeFromRight;
+  animation-delay: 0.16s;
+}
+
+body.app-reveal .view:not([hidden]) > :nth-child(3n) { animation-delay: 0.24s; }
+
+@keyframes welcomeBrandIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.94); filter: blur(8px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@keyframes welcomeValueIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes welcomeFromLeft {
+  from { opacity: 0; transform: translate3d(-105vw, 16px, 0) rotate(-3deg); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) rotate(0); }
+}
+
+@keyframes welcomeFromRight {
+  from { opacity: 0; transform: translate3d(105vw, 16px, 0) rotate(3deg); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) rotate(0); }
+}
+
+@keyframes welcomeNeedle {
+  from { transform: rotate(-7deg); }
+  to { transform: rotate(8deg); }
+}
+
+@keyframes welcomeOrb {
+  from { transform: translate3d(-2%, -2%, 0) scale(0.96); }
+  to { transform: translate3d(4%, 5%, 0) scale(1.08); }
+}
+
+@keyframes appEdgeFromLeft {
+  from { opacity: 0; transform: translate3d(-52px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes appEdgeFromRight {
+  from { opacity: 0; transform: translate3d(52px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes appEdgeFromBottom {
+  from { opacity: 0; transform: translate3d(0, 38px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@media (max-width: 680px) {
+  .welcome-stage { width: min(520px, calc(100% - 28px)); padding-block: 20px; }
+  .welcome-brand { flex-direction: column; gap: 10px; }
+  .welcome-logo { width: 66px; height: 66px; }
+  .welcome-wordmark { font-size: clamp(50px, 17vw, 74px); }
+  .welcome-value { max-width: 430px; margin-top: 20px; margin-bottom: 26px; font-size: clamp(19px, 5.8vw, 26px); }
+  .welcome-menu { grid-template-columns: 1fr; gap: 9px; }
+  .welcome-action, .welcome-morph-clone.welcome-action { min-height: 58px; border-radius: 15px; padding: 12px 14px 12px 17px; }
+  .welcome-arrow { width: 30px; height: 30px; }
+}
+
+@media (max-height: 680px) and (min-width: 681px) {
+  .welcome-logo { width: 66px; height: 66px; }
+  .welcome-wordmark { font-size: 64px; }
+  .welcome-value { margin-block: 20px 26px; font-size: 22px; }
+  .welcome-action, .welcome-morph-clone.welcome-action { min-height: 56px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-brand,
+  .welcome-value,
+  .welcome-action,
+  .welcome-needle,
+  .welcome-orb,
+  body.app-reveal .view:not([hidden]) > * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================
+   v0.26 · Standardized AI marks and official logotypes
+   ========================================================== */
+
+.ai-brand-mark {
+  --ai-logo-size: 1.28em;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.48em;
+  vertical-align: -0.16em;
+  color: inherit;
+  line-height: 1.15;
+}
+
+.ai-brand-icon-frame {
+  width: var(--ai-logo-size);
+  height: var(--ai-logo-size);
+  min-width: var(--ai-logo-size);
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  overflow: hidden;
+  border-radius: 24%;
+  line-height: 1;
+}
+
+.ai-brand-icon-frame.ai-brand-icon-sm { --ai-logo-size: 1.18em; }
+
+.ai-brand-icon {
+  display: block;
+  width: 88%;
+  height: 88%;
+  object-fit: contain;
+}
+
+.ai-brand-label {
+  min-width: 0;
+  display: inline-block;
+  font-weight: inherit;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+
+.ai-brand-wordmark {
+  display: block;
+  width: auto;
+  max-width: min(7em, 112px);
+  height: 0.92em;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.ai-brand-provider {
+  max-width: 4.8em;
+  height: 0.7em;
+  margin-left: 0.12em;
+  opacity: 0.62;
+}
+
+.ai-font-openai { font-family: "OpenAI Sans", "Inter", system-ui, sans-serif; letter-spacing: -0.028em; }
+.ai-font-meta { font-family: "Optimistic Display", "Inter", system-ui, sans-serif; letter-spacing: -0.025em; }
+.ai-font-nvidia { font-family: "DIN Pro", "Arial Narrow", "Inter", sans-serif; letter-spacing: 0.01em; }
+
+[data-theme="dark"] .ai-brand-mono .ai-brand-icon,
+[data-theme="dark"] .ai-brand-wordmark.ai-brand-mono { filter: invert(1); }
+
+[data-theme="sepia"] .ai-brand-mono .ai-brand-icon,
+[data-theme="sepia"] .ai-brand-wordmark.ai-brand-mono { filter: sepia(.35) saturate(.65) brightness(.56); }
+
+.model-check > span {
+  min-width: 0;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.42em;
+}
+
+.model-check > span > .ai-brand-icon-frame { --ai-logo-size: 1.42em; }
+.model-check > span > small { margin-left: -0.15em; }
+
+.tab .ai-brand-mark,
+.router-app .ai-brand-mark,
+.compare-title .ai-brand-mark,
+.panel-head .ai-brand-mark { --ai-logo-size: 1.22em; }
+
+.db-hit .ai-brand-icon-frame,
+.radar-title .ai-brand-icon-frame { --ai-logo-size: 1.32em; margin-right: 0.12em; }
+
+.radar-title { display: flex; align-items: flex-start; gap: 0.35em; }
+
+.chain-node-model .ai-brand-mark { --ai-logo-size: 1.15em; }
+
+.chain-selected-brand,
+.doctor-selected-brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.chain-selected-brand .ai-brand-label,
+.chain-selected-brand .ai-brand-wordmark,
+.doctor-selected-brand .ai-brand-label,
+.doctor-selected-brand .ai-brand-wordmark { display: none; }
+
+.brand-comparison {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.38em;
+}
+
+.brand-comparison > span:not(.ai-brand-mark) {
+  color: var(--muted);
+  font-size: 0.58em;
+  font-weight: 500;
+}
+
+.guide-head h1 > .ai-brand-mark { --ai-logo-size: 1.1em; }
+
+.ai-brand-lockup { --ai-logo-size: 1.55em; gap: 0.58em; }
+.ai-brand-lockup .ai-brand-wordmark { height: 1.08em; max-width: 8.5em; }
+
+@media (max-width: 480px) {
+  .ai-brand-wordmark { max-width: 5.8em; }
+  .model-check > span > small { display: none; }
+  .chain-selected-brand { display: none; }
+}

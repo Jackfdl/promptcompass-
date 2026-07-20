@@ -10,6 +10,7 @@
   var Bench = window.PromptCompassBenchmarks || null;
   var Chains = window.PromptCompassChains || null;
   var I18n = window.PromptCompassI18n || null;
+  var Brands = window.WhichAIBrands || null;
 
   var $goal = document.getElementById("goal");
   var $context = document.getElementById("context");
@@ -111,7 +112,7 @@
   var THEME_KEY = "pc_theme";
   var DEFAULT_GEMINI_MODEL = "gemini-3.5-flash";
   var DEFAULT_GROQ_MODEL = "llama-3.3-70b-versatile";
-  var APP_VERSION = "v0.25";
+  var APP_VERSION = "v0.26";
   var BRAND = "WhichAI";
   var TASK_ICONS = {
     writing: '<svg class="guide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z"/><path d="M13.5 7.5l3 3"/></svg>',
@@ -133,6 +134,11 @@
 
   function T(key) {
     return I18n ? I18n.t(currentLang, key) : key;
+  }
+
+  function setBrandMark(el, subject, label, options) {
+    if (Brands && Brands.setMark(el, subject, label, options)) return;
+    if (el) el.textContent = label || "";
   }
 
   function tl(taskKey) {
@@ -171,6 +177,7 @@
     setText("#nav-glossary strong", "footGlossary");
     setText("#nav-radar strong", "navRadar");
     setText("#nav-radar-sub", "navRadarSub");
+    if (window.WhichAIWelcome) window.WhichAIWelcome.setLanguage(T);
     setText("#nav-chains-sub", "navChainsSub");
     setText("#nav-stack-sub", "navStackSub");
     setText("#nav-doctor-sub", "navDoctorSub");
@@ -1055,7 +1062,7 @@
     var freeAlt = null;
     for (var i = 1; i < rec.ranking.length; i++) {
       var app = Bench.apps[rec.ranking[i].app];
-      if (app && app.freeModel) { freeAlt = { app: app, note: rec.ranking[i].note }; break; }
+      if (app && app.freeModel) { freeAlt = { id: rec.ranking[i].app, app: app, note: rec.ranking[i].note }; break; }
     }
     var exGoal = "Summarize 30 academic PDFs with citations, spending under $20/month";
     box.innerHTML = "";
@@ -1071,14 +1078,21 @@
     var best1 = document.createElement("p");
     best1.className = "demo-line";
     var b1 = document.createElement("strong");
-    b1.textContent = T("demoBest") + " " + best.label;
+    b1.appendChild(document.createTextNode(T("demoBest") + " "));
+    var bestMark = Brands && Brands.createMark(rec.ranking[0].app, best.label, { wordmark: true, providerWordmark: true });
+    if (bestMark) b1.appendChild(bestMark);
+    else b1.appendChild(document.createTextNode(best.label));
     best1.appendChild(b1);
     best1.appendChild(document.createTextNode(" \u00b7 " + rec.ranking[0].note.split(";")[0].split(".")[0] + "."));
     box.appendChild(best1);
     if (freeAlt) {
       var alt = document.createElement("p");
       alt.className = "demo-line demo-alt";
-      alt.textContent = T("demoAlt") + " " + freeAlt.app.label + " \u00b7 " + freeAlt.app.freeModel;
+      alt.appendChild(document.createTextNode(T("demoAlt") + " "));
+      var altMark = Brands && Brands.createMark(freeAlt.id, freeAlt.app.label, { wordmark: true, providerWordmark: true });
+      if (altMark) alt.appendChild(altMark);
+      else alt.appendChild(document.createTextNode(freeAlt.app.label));
+      alt.appendChild(document.createTextNode(" \u00b7 " + freeAlt.app.freeModel));
       box.appendChild(alt);
     }
     var acts = document.createElement("div");
@@ -1296,7 +1310,7 @@
       var modelLbl = Engine.MODELS[step.model] ? Engine.MODELS[step.model].label : step.model;
       var mc = document.createElement("span");
       mc.className = "chain-node-model";
-      mc.textContent = modelLbl + (RUNNERS[step.model] ? " \u00b7 auto-run" : "");
+      setBrandMark(mc, step.model, modelLbl + (RUNNERS[step.model] ? " \u00b7 auto-run" : ""), { providerWordmark: true });
       node.appendChild(mc);
       var de = document.createElement("p");
       de.className = "chain-node-desc";
@@ -1478,9 +1492,9 @@
       var li = document.createElement("li");
       var name = document.createElement("span");
       name.className = "router-app";
-      name.textContent = app.label + " (" + app.vendor + ")";
+      setBrandMark(name, item.app, app.label, { wordmark: true });
       li.appendChild(name);
-      li.appendChild(document.createTextNode(" - " + item.note));
+      li.appendChild(document.createTextNode(" (" + app.vendor + ") - " + item.note));
       var free = document.createElement("span");
       free.className = "router-free";
       free.textContent = T("freeTier") + " " + app.freeModel;
@@ -1545,7 +1559,7 @@
     pick.className = "router-pick";
     pick.appendChild(document.createTextNode(T("bestPick") + " "));
     var strong = document.createElement("strong");
-    strong.textContent = Bench.apps[recommendedAppId].label;
+    setBrandMark(strong, recommendedAppId, Bench.apps[recommendedAppId].label, { wordmark: true });
     pick.appendChild(strong);
     $routerCard.appendChild(pick);
 
@@ -1593,7 +1607,7 @@
       pick.className = "router-pick";
       pick.appendChild(document.createTextNode(T("bestPick") + " "));
       var strong = document.createElement("strong");
-      strong.textContent = topApp.label;
+      setBrandMark(strong, rec.ranking[0].app, topApp.label, { wordmark: true });
       pick.appendChild(strong);
       card.appendChild(pick);
 
@@ -1653,7 +1667,7 @@
         var li = document.createElement("li");
         var name = document.createElement("span");
         name.className = "router-app";
-        name.textContent = m.name;
+        setBrandMark(name, m.vendor, m.name, { small: true });
         li.appendChild(name);
         li.appendChild(document.createTextNode(" - " + m.vendor));
         var access = document.createElement("span");
@@ -1721,7 +1735,7 @@
       head.className = "db-row-head";
       var name = document.createElement("span");
       name.className = "panel-model";
-      name.textContent = m.name;
+      setBrandMark(name, m, m.name, { className: "ai-brand-lockup", providerWordmark: true });
       var vend = document.createElement("small");
       vend.textContent = m.vendor;
       name.appendChild(vend);
@@ -1962,7 +1976,7 @@
         hit.setAttribute("data-mid", m.id);
         var left = document.createElement("span");
         var nm = document.createElement("strong");
-        nm.textContent = m.name;
+        setBrandMark(nm, m, m.name, { small: true });
         left.appendChild(nm);
         if (m.tags.indexOf("prompt-target") !== -1) {
           var gm = document.createElement("span");
@@ -2140,7 +2154,7 @@
       head.className = "compare-col-head";
       var title = document.createElement("span");
       title.className = "panel-model";
-      title.textContent = entry.label;
+      setBrandMark(title, entry.model, entry.label, { wordmark: true, providerWordmark: true });
       var vendor = document.createElement("small");
       vendor.textContent = entry.vendor;
       title.appendChild(vendor);
@@ -2421,6 +2435,14 @@
       head.appendChild(title);
       var headRight = document.createElement("div");
       headRight.className = "chain-step-tools";
+      var chainBrand = document.createElement("span");
+      chainBrand.className = "chain-selected-brand";
+      function refreshChainBrand() {
+        var chainLabel = Engine.MODELS[modelSel.value] ? Engine.MODELS[modelSel.value].label : modelSel.value;
+        setBrandMark(chainBrand, modelSel.value, chainLabel, { providerWordmark: true });
+      }
+      refreshChainBrand();
+      headRight.appendChild(chainBrand);
       headRight.appendChild(modelSel);
       function mkTool(txt, key, enabled, fn) {
         var b = document.createElement("button");
@@ -2531,6 +2553,7 @@
 
       modelSel.addEventListener("change", function () {
         step.model = modelSel.value;
+        refreshChainBrand();
         refreshRunBtn();
         renderChainMap();
         if (det.open) pre.textContent = buildStepPrompt(i);
@@ -2768,7 +2791,7 @@
       var tab = document.createElement("button");
       tab.className = "tab" + (r.id === recommendedAppId ? " tab-reco" : "");
       tab.type = "button";
-      tab.textContent = r.label;
+      setBrandMark(tab, r.id, r.label, { wordmark: true, small: true });
       tab.setAttribute("role", "tab");
       if (r.id === recommendedAppId) tab.title = "Recommended for this task";
       tab.addEventListener("click", function () { selectTab(i); });
@@ -2782,7 +2805,7 @@
 
       var title = document.createElement("span");
       title.className = "panel-model";
-      title.textContent = r.label;
+      setBrandMark(title, r.id, r.label, { wordmark: true, providerWordmark: true });
       var vendor = document.createElement("small");
       vendor.textContent = r.vendor;
       title.appendChild(vendor);
@@ -2817,7 +2840,10 @@
       var why = document.createElement("details");
       why.className = "why";
       var summary = document.createElement("summary");
-      summary.textContent = T("whyPrefix") + " " + r.label;
+      summary.appendChild(document.createTextNode(T("whyPrefix") + " "));
+      var whyMark = Brands && Brands.createMark(r.id, r.label, { providerWordmark: true, small: true });
+      if (whyMark) summary.appendChild(whyMark);
+      else summary.appendChild(document.createTextNode(r.label));
       why.appendChild(summary);
       var ul = document.createElement("ul");
       r.why.forEach(function (reason) {
