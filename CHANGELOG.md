@@ -2,6 +2,20 @@
 
 (Older release-by-release history lives in `STATUS.md`, the project's working memory.)
 
+## v0.24.0 (2026-07-20)
+
+Phase 2 of the growth plan: personalization tools and a calmer first impression.
+
+### Added
+- **AI Stack Optimizer** (`js/stack.js`, `#stack`): four quick choices (tasks, current subscriptions, budget, essential needs) produce a transparent, rule-based stack: which single subscription is worth paying, what to cover with free tiers, estimated monthly cost, current spend, estimated saving and possibly-redundant subscriptions. Privacy and API needs surface local/open and free-route extras. Profile persists locally; result exports as Markdown. Prices from vendor pages (July 2026 snapshot), rankings from the benchmark router; everything labeled as estimate.
+- **Prompt Doctor** (`js/doctor.js`, `#doctor`, plus a shortcut next to "Refine with AI"): paste a prompt, get a 0-100 score from 10 weighted bilingual checks (role, audience, format, constraints, context, examples, quality bar, uncertainty handling, sources), a checklist with one-line tips for every gap, and a before/after view where the optimized version is built by the existing prompt engine for any of the 13 model families, with a "what changed and why" list. 100% static, no API.
+- **Homepage that shows a result first**: the empty state now opens with a completed example (goal, best pick and free alternative derived live from the benchmark router) and two actions: try the example or take the 30-second finder.
+- **Calmer navigation**: primary nav reduced to Generator, Model guide, Compare plus a "More" menu; the dropdown lists Chains, Stack Optimizer, Prompt Doctor, Glossary, About and Settings each with a one-line description. Keyboard (Esc), click-out closing, active-state aware, full-width sheet on mobile, RTL-aware.
+- 39 new i18n keys in all 11 languages (249 total).
+
+### Tests
+- Static suite: 83 checks (stack optimizer scenarios, doctor scoring EN+IT, new ids, SW precache). DOM smoke: 46 (demo card, More menu, full stack flow, full doctor flow). **129/129 green.**
+
 ## v0.23.0 (2026-07-20)
 
 Dark-theme legibility, typography cleanup, and phase 1 of the growth plan: static wiki pages, key hardening, data backup, real offline PWA, versioned methodology.

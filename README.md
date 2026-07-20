@@ -3,7 +3,7 @@
 
 Turn a plain-language goal into prompts optimized for each AI model - and know which model to use for the job.
 
-**Live:** https://whichai.wiki · **Status:** Growth · v0.23.0 · zero-cost architecture (free tiers only) · responsive, installable (PWA) and offline-capable
+**Live:** https://whichai.wiki · **Status:** Growth · v0.24.0 · zero-cost architecture (free tiers only) · responsive, installable (PWA) and offline-capable
 
 **Two ways in.** Describe a goal and get optimized prompts - or take the **guided finder**: a few quick questions (task, budget, must-haves) and WhichAI recommends the right AI with reasons, honest limitations and pricing. No prompt needed.
 
@@ -30,6 +30,8 @@ Turn a plain-language goal into prompts optimized for each AI model - and know w
 **A real wiki.** 156 static pages are generated straight from the database (`node tools/build-seo.mjs`): a page per model, per task ranking, per glossary term and curated head-to-heads, all indexed in `sitemap.xml`. The full database is an open dataset at `/data/models.json` (CC BY 4.0).
 
 **Keys and data, handled honestly.** API keys default to session-only storage and never leave the browser; saving on the device is an explicit opt-in. A strict Content Security Policy limits connections to the three BYOK providers. Settings includes full JSON export/import and a delete-everything button. Methodology is versioned and public in About.
+
+**Personal tools.** The Stack Optimizer turns four quick choices into an honest subscription plan (what to pay, what to use free, what is redundant, estimated saving). The Prompt Doctor scores any pasted prompt against 10 prompt-engineering checks and rewrites it with the same engine that powers the Generator.
 
 ## Run locally
 

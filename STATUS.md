@@ -1,10 +1,20 @@
 # WhichAI (ex PromptCompass) — STATUS
 
-Ultimo aggiornamento: 2026-07-20 (sessione 23)
-Versione app: v0.23.0 (in cartella; live ancora v0.21: da pubblicare v0.22+v0.23 insieme)
+Ultimo aggiornamento: 2026-07-20 (sessione 24)
+Versione app: v0.24.0 (in cartella; live ancora v0.21: da pubblicare v0.22+v0.23+v0.24 insieme)
 Sito live: https://whichai.wiki · https://promptcompass.vercel.app resta come alias
 
 ## Fase corrente: Growth - fase 1 del piano brainstorming (SEO statico, sicurezza, retention di base)
+
+## Fatto (sessione 24, 2026-07-20)
+
+- **AI STACK OPTIMIZER** (`js/stack.js`, vista `#stack`, nel menu More): 4 scelte (attività, abbonamenti attuali, budget, esigenze) → stack consigliato rule-based e trasparente: quale UNICO abbonamento pagare (budget $20), cosa coprire coi piani gratuiti, costo stimato vs spesa attuale, risparmio stimato, abbonamenti "forse ridondanti". Esigenze privacy/API fanno emergere opzioni locali/open e route gratuite. Profilo persistito (pc_stack_v1), export .md. Prezzi da pagine vendor (snapshot luglio 2026), ranking dal router; tutto etichettato come stima.
+- **PROMPT DOCTOR** (`js/doctor.js`, vista `#doctor` + scorciatoia accanto a "Refine with AI" nel Generator): incolli un prompt → punteggio 0-100 da 10 check pesati e bilingue (EN+IT), checklist di cosa manca con suggerimento, e vista prima/dopo dove la versione ottimizzata è generata dall'engine esistente per una delle 13 famiglie, con lista "cosa è cambiato e perché". 100% statico, zero API.
+- **HOMEPAGE A DUE PERCORSI (6.1+6.2)**: l'empty state ora apre con un risultato di esempio già completo (goal, best pick e alternativa gratuita presi LIVE dal router benchmark, quindi sempre aggiornati) e due azioni: "Prova questo esempio" (genera davvero) o "Il tuo in 30 secondi" (finder). Il valore si vede prima di compilare qualsiasi form.
+- **NAV RAGGRUPPATA (richiesta Jack)**: 3 voci primarie (Generator, Model guide, Compare) + menu "More ▾" a comparsa con 6 voci descritte (Chains, Stack Optimizer, Prompt Doctor, Glossary, About, Settings), chiusura con Esc/click fuori, stato attivo, foglio a tutta larghezza su mobile, RTL ok. Meno dispersione al primo arrivo, stessa profondità per chi la cerca.
+- **i18n**: +39 chiavi ×11 (=249). **Versioni**: v0.24 ovunque (badge, footer, APP_VERSION, SW cache whichai-v0.24.0 con stack.js e doctor.js nel precache).
+- **TEST**: 83 statici + 46 smoke DOM = **129/129 PASSATI** (scenari stack, scoring doctor EN+IT, flussi completi in jsdom).
+- [ ] **Jack pubblica v0.24** (include v0.22 e v0.23 mai pubblicate). File NUOVI di questa sessione: `js/stack.js`, `js/doctor.js`. Modificati: index.html, styles.css, js/app.js, js/i18n.js, sw.js, tests/, README/STATUS/CHANGELOG.
 
 ## Fatto (sessione 23, 2026-07-20)
 

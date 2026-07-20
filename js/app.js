@@ -111,7 +111,7 @@
   var THEME_KEY = "pc_theme";
   var DEFAULT_GEMINI_MODEL = "gemini-3.5-flash";
   var DEFAULT_GROQ_MODEL = "llama-3.3-70b-versatile";
-  var APP_VERSION = "v0.23";
+  var APP_VERSION = "v0.24";
   var BRAND = "WhichAI";
   var TASK_ICONS = {
     writing: '<svg class="guide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z"/><path d="M13.5 7.5l3 3"/></svg>',
@@ -163,8 +163,19 @@
     setText("#nav-generator", "navGenerator");
     setText("#nav-guide", "navGuide");
     setText("#nav-compare", "navCompare");
-    setText("#nav-chains", "navChains");
-    setText("#nav-settings", "navSettings");
+    setText("#nav-chains strong", "navChains");
+    setText("#nav-settings strong", "navSettings");
+    setText("#nav-more", "navMore");
+    setText("#nav-stack strong", "navStack");
+    setText("#nav-doctor strong", "navDoctor");
+    setText("#nav-glossary strong", "footGlossary");
+    setText("#nav-chains-sub", "navChainsSub");
+    setText("#nav-stack-sub", "navStackSub");
+    setText("#nav-doctor-sub", "navDoctorSub");
+    setText("#nav-glossary-sub", "navGlossarySub");
+    setText("#nav-about-sub", "navAboutSub");
+    setText("#nav-settings-sub", "navSettingsSub");
+    setText("#open-doctor", "navDoctor");
     setText("#privacy-text", "privacyPill");
     var pill = document.querySelector(".badge-privacy");
     if (pill) pill.title = T("privacyTip");
@@ -204,7 +215,7 @@
     var gs = document.querySelector("#guide-view .guide-head p:not(.guide-updated)");
     if (gs) gs.textContent = T("guideSub");
     setText(".catalog h2", "catalogTitle");
-    setText("#nav-about", "navAbout");
+    setText("#nav-about strong", "navAbout");
     var dbi = document.getElementById("db-search");
     if (dbi) dbi.placeholder = T("dbSearchPh");
     var dbh = document.getElementById("db-hint");
@@ -293,6 +304,9 @@
     setText("#chain-addstep", "chainAddStep");
     if (window.WhichAIFinder) window.WhichAIFinder.rerender();
     if (window.WhichAIModelCompare) window.WhichAIModelCompare.rerender();
+    if (window.WhichAIStack) window.WhichAIStack.rerender();
+    if (window.WhichAIDoctor) window.WhichAIDoctor.rerender();
+    renderDemo();
     var glv = document.getElementById("glossary-view");
     if (glv && !glv.hidden) initGlossary();
 
@@ -848,6 +862,10 @@
     $settingsView.hidden = name !== "settings";
     var glossaryView = document.getElementById("glossary-view");
     if (glossaryView) glossaryView.hidden = name !== "glossary";
+    var stackView = document.getElementById("stack-view");
+    if (stackView) stackView.hidden = name !== "stack";
+    var doctorView = document.getElementById("doctor-view");
+    if (doctorView) doctorView.hidden = name !== "doctor";
     if ($mergeView) $mergeView.hidden = name !== "merge";
     $navGenerator.classList.toggle("active", name === "generator");
     $navGuide.classList.toggle("active", name === "guide");
@@ -855,10 +873,38 @@
     $navChains.classList.toggle("active", name === "chains");
     $navAbout.classList.toggle("active", name === "about");
     $navSettings.classList.toggle("active", name === "settings");
+    var navStack = document.getElementById("nav-stack");
+    var navDoctor = document.getElementById("nav-doctor");
+    var navGlossary = document.getElementById("nav-glossary");
+    if (navStack) navStack.classList.toggle("active", name === "stack");
+    if (navDoctor) navDoctor.classList.toggle("active", name === "doctor");
+    if (navGlossary) navGlossary.classList.toggle("active", name === "glossary");
+    var moreBtn = document.getElementById("nav-more");
+    if (moreBtn) moreBtn.classList.toggle("active", ["chains", "stack", "doctor", "glossary", "about", "settings"].indexOf(name) !== -1);
+    closeMorePanel();
     if (name === "guide" && !guideBuilt) buildGuide();
     if (name === "compare") renderCompare();
     if (name === "chains") renderChainHistory();
     if (name === "glossary") initGlossary();
+    if (name === "stack" && window.WhichAIStack) {
+      window.WhichAIStack.init(document.getElementById("stack-wrap"), {
+        T: T,
+        openModel: openModelById,
+        openFinder: function () { location.hash = "#finder"; }
+      });
+    }
+    if (name === "doctor" && window.WhichAIDoctor) {
+      window.WhichAIDoctor.init(document.getElementById("doctor-wrap"), {
+        T: T,
+        copy: copyPrompt,
+        useInGenerator: function (text) {
+          if (text) $goal.value = text;
+          setGenMode("goal", true);
+          if (location.hash) location.hash = ""; else setView("generator");
+          $goal.focus();
+        }
+      });
+    }
     if (name === "merge" && window.WhichAIMerge) window.WhichAIMerge.render();
     if (viewInitDone) window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -872,8 +918,10 @@
     var isCompare = h.indexOf("#compare") === 0;
     var isFinder = h.indexOf("#finder") === 0;
     var isModel = h.indexOf("#model=") === 0;
+    var isStack = h.indexOf("#stack") === 0;
+    var isDoctor = h.indexOf("#doctor") === 0;
     if (isModel) { openModelById(decodeURIComponent(h.slice(7))); return; }
-    setView(h === "#guide" ? "guide" : isCompare ? "compare" : isChains ? "chains" : isMerge ? "merge" : isAbout ? "about" : isGlossary ? "glossary" : h === "#settings" ? "settings" : "generator");
+    setView(h === "#guide" ? "guide" : isCompare ? "compare" : isChains ? "chains" : isMerge ? "merge" : isAbout ? "about" : isGlossary ? "glossary" : isStack ? "stack" : isDoctor ? "doctor" : h === "#settings" ? "settings" : "generator");
     if (isChains) importChainFromHash();
     if (isCompare) setCompareTab(h.indexOf("#compare-specs") === 0 ? "specs" : "outputs");
     if (isFinder) setGenMode("finder", false);
@@ -881,6 +929,99 @@
       var anchor = document.getElementById(h.slice(1));
       if (anchor) setTimeout(function () { anchor.scrollIntoView({ behavior: "smooth", block: "start" }); }, 160);
     }
+  }
+
+  /* ---------- v0.24: "More" nav menu ---------- */
+
+  function closeMorePanel() {
+    var p = document.getElementById("nav-more-panel");
+    var b = document.getElementById("nav-more");
+    if (p && !p.hidden) p.hidden = true;
+    if (b) b.setAttribute("aria-expanded", "false");
+  }
+
+  function initMoreMenu() {
+    var b = document.getElementById("nav-more");
+    var p = document.getElementById("nav-more-panel");
+    if (!b || !p) return;
+    b.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = p.hidden;
+      if (open) {
+        var header = document.querySelector(".site-header");
+        if (header) p.style.top = (header.getBoundingClientRect().bottom + 6) + "px";
+        p.hidden = false;
+        b.setAttribute("aria-expanded", "true");
+      } else {
+        closeMorePanel();
+      }
+    });
+    p.addEventListener("click", function () { closeMorePanel(); });
+    document.addEventListener("click", function (e) {
+      if (!p.hidden && !p.contains(e.target) && e.target !== b) closeMorePanel();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeMorePanel();
+    });
+  }
+
+  /* ---------- v0.24: precompiled demo in the empty state ---------- */
+
+  function renderDemo() {
+    var box = document.getElementById("demo-card");
+    if (!box || !Bench) return;
+    var task = "research";
+    var rec = Bench.recommend(task);
+    var best = Bench.apps[rec.ranking[0].app];
+    var freeAlt = null;
+    for (var i = 1; i < rec.ranking.length; i++) {
+      var app = Bench.apps[rec.ranking[i].app];
+      if (app && app.freeModel) { freeAlt = { app: app, note: rec.ranking[i].note }; break; }
+    }
+    var exGoal = "Summarize 30 academic PDFs with citations, spending under $20/month";
+    box.innerHTML = "";
+    box.hidden = false;
+    var tag = document.createElement("p");
+    tag.className = "demo-tag";
+    tag.textContent = T("demoTitle");
+    box.appendChild(tag);
+    var g = document.createElement("p");
+    g.className = "demo-goal";
+    g.textContent = "\u201c" + exGoal + "\u201d";
+    box.appendChild(g);
+    var best1 = document.createElement("p");
+    best1.className = "demo-line";
+    var b1 = document.createElement("strong");
+    b1.textContent = T("demoBest") + " " + best.label;
+    best1.appendChild(b1);
+    best1.appendChild(document.createTextNode(" \u00b7 " + rec.ranking[0].note.split(";")[0].split(".")[0] + "."));
+    box.appendChild(best1);
+    if (freeAlt) {
+      var alt = document.createElement("p");
+      alt.className = "demo-line demo-alt";
+      alt.textContent = T("demoAlt") + " " + freeAlt.app.label + " \u00b7 " + freeAlt.app.freeModel;
+      box.appendChild(alt);
+    }
+    var acts = document.createElement("div");
+    acts.className = "compare-actions demo-actions";
+    var tryB = document.createElement("button");
+    tryB.type = "button";
+    tryB.className = "btn-copy";
+    tryB.textContent = T("demoTry");
+    tryB.addEventListener("click", function () {
+      $goal.value = exGoal;
+      $context.value = "";
+      $taskType.value = "auto";
+      onGenerate();
+    });
+    var mineB = document.createElement("button");
+    mineB.type = "button";
+    mineB.className = "btn-primary btn-inline";
+    mineB.textContent = T("demoYours");
+    mineB.addEventListener("click", function () { setGenMode("finder", true); });
+    acts.appendChild(mineB);
+    acts.appendChild(tryB);
+    box.appendChild(acts);
   }
 
   /* ---------- v0.22: generator mode (goal vs guided finder) ---------- */
@@ -2726,6 +2867,14 @@
     raf = requestAnimationFrame(tick);
   }
   initNavAutoScroll();
+  initMoreMenu();
+
+  var openDoctorBtn = document.getElementById("open-doctor");
+  if (openDoctorBtn) openDoctorBtn.addEventListener("click", function () {
+    var txt = $goal.value.trim();
+    location.hash = "#doctor";
+    if (txt && window.WhichAIDoctor) setTimeout(function () { window.WhichAIDoctor.load(txt); }, 60);
+  });
 
   /* ---------- v0.22 init: modes, subtabs, footer ---------- */
   (function initV22() {

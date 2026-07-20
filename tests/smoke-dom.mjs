@@ -24,7 +24,7 @@ w.confirm = () => true;
 w.URL.createObjectURL = w.URL.createObjectURL || (() => "blob:test");
 w.URL.revokeObjectURL = w.URL.revokeObjectURL || (() => {});
 
-const scripts = ["js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js", "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/app.js"];
+const scripts = ["js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js", "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/stack.js", "js/doctor.js", "js/app.js"];
 let bootError = null;
 for (const s of scripts) {
   try { w.eval(readFileSync(s, "utf8")); }
@@ -128,6 +128,30 @@ check("v23: export does not throw", true);
 w.location.hash = "#model=kimi-k3";
 await new Promise(r => setTimeout(r, 260));
 check("v23: #model= deep link opens detail", !d.getElementById("guide-view").hidden && d.getElementById("db-detail").textContent.includes("Kimi K3"));
+
+/* --- v0.24: demo card, More menu, stack, doctor --- */
+w.location.hash = "";
+await new Promise(r => setTimeout(r, 30));
+check("v24: demo card rendered with actions", !d.getElementById("demo-card").hidden && d.querySelectorAll("#demo-card button").length === 2);
+const moreBtn = d.getElementById("nav-more");
+moreBtn.click();
+check("v24: More panel opens with 6 items", !d.getElementById("nav-more-panel").hidden && d.querySelectorAll("#nav-more-panel .more-item").length === 6);
+w.location.hash = "#stack";
+await new Promise(r => setTimeout(r, 30));
+check("v24: stack view opens, panel closed", !d.getElementById("stack-view").hidden && d.getElementById("nav-more-panel").hidden);
+const taskChips = d.querySelectorAll("#stack-wrap .stack-chips")[0].querySelectorAll("button");
+taskChips[0].click(); // writing
+taskChips[2].click(); // research
+const goBtn = d.querySelector("#stack-wrap .stack-go");
+goBtn.click();
+check("v24: stack result rendered with cost card", !!d.querySelector("#stack-wrap .stack-cost") && d.querySelectorAll("#stack-wrap .stack-grid .finder-result").length >= 1);
+w.location.hash = "#doctor";
+await new Promise(r => setTimeout(r, 30));
+check("v24: doctor view opens", !d.getElementById("doctor-view").hidden && !!d.getElementById("doctor-input"));
+d.getElementById("doctor-input").value = "write a poem";
+[...d.querySelectorAll("#doctor-wrap button")].find(b => b.className.includes("btn-primary")).click();
+check("v24: doctor score + checklist + optimized panes", !!d.querySelector("#doctor-wrap .doctor-score") && d.querySelectorAll("#doctor-wrap .doctor-check").length === 10 && d.querySelector("#doctor-wrap .doctor-after").textContent.length > 200);
+check("v24: doctor before pane shows original", d.querySelector("#doctor-wrap .doctor-before").textContent === "write a poem");
 
 /* --- About anchors + language + theme --- */
 w.location.hash = "#about-faq";

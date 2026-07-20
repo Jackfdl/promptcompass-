@@ -2018,3 +2018,143 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [role="tab"]:focus
   max-width: calc(100vw - 24px);
 }
 .update-toast .btn-primary { width: auto; margin: 0; padding: 8px 14px; }
+
+
+/* ============================================================ *
+ *  v0.24 - "More" nav menu, homepage demo, Stack Optimizer,    *
+ *  Prompt Doctor                                               *
+ * ============================================================ */
+
+/* --- Nav: fewer choices + a rich dropdown --- */
+.nav-more-wrap { display: inline-flex; flex: none; }
+.nav-more {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-ctl);
+  padding: 7px 14px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--surface);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.12s, border-color 0.12s, background 0.12s, transform 0.12s;
+}
+.nav-more:hover { color: var(--text); border-color: var(--text); transform: translateY(-1px); }
+.nav-more.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+[data-theme="dark"] .nav-more.active { background: #e7e9ee; border-color: #e7e9ee; color: #0f1013; }
+[data-theme="sepia"] .nav-more.active { background: #4a3826; border-color: #4a3826; color: #f8f1e2; }
+
+.nav-more-panel {
+  position: fixed;
+  inset-inline-end: 14px;
+  z-index: 70;
+  min-width: 270px;
+  max-width: min(340px, calc(100vw - 24px));
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-card);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.16);
+  padding: 6px;
+  max-height: min(70vh, 480px);
+  overflow-y: auto;
+  animation: viewIn 0.16s ease;
+}
+.more-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 10px 12px;
+  border-radius: var(--r-ctl);
+  text-decoration: none;
+  color: var(--text);
+  border: none;
+  background: none;
+  transition: background 0.12s;
+}
+.more-item strong { font-size: 13.5px; font-weight: 600; }
+.more-item .more-sub { font-size: 11.5px; color: var(--muted); }
+.more-item:hover { background: var(--bg); }
+.more-item.active strong { color: var(--focus); }
+@media (max-width: 680px) {
+  .nav-more-panel { inset-inline: 12px; max-width: none; }
+}
+@media (pointer: coarse) { .more-item { padding: 12px; } }
+@media (prefers-reduced-motion: reduce) { .nav-more-panel { animation: none; } .nav-more:hover { transform: none; } }
+
+/* --- Homepage demo (result before any form) --- */
+.demo-card {
+  margin: 18px auto 4px;
+  max-width: 430px;
+  text-align: start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 14px 16px;
+  color: var(--text);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.05);
+}
+.demo-tag {
+  margin: 0 0 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--focus);
+}
+.demo-goal { margin: 0 0 8px; font-size: 13.5px; font-style: italic; color: var(--muted); }
+.demo-line { margin: 4px 0 0; font-size: 13px; }
+.demo-alt { color: var(--muted); font-size: 12.5px; }
+.demo-actions { margin-top: 12px; gap: 10px; flex-wrap: wrap; }
+.demo-actions .btn-primary { padding: 9px 14px; font-size: 13px; }
+
+/* --- Stack Optimizer --- */
+.stack-card { max-width: 780px; }
+.stack-chips { margin: 8px 0 2px; max-width: none; }
+.stack-budget { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.stack-opt.on { border-color: var(--focus); box-shadow: inset 0 0 0 1px var(--focus); background: rgba(37, 99, 235, 0.06); }
+[data-theme="dark"] .stack-opt.on { background: rgba(96, 165, 250, 0.12); }
+[data-theme="sepia"] .stack-opt.on { background: rgba(122, 77, 32, 0.09); }
+.stack-result { max-width: 780px; margin-top: 18px; }
+.stack-result-title { margin-top: 0; }
+.stack-cost { margin-bottom: 12px; }
+.stack-cost-main { margin: 0; font-size: 17px; }
+.stack-grid { margin-top: 12px; }
+.stack-extra { margin-top: 12px; }
+@media (max-width: 680px) {
+  .stack-budget { grid-template-columns: 1fr; }
+}
+
+/* --- Prompt Doctor --- */
+.doctor-card { max-width: 780px; }
+.doctor-card textarea { margin-top: 12px; }
+.doctor-result { max-width: 920px; margin-top: 16px; display: flex; flex-direction: column; gap: 12px; }
+.doctor-score { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+.doctor-score.good { color: #15803d; }
+.doctor-score.mid { color: #b45309; }
+.doctor-score.low { color: var(--error); }
+[data-theme="dark"] .doctor-score.good { color: #4ade80; }
+[data-theme="dark"] .doctor-score.mid { color: #fbbf24; }
+[data-theme="sepia"] .doctor-score.good { color: #4d6b3a; }
+.doctor-track { max-width: none; height: 9px; margin-top: 10px; }
+.doctor-fill.good { background: linear-gradient(90deg, #15803d, #4ade80); }
+.doctor-fill.mid { background: linear-gradient(90deg, #b45309, #f59e0b); }
+.doctor-fill.low { background: linear-gradient(90deg, #b91c1c, #f87171); }
+.doctor-checks { list-style: none; margin: 0; padding: 0; }
+.doctor-check { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+.doctor-check:last-child { border-bottom: none; }
+.doctor-mark { flex: none; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+.doctor-check.pass .doctor-mark { background: rgba(21, 128, 61, 0.14); color: #15803d; }
+.doctor-check.miss .doctor-mark { background: rgba(185, 28, 28, 0.1); color: var(--error); }
+[data-theme="dark"] .doctor-check.pass .doctor-mark { color: #4ade80; }
+.doctor-check-body { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.doctor-check-body strong { font-weight: 600; }
+.doctor-check.pass .doctor-check-body strong { color: var(--muted); font-weight: 500; }
+.doctor-tip { font-size: 12.5px; color: var(--muted); }
+.doctor-panes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px; }
+.doctor-pane { min-width: 0; }
+.doctor-pane .prompt-text { max-height: 340px; }
+.doctor-why { margin-top: 12px; }
+@media (max-width: 920px) {
+  .doctor-panes { grid-template-columns: 1fr; }
+}

@@ -17,7 +17,7 @@ function check(name, cond, detail) {
 globalThis.window = globalThis;
 
 /* ---------- 1. Syntax of every shipped JS file ---------- */
-const jsFiles = ["js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js", "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/app.js", "sw.js"];
+const jsFiles = ["js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js", "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/stack.js", "js/doctor.js", "js/app.js", "sw.js"];
 for (const f of jsFiles) {
   try { execSync("node --check " + f, { stdio: "pipe" }); check("syntax " + f, true); }
   catch (e) { check("syntax " + f, false, String(e.stderr || e)); }
@@ -33,6 +33,8 @@ const Charts = require("../js/charts.js");
 const Glossary = require("../js/glossary.js");
 const Finder = require("../js/finder.js");
 const MC = require("../js/modelcompare.js");
+const Stack = require("../js/stack.js");
+const Doctor = require("../js/doctor.js");
 
 /* ---------- 3. models-db integrity ---------- */
 {
@@ -144,6 +146,27 @@ const MC = require("../js/modelcompare.js");
   check("finder: offers carry access + limit", [r1, r2, r3].every(r => r.top.access && r.top.limit));
 }
 
+/* ---------- 9b. stack optimizer + prompt doctor logic ---------- */
+{
+  const r1 = Stack._optimize({ tasks: ["writing", "research", "coding"], subs: ["chatgpt", "perplexity", "claude"], budget: "20", needs: ["web"], done: true });
+  check("stack: $20 budget keeps 1 paid sub", r1.stack.filter(s => s.paid).length === 1 && r1.newCost <= 20);
+  check("stack: redundancy detected", r1.redundant.length >= 1 && r1.currentCost === 60);
+  const r2 = Stack._optimize({ tasks: ["writing"], subs: [], budget: "0", needs: [], done: true });
+  check("stack: free-only budget costs 0", r2.newCost === 0 && r2.stack.every(s => !s.paid));
+  const r3 = Stack._optimize({ tasks: ["research"], subs: [], budget: "nolimit", needs: ["web", "privacy"], done: true });
+  check("stack: web need routes research to Perplexity", r3.stack.some(s => s.app === "perplexity"));
+  check("stack: privacy extra surfaces local option", r3.extras.some(x => x.kind === "privacy" && x.dbId === "inkling"));
+  const weak = Doctor._analyze("write something");
+  const strong = Doctor._analyze("Act as a senior editor. Rewrite my article for beginner developers as a 5-bullet list, max 200 words, avoid jargon. Context: our company sells devtools. For example keep the tone like our blog. Make sure it is accurate; if unsure, ask clarifying questions. Cite sources.");
+  check("doctor: weak prompt scores low (" + weak.score + ")", weak.score <= 20);
+  check("doctor: strong prompt scores high (" + strong.score + ")", strong.score >= 85);
+  check("doctor: 10 weighted checks with tips", Doctor._checks.length === 10 && Doctor._checks.every(c => c.tip && c.w > 0));
+  const it = Doctor._analyze("Agisci come un editor esperto. Riscrivi il testo per principianti, al massimo 200 parole, evita il gergo. Ad esempio come il nostro blog. Se non sei sicuro chiedi. Cita le fonti.");
+  check("doctor: Italian keywords recognized (" + it.score + ")", it.score >= 60);
+  const v24keys = ["navMore", "stackTitle", "stackGo", "doctorTitle", "doctorGo", "demoTitle", "demoTry"];
+  check("i18n: v0.24 keys in all languages", v24keys.every(k => I18n.STRINGS.en[k] && I18n.STRINGS.ar[k] && I18n.STRINGS.zh[k] && I18n.STRINGS.it[k]));
+}
+
 /* ---------- 10. HTML ↔ JS id cross-check ---------- */
 {
   const html = readFileSync("index.html", "utf8");
@@ -178,10 +201,12 @@ const MC = require("../js/modelcompare.js");
   const html = readFileSync("index.html", "utf8");
   const app = readFileSync("js/app.js", "utf8");
   const sw = readFileSync("sw.js", "utf8");
-  check("version: badge v0.23", html.includes(">v0.23 · Growth<"));
-  check("version: footer v0.23", html.includes("WhichAI v0.23"));
-  check("version: APP_VERSION v0.23", app.includes('APP_VERSION = "v0.23"'));
-  check("version: SW cache v0.23", sw.includes('"whichai-v0.23.0"'));
+  check("version: badge v0.24", html.includes(">v0.24 · Growth<"));
+  check("version: footer v0.24", html.includes("WhichAI v0.24"));
+  check("version: APP_VERSION v0.24", app.includes('APP_VERSION = "v0.24"'));
+  check("version: SW cache v0.24", sw.includes('"whichai-v0.24.0"'));
+  check("v0.24: nav More + new views ids", ["nav-more", "nav-more-panel", "nav-stack", "nav-doctor", "nav-glossary", "stack-view", "doctor-view", "stack-wrap", "doctor-wrap", "demo-card", "open-doctor"].every(id => html.includes('id="' + id + '"')));
+  check("v0.24: SW precaches stack + doctor", sw.includes("js/stack.js") && sw.includes("js/doctor.js"));
   check("v0.23: CSP meta present", html.includes("Content-Security-Policy") && html.includes("connect-src 'self' https://generativelanguage.googleapis.com"));
   check("v0.23: key storage + data tools ids", ["keymode-session", "keymode-local", "keys-clear", "data-export", "data-import", "data-wipe", "data-file"].every(id => html.includes('id="' + id + '"')));
   check("v0.23: methodology card", html.includes('id="about-methodology"') && html.includes("Methodology v1.0"));
