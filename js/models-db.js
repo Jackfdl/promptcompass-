@@ -25,6 +25,28 @@
     updated: "July 19, 2026",
     scaleNote: "Artificial Analysis Intelligence Index, 2026 rebased scale (top models ≈ 55–60). Snapshot: July 16, 2026 (BenchLM mirror), retrieved July 19, 2026.",
     specNote: "Context, price and release data come from vendor pages and public pricing mirrors (retrieved July 19, 2026). Missing values are not published or not yet verified - shown as -.",
+    /* Official apps per prompt family, plus vendor fallbacks (checked July 2026) */
+    links: {
+      claude: "https://claude.ai", chatgpt: "https://chatgpt.com", gemini: "https://gemini.google.com",
+      perplexity: "https://www.perplexity.ai", grok: "https://grok.com", copilot: "https://copilot.microsoft.com",
+      meta: "https://www.meta.ai", llama: "https://www.meta.ai", glm: "https://chat.z.ai",
+      kimi: "https://www.kimi.com", nemotron: "https://build.nvidia.com", deepseek: "https://chat.deepseek.com",
+      qwen: "https://chat.qwen.ai"
+    },
+    vendorLinks: {
+      "OpenAI": "https://chatgpt.com", "Anthropic": "https://claude.ai", "Google": "https://gemini.google.com",
+      "xAI": "https://grok.com", "Meta": "https://www.meta.ai", "Microsoft": "https://copilot.microsoft.com",
+      "Moonshot AI": "https://www.kimi.com", "Z.ai": "https://chat.z.ai", "DeepSeek": "https://chat.deepseek.com",
+      "Alibaba": "https://chat.qwen.ai", "NVIDIA": "https://build.nvidia.com", "Perplexity AI": "https://www.perplexity.ai",
+      "Mistral AI": "https://chat.mistral.ai", "Tencent": "https://hunyuan.tencent.com", "Thinking Machines Lab": "https://thinkingmachines.ai",
+      "Cohere": "https://cohere.com", "IBM": "https://www.ibm.com/granite", "Amazon": "https://aws.amazon.com/bedrock",
+      "Baidu": "https://yiyan.baidu.com", "ByteDance": "https://www.doubao.com", "Xiaomi": "https://www.xiaomi.com",
+      "StepFun": "https://www.stepfun.com", "Inception Labs": "https://www.inceptionlabs.ai", "LG AI Research": "https://www.lgresearch.ai",
+      "Upstage": "https://www.upstage.ai", "Arcee AI": "https://www.arcee.ai", "Sarvam AI": "https://www.sarvam.ai",
+      "TII (UAE)": "https://www.tii.ae", "Reka AI": "https://www.reka.ai", "Ai2": "https://allenai.org",
+      "Liquid AI": "https://www.liquid.ai", "AI21 Labs": "https://www.ai21.com", "Ant Group": "https://www.antgroup.com",
+      "MiniMax": "https://www.minimax.io"
+    },
     models: [
 
       /* ---------------- OpenAI ---------------- */

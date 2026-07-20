@@ -17,7 +17,7 @@ function check(name, cond, detail) {
 globalThis.window = globalThis;
 
 /* ---------- 1. Syntax of every shipped JS file ---------- */
-const jsFiles = ["js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js", "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/stack.js", "js/doctor.js", "js/app.js", "sw.js"];
+const jsFiles = ["js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js", "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/stack.js", "js/doctor.js", "js/changes.js", "js/radar.js", "js/sharecard.js", "js/app.js", "sw.js"];
 for (const f of jsFiles) {
   try { execSync("node --check " + f, { stdio: "pipe" }); check("syntax " + f, true); }
   catch (e) { check("syntax " + f, false, String(e.stderr || e)); }
@@ -35,6 +35,9 @@ const Finder = require("../js/finder.js");
 const MC = require("../js/modelcompare.js");
 const Stack = require("../js/stack.js");
 const Doctor = require("../js/doctor.js");
+const ChangesFeed = require("../js/changes.js");
+const Radar = require("../js/radar.js");
+const ShareCard = require("../js/sharecard.js");
 
 /* ---------- 3. models-db integrity ---------- */
 {
@@ -167,6 +170,27 @@ const Doctor = require("../js/doctor.js");
   check("i18n: v0.24 keys in all languages", v24keys.every(k => I18n.STRINGS.en[k] && I18n.STRINGS.ar[k] && I18n.STRINGS.zh[k] && I18n.STRINGS.it[k]));
 }
 
+/* ---------- 9c. official links, change feed, radar/share exports ---------- */
+{
+  const linkFor = m => m.url || (m.family && DB.links && DB.links[m.family]) || (DB.vendorLinks && DB.vendorLinks[m.vendor]) || null;
+  const unlinked = DB.models.filter(m => !linkFor(m)).map(m => m.id);
+  check("links: every model resolves an official link", unlinked.length === 0, unlinked.join(", "));
+  check("links: all 13 prompt families covered", Engine.MODEL_ORDER.every(f => DB.links[f] && DB.links[f].indexOf("https://") === 0));
+  const VALID_TYPES = ["new-model", "price", "score", "free-tier", "upcoming"];
+  let badChange = null;
+  for (const c of ChangesFeed.CHANGES) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(c.date)) badChange = c.title + " date";
+    if (!VALID_TYPES.includes(c.type)) badChange = c.title + " type";
+    if (c.dbId && !DB.models.some(m => m.id === c.dbId)) badChange = c.title + " dbId";
+    if (!c.src || !/^https:/.test(c.src.url)) badChange = c.title + " src";
+    if (!c.note || c.note.length < 30) badChange = c.title + " note";
+  }
+  check("radar: " + ChangesFeed.CHANGES.length + " changes valid (dates, types, dbIds, sources)", !badChange, badChange);
+  check("radar: unseen counting works", ChangesFeed.unseenCount("", "2026-07-20") === 10 && ChangesFeed.unseenCount("2026-07-16", "2026-07-20") === 0 && ChangesFeed.unseenCount("2026-07-10", "2026-07-20") > 0);
+  check("radar: upcoming separated", ChangesFeed.upcoming("2026-07-20").every(c => c.date > "2026-07-20"));
+  check("radar + sharecard modules export", typeof Radar.init === "function" && typeof ShareCard.share === "function");
+}
+
 /* ---------- 10. HTML ↔ JS id cross-check ---------- */
 {
   const html = readFileSync("index.html", "utf8");
@@ -201,10 +225,12 @@ const Doctor = require("../js/doctor.js");
   const html = readFileSync("index.html", "utf8");
   const app = readFileSync("js/app.js", "utf8");
   const sw = readFileSync("sw.js", "utf8");
-  check("version: badge v0.24", html.includes(">v0.24 · Growth<"));
-  check("version: footer v0.24", html.includes("WhichAI v0.24"));
-  check("version: APP_VERSION v0.24", app.includes('APP_VERSION = "v0.24"'));
-  check("version: SW cache v0.24", sw.includes('"whichai-v0.24.0"'));
+  check("version: badge v0.25", html.includes(">v0.25 · Growth<"));
+  check("version: footer v0.25", html.includes("WhichAI v0.25"));
+  check("version: APP_VERSION v0.25", app.includes('APP_VERSION = "v0.25"'));
+  check("version: SW cache v0.25", sw.includes('"whichai-v0.25.0"'));
+  check("v0.25: radar ids + scripts", ["nav-radar", "radar-view", "radar-wrap"].every(id => html.includes('id="' + id + '"')) && ["changes.js", "radar.js", "sharecard.js"].every(s => html.includes("js/" + s)));
+  check("v0.25: SW precaches radar + share", sw.includes("js/radar.js") && sw.includes("js/sharecard.js") && sw.includes("js/changes.js"));
   check("v0.24: nav More + new views ids", ["nav-more", "nav-more-panel", "nav-stack", "nav-doctor", "nav-glossary", "stack-view", "doctor-view", "stack-wrap", "doctor-wrap", "demo-card", "open-doctor"].every(id => html.includes('id="' + id + '"')));
   check("v0.24: SW precaches stack + doctor", sw.includes("js/stack.js") && sw.includes("js/doctor.js"));
   check("v0.23: CSP meta present", html.includes("Content-Security-Policy") && html.includes("connect-src 'self' https://generativelanguage.googleapis.com"));

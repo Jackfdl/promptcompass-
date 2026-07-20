@@ -2,6 +2,24 @@
 
 (Older release-by-release history lives in `STATUS.md`, the project's working memory.)
 
+## v0.25.0 (2026-07-20)
+
+Retention and polish: Model Radar, inline model details, official app links everywhere, smarter Compare default, shareable result images.
+
+### Fixed
+- **Model guide details now open inline**: clicking a result expands the overview right under that row (accordion with a soft slide, arrow rotates, row highlighted; clicking again closes). Previously the card appeared under the whole list and long result sets made it look like nothing happened.
+- **More menu readability**: panel rows were inheriting the nav pill "active" style (light pill + accent text = poor contrast). Panel rows now have their own calm active state: subtle background, accent side bar, regular text color.
+
+### Added
+- **Official app links everywhere an AI is suggested**: model detail cards ("Open the official app ↗"), every generated prompt panel ("Open Claude ↗" next to Copy: copy the prompt, jump straight to the chatbot), Compare output columns, finder result cards, stack cards, and the static wiki pages (models + task rankings). New `links` (13 prompt families → official chat apps) and `vendorLinks` (34 vendors) maps in `models-db.js`; every one of the 105 models resolves to an official destination (tested).
+- **Model Radar** (`js/radar.js` + curated feed `js/changes.js`, `#radar`, first item in the More menu): what changed since your last visit: new models, price moves, score snapshots, free-tier changes, plus a "Coming up" section (Kimi K3 weights July 27, Sonnet 5 intro price ending Aug 31). Type filters, NEW badges based on your last visit, per-model ★ watchlist (also from any model card) with a "Following" filter, and sources on every entry. A small dot on the More button signals unseen changes; visiting the radar clears it. The feed is part of the monthly data-refresh routine.
+- **Share as image**: finder and Stack Optimizer results can be exported as a polished 1200x630 PNG card (canvas, no libraries, aurora-dark design) via the native share sheet on mobile or download on desktop.
+- **Compare opens on Model comparison by default**: the on-paper comparison is the zero-effort entry point; Output comparison shows first only when one is already in progress (or via the explicit `#compare-outputs` link).
+- 20 new i18n keys in all 11 languages (269 total).
+
+### Tests
+- Static suite: 94 checks (link coverage for all models and families, change-feed validation, radar/share exports). DOM smoke: 57 (inline accordion open/close, radar flow with dot + watchlist, compare default, official links on panels). **151/151 green.**
+
 ## v0.24.0 (2026-07-20)
 
 Phase 2 of the growth plan: personalization tools and a calmer first impression.

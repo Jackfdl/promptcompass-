@@ -1,10 +1,10 @@
 /* WhichAI service worker: network-first, precached shell, offline fallback.
    Bump CACHE on every release so old assets never linger. */
-var CACHE = "whichai-v0.24.0";
+var CACHE = "whichai-v0.25.0";
 var SHELL = [
   "./", "index.html", "styles.css", "manifest.webmanifest",
   "js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js",
-  "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/stack.js", "js/doctor.js", "js/app.js",
+  "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/stack.js", "js/doctor.js", "js/changes.js", "js/radar.js", "js/sharecard.js", "js/app.js",
   "icons/icon-192.png", "icons/icon-512.png", "icons/icon-512-maskable.png", "icons/apple-touch-icon.png"
 ];
 

@@ -111,7 +111,7 @@
   var THEME_KEY = "pc_theme";
   var DEFAULT_GEMINI_MODEL = "gemini-3.5-flash";
   var DEFAULT_GROQ_MODEL = "llama-3.3-70b-versatile";
-  var APP_VERSION = "v0.24";
+  var APP_VERSION = "v0.25";
   var BRAND = "WhichAI";
   var TASK_ICONS = {
     writing: '<svg class="guide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z"/><path d="M13.5 7.5l3 3"/></svg>',
@@ -169,6 +169,8 @@
     setText("#nav-stack strong", "navStack");
     setText("#nav-doctor strong", "navDoctor");
     setText("#nav-glossary strong", "footGlossary");
+    setText("#nav-radar strong", "navRadar");
+    setText("#nav-radar-sub", "navRadarSub");
     setText("#nav-chains-sub", "navChainsSub");
     setText("#nav-stack-sub", "navStackSub");
     setText("#nav-doctor-sub", "navDoctorSub");
@@ -306,6 +308,7 @@
     if (window.WhichAIModelCompare) window.WhichAIModelCompare.rerender();
     if (window.WhichAIStack) window.WhichAIStack.rerender();
     if (window.WhichAIDoctor) window.WhichAIDoctor.rerender();
+    if (window.WhichAIRadar) window.WhichAIRadar.rerender();
     renderDemo();
     var glv = document.getElementById("glossary-view");
     if (glv && !glv.hidden) initGlossary();
@@ -866,6 +869,8 @@
     if (stackView) stackView.hidden = name !== "stack";
     var doctorView = document.getElementById("doctor-view");
     if (doctorView) doctorView.hidden = name !== "doctor";
+    var radarView = document.getElementById("radar-view");
+    if (radarView) radarView.hidden = name !== "radar";
     if ($mergeView) $mergeView.hidden = name !== "merge";
     $navGenerator.classList.toggle("active", name === "generator");
     $navGuide.classList.toggle("active", name === "guide");
@@ -879,13 +884,25 @@
     if (navStack) navStack.classList.toggle("active", name === "stack");
     if (navDoctor) navDoctor.classList.toggle("active", name === "doctor");
     if (navGlossary) navGlossary.classList.toggle("active", name === "glossary");
+    var navRadar = document.getElementById("nav-radar");
+    if (navRadar) navRadar.classList.toggle("active", name === "radar");
     var moreBtn = document.getElementById("nav-more");
-    if (moreBtn) moreBtn.classList.toggle("active", ["chains", "stack", "doctor", "glossary", "about", "settings"].indexOf(name) !== -1);
+    if (moreBtn) moreBtn.classList.toggle("active", ["chains", "stack", "doctor", "glossary", "about", "settings", "radar"].indexOf(name) !== -1);
     closeMorePanel();
     if (name === "guide" && !guideBuilt) buildGuide();
     if (name === "compare") renderCompare();
     if (name === "chains") renderChainHistory();
     if (name === "glossary") initGlossary();
+    if (name === "radar" && window.WhichAIRadar) {
+      window.WhichAIRadar.init(document.getElementById("radar-wrap"), {
+        T: T,
+        openModel: openModelById,
+        isWatched: isWatched,
+        toggleWatch: toggleWatch,
+        getSeen: getRadarSeen,
+        setSeen: setRadarSeen
+      });
+    }
     if (name === "stack" && window.WhichAIStack) {
       window.WhichAIStack.init(document.getElementById("stack-wrap"), {
         T: T,
@@ -920,15 +937,77 @@
     var isModel = h.indexOf("#model=") === 0;
     var isStack = h.indexOf("#stack") === 0;
     var isDoctor = h.indexOf("#doctor") === 0;
+    var isRadar = h.indexOf("#radar") === 0;
     if (isModel) { openModelById(decodeURIComponent(h.slice(7))); return; }
-    setView(h === "#guide" ? "guide" : isCompare ? "compare" : isChains ? "chains" : isMerge ? "merge" : isAbout ? "about" : isGlossary ? "glossary" : isStack ? "stack" : isDoctor ? "doctor" : h === "#settings" ? "settings" : "generator");
+    setView(h === "#guide" ? "guide" : isCompare ? "compare" : isChains ? "chains" : isMerge ? "merge" : isAbout ? "about" : isGlossary ? "glossary" : isStack ? "stack" : isDoctor ? "doctor" : isRadar ? "radar" : h === "#settings" ? "settings" : "generator");
     if (isChains) importChainFromHash();
-    if (isCompare) setCompareTab(h.indexOf("#compare-specs") === 0 ? "specs" : "outputs");
+    if (isCompare) {
+      // Model comparison is the default; outputs win only when explicitly asked
+      // for or when an output comparison is already in progress.
+      var tab = h.indexOf("#compare-specs") === 0 ? "specs"
+        : h.indexOf("#compare-outputs") === 0 ? "outputs"
+        : (activeCmp ? "outputs" : "specs");
+      setCompareTab(tab);
+    }
     if (isFinder) setGenMode("finder", false);
     if (isAbout && h.length > "#about".length) {
       var anchor = document.getElementById(h.slice(1));
       if (anchor) setTimeout(function () { anchor.scrollIntoView({ behavior: "smooth", block: "start" }); }, 160);
     }
+  }
+
+  /* ---------- v0.25: official links, watchlist, radar seen-state ---------- */
+
+  function linkForModel(m) {
+    var DBx = window.PromptCompassModelsDB || null;
+    if (!m || !DBx) return null;
+    if (m.url) return m.url;
+    if (m.family && DBx.links && DBx.links[m.family]) return DBx.links[m.family];
+    if (DBx.vendorLinks && DBx.vendorLinks[m.vendor]) return DBx.vendorLinks[m.vendor];
+    return null;
+  }
+
+  function linkForFamily(fam) {
+    var DBx = window.PromptCompassModelsDB || null;
+    return DBx && DBx.links && DBx.links[fam] ? DBx.links[fam] : null;
+  }
+
+  function officialAnchor(url, label, primary) {
+    var a = document.createElement("a");
+    a.className = primary ? "btn-copy btn-official" : "btn-link btn-official";
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = label + " \u2197";
+    return a;
+  }
+
+  var WATCH_KEY = "pc_watch_v1";
+  var RADAR_SEEN_KEY = "pc_radar_seen";
+
+  function getWatchlist() {
+    try { return JSON.parse(localStorage.getItem(WATCH_KEY)) || []; } catch (e) { return []; }
+  }
+  function isWatched(id) { return getWatchlist().indexOf(id) !== -1; }
+  function toggleWatch(id) {
+    var w = getWatchlist();
+    var i = w.indexOf(id);
+    if (i === -1) w.push(id); else w.splice(i, 1);
+    try { localStorage.setItem(WATCH_KEY, JSON.stringify(w)); } catch (e) { /* ignore */ }
+  }
+  function getRadarSeen() {
+    try { return localStorage.getItem(RADAR_SEEN_KEY) || ""; } catch (e) { return ""; }
+  }
+  function setRadarSeen(iso) {
+    try { localStorage.setItem(RADAR_SEEN_KEY, iso); } catch (e) { /* ignore */ }
+    updateRadarDot();
+  }
+  function updateRadarDot() {
+    var b = document.getElementById("nav-more");
+    var ch = window.WhichAIChanges || null;
+    if (!b || !ch) return;
+    var unseen = ch.unseenCount(getRadarSeen());
+    b.classList.toggle("has-dot", unseen > 0);
   }
 
   /* ---------- v0.24: "More" nav menu ---------- */
@@ -1613,7 +1692,26 @@
       return el;
     }
 
-    function showDetail(m) {
+    function showDetail(m, hitEl) {
+      // toggle: clicking the open model again closes it
+      if (!detailEl.hidden && detailEl.getAttribute("data-mid") === m.id) {
+        detailEl.hidden = true;
+        detailEl.removeAttribute("data-mid");
+        var openHit0 = resultsEl.querySelector(".db-hit.open");
+        if (openHit0) openHit0.classList.remove("open");
+        return;
+      }
+      // open as an accordion right under the clicked row
+      if (!hitEl) hitEl = resultsEl.querySelector('.db-hit[data-mid="' + m.id + '"]');
+      var prevOpen = resultsEl.querySelector(".db-hit.open");
+      if (prevOpen) prevOpen.classList.remove("open");
+      if (hitEl) {
+        hitEl.classList.add("open");
+        resultsEl.insertBefore(detailEl, hitEl.nextSibling);
+      } else if (detailEl.parentNode !== resultsEl) {
+        resultsEl.insertBefore(detailEl, resultsEl.firstChild);
+      }
+      detailEl.setAttribute("data-mid", m.id);
       detailEl.innerHTML = "";
       detailEl.hidden = false;
       var card = document.createElement("div");
@@ -1755,6 +1853,18 @@
         });
         actions.appendChild(useBtn);
       }
+      var offUrl = linkForModel(m);
+      if (offUrl) actions.appendChild(officialAnchor(offUrl, T("officialSite"), true));
+      var watchBtn = document.createElement("button");
+      watchBtn.type = "button";
+      watchBtn.className = "btn-copy radar-star" + (isWatched(m.id) ? " on" : "");
+      watchBtn.textContent = (isWatched(m.id) ? "\u2605 " + T("radarUnfollow") : "\u2606 " + T("radarFollow"));
+      watchBtn.addEventListener("click", function () {
+        toggleWatch(m.id);
+        watchBtn.classList.toggle("on", isWatched(m.id));
+        watchBtn.textContent = (isWatched(m.id) ? "\u2605 " + T("radarUnfollow") : "\u2606 " + T("radarFollow"));
+      });
+      actions.appendChild(watchBtn);
       var cmpBtn = document.createElement("button");
       cmpBtn.type = "button";
       cmpBtn.className = "btn-copy";
@@ -1822,8 +1932,12 @@
 
     function render(q) {
       q = (q || "").toLowerCase().trim();
+      if (detailEl.parentNode === resultsEl) {
+        resultsEl.parentNode.insertBefore(detailEl, resultsEl.nextSibling);
+      }
       resultsEl.innerHTML = "";
       detailEl.hidden = true;
+      detailEl.removeAttribute("data-mid");
       if (!q && !activeTags.length && !activeLabels.length) return;
       var matches = DB.models.filter(function (m) {
         var ok = activeTags.every(function (t) { return m.tags.indexOf(t) !== -1; }) &&
@@ -1845,6 +1959,7 @@
         var hit = document.createElement("button");
         hit.type = "button";
         hit.className = "db-hit";
+        hit.setAttribute("data-mid", m.id);
         var left = document.createElement("span");
         var nm = document.createElement("strong");
         nm.textContent = m.name;
@@ -1864,7 +1979,7 @@
         sc.className = "badge";
         sc.textContent = m.score && m.score.aa ? "AA " + (m.score.est ? "~" : "") + m.score.aa : "n/a";
         hit.appendChild(sc);
-        hit.addEventListener("click", function () { showDetail(m); });
+        hit.addEventListener("click", function () { showDetail(m, hit); });
         resultsEl.appendChild(hit);
       });
       if (matches.length > 20) {
@@ -2065,6 +2180,8 @@
       lab.className = "compare-label";
       lab.textContent = runner ? entry.label + "'s answer" : "Paste " + entry.label + "'s answer";
       labRow.appendChild(lab);
+      var cmpUrl = linkForFamily(entry.model);
+      if (cmpUrl) labRow.appendChild(officialAnchor(cmpUrl, T("officialOpen") + " " + entry.label, false));
       var statusEl = document.createElement("p");
       statusEl.className = "run-status";
       statusEl.hidden = true;
@@ -2677,7 +2794,12 @@
       copyBtn.addEventListener("click", function () { copyPrompt(r.prompt, copyBtn); });
 
       toolbar.appendChild(title);
-      toolbar.appendChild(copyBtn);
+      var tbBtns = document.createElement("div");
+      tbBtns.className = "panel-btns";
+      var famUrl = linkForFamily(r.id);
+      if (famUrl) tbBtns.appendChild(officialAnchor(famUrl, T("officialOpen") + " " + r.label, true));
+      tbBtns.appendChild(copyBtn);
+      toolbar.appendChild(tbBtns);
       panel.appendChild(toolbar);
 
       var pre = document.createElement("pre");
@@ -2868,6 +2990,7 @@
   }
   initNavAutoScroll();
   initMoreMenu();
+  updateRadarDot();
 
   var openDoctorBtn = document.getElementById("open-doctor");
   if (openDoctorBtn) openDoctorBtn.addEventListener("click", function () {
@@ -2889,7 +3012,7 @@
     var bo = document.getElementById("cmp-tab-outputs");
     var bs = document.getElementById("cmp-tab-specs");
     if (bo) bo.addEventListener("click", function () {
-      if (location.hash === "#compare") setCompareTab("outputs"); else location.hash = "#compare";
+      if (location.hash === "#compare-outputs") setCompareTab("outputs"); else location.hash = "#compare-outputs";
     });
     if (bs) bs.addEventListener("click", function () {
       if (location.hash === "#compare-specs") setCompareTab("specs"); else location.hash = "#compare-specs";

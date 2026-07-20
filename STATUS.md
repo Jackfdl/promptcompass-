@@ -1,10 +1,22 @@
 # WhichAI (ex PromptCompass) — STATUS
 
-Ultimo aggiornamento: 2026-07-20 (sessione 24)
-Versione app: v0.24.0 (in cartella; live ancora v0.21: da pubblicare v0.22+v0.23+v0.24 insieme)
+Ultimo aggiornamento: 2026-07-20 (sessione 25)
+Versione app: v0.25.0 (in cartella; live ancora v0.21: il prossimo deploy porta v0.22→v0.25 insieme)
 Sito live: https://whichai.wiki · https://promptcompass.vercel.app resta come alias
 
 ## Fase corrente: Growth - fase 1 del piano brainstorming (SEO statico, sicurezza, retention di base)
+
+## Fatto (sessione 25, 2026-07-20)
+
+- **Scheda modello a tendina (richiesta Jack)**: il dettaglio si apre ORA subito sotto la riga cliccata (accordion con slide morbido, freccia che ruota, riga evidenziata; secondo click richiude). Prima compariva in fondo alla lista e con tanti risultati sembrava che non succedesse nulla.
+- **Fix leggibilità menu More (richiesta Jack)**: le voci del pannello ereditavano lo stile "pill attiva" della nav (sfondo chiaro + testo accento = contrasto scarso). Ora stato attivo dedicato: sfondo tenue, barretta laterale accento, testo normale.
+- **LINK UFFICIALI OVUNQUE (richiesta Jack)**: nuova mappa `links` (13 famiglie → app ufficiali: claude.ai, chatgpt.com, gemini.google.com, perplexity.ai, grok.com, copilot.microsoft.com, meta.ai, chat.z.ai, kimi.com, build.nvidia.com, chat.deepseek.com, chat.qwen.ai) + `vendorLinks` (34 vendor) in models-db.js. Bottone "apri app ufficiale ↗" in: scheda modello, OGNI pannello prompt generato (copi e vai a incollare), colonne del Compare output, card del finder, card dello stack, pagine wiki statiche (modelli + best-ai-for, rigenerate). Test: tutti i 105 modelli risolvono un link.
+- **Compare: default su Model comparison (richiesta Jack)**: `#compare` apre il confronto su carta, a meno che ci sia già un confronto output attivo; `#compare-outputs` lo forza esplicitamente.
+- **MODEL RADAR (fase 3, retention)**: `js/changes.js` = feed curato e datato con fonti (13 voci reali di luglio: K3, Inkling, GPT-5.6, Grok 4.5, snapshot AA, route free, + "In arrivo": pesi K3 il 27/7, fine prezzo intro Sonnet 5 il 31/8). `js/radar.js` = vista `#radar` (prima voce del menu More): filtri per tipo, badge NEW rispetto all'ultima visita (pc_radar_seen), watchlist ★ per modello (pc_watch_v1, attivabile anche dalla scheda modello) con filtro "Seguiti", fonte linkata su ogni voce. **Pallino blu sul bottone More** quando ci sono novità non viste; sparisce visitando il radar. Il feed va aggiornato col refresh mensile (2 minuti: si aggiungono le voci in cima a changes.js).
+- **SHARE CARD (viralità)**: `js/sharecard.js` disegna una PNG 1200x630 (canvas puro, design scuro con aurora, zero librerie) con i risultati di finder e stack; share sheet nativo su mobile, download su desktop.
+- **i18n**: +20 chiavi ×11 (=269). **Versioni**: v0.25 ovunque, SW cache v0.25.0 con changes/radar/sharecard nel precache. Wiki rigenerata (156 pagine con link ufficiali).
+- **TEST**: 94 statici + 57 smoke = **151/151 PASSATI**.
+- [ ] **Jack pubblica v0.25** (live fermo a v0.21: questo deploy porta v0.22→v0.25). File NUOVI: `js/changes.js`, `js/radar.js`, `js/sharecard.js`.
 
 ## Fatto (sessione 24, 2026-07-20)
 

@@ -27,6 +27,7 @@ const COMPARE_PAIRS = [
 ];
 
 const byId = id => DB.models.find(m => m.id === id);
+const linkFor = m => m.url || (m.family && DB.links && DB.links[m.family]) || (DB.vendorLinks && DB.vendorLinks[m.vendor]) || null;
 const pairsFor = id => COMPARE_PAIRS.filter(p => p.includes(id));
 const pairPath = p => `/compare/${p[0]}-vs-${p[1]}.html`;
 
@@ -160,6 +161,7 @@ for (const m of DB.models) {
       ${alternatives(m)}
       ${cmp ? `<p class="router-meta">Head-to-head: ${cmp}</p>` : ""}
       <div class="compare-actions">
+        ${linkFor(m) ? `<a class="btn-copy" href="${esc(linkFor(m))}" rel="noopener">Open ${esc(m.name.split(" ")[0])}'s official app ↗</a>` : ""}
         <a class="btn-copy" href="/#model=${m.id}">Open in the WhichAI app</a>
         <a class="btn-copy" href="/#finder">Not sure? Take the 30-second finder</a>
       </div>
@@ -197,7 +199,7 @@ for (const t of Engine.TASK_ORDER) {
     <div class="card about-card">
       <h2 class="card-title">Ranking · ${esc(rec.confidence)} confidence</h2>
       <ol class="router-rank">
-        ${rec.ranking.map(r => { const app = Bench.apps[r.app]; return `<li><span class="router-app">${esc(app.label)}</span> (${esc(app.vendor)}) · ${esc(r.note)}<span class="router-free">Free tier: ${esc(app.freeModel)}</span></li>`; }).join("\n        ")}
+        ${rec.ranking.map(r => { const app = Bench.apps[r.app]; const u = DB.links && DB.links[r.app]; return `<li><span class="router-app">${esc(app.label)}</span> (${esc(app.vendor)})${u ? ` · <a href="${esc(u)}" rel="noopener">open ↗</a>` : ""} · ${esc(r.note)}<span class="router-free">Free tier: ${esc(app.freeModel)}</span></li>`; }).join("\n        ")}
       </ol>
       <p class="router-meta">${esc(Bench.CONFIDENCE_NOTES[rec.confidence])} ${esc(Bench.disclaimer)}</p>
       <p class="router-meta">Sources: ${rec.sourceIds.map(sid => { const s = Bench.sources.find(x => x.id === sid); return s ? `<a href="${esc(s.url)}" rel="noopener">${esc(s.label)}</a>` : ""; }).filter(Boolean).join(" · ")}</p>

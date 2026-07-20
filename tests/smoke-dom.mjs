@@ -24,7 +24,7 @@ w.confirm = () => true;
 w.URL.createObjectURL = w.URL.createObjectURL || (() => "blob:test");
 w.URL.revokeObjectURL = w.URL.revokeObjectURL || (() => {});
 
-const scripts = ["js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js", "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/stack.js", "js/doctor.js", "js/app.js"];
+const scripts = ["js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js", "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/stack.js", "js/doctor.js", "js/changes.js", "js/radar.js", "js/sharecard.js", "js/app.js"];
 let bootError = null;
 for (const s of scripts) {
   try { w.eval(readFileSync(s, "utf8")); }
@@ -88,9 +88,9 @@ check("compare: mc charts rendered", d.querySelectorAll("#cmp-specs-wrap svg").l
 const addBtn = d.querySelector("#cmp-specs-wrap .mc-add");
 addBtn.click();
 check("compare: third model added", d.querySelectorAll("#cmp-specs-wrap .mc-select").length === 3);
-w.location.hash = "#compare";
+w.location.hash = "#compare-outputs";
 await new Promise(r => setTimeout(r, 30));
-check("compare: outputs tab restores", !d.getElementById("cmp-outputs-wrap").hidden && d.getElementById("cmp-specs-wrap").hidden);
+check("compare: outputs tab restores via explicit hash", !d.getElementById("cmp-outputs-wrap").hidden && d.getElementById("cmp-specs-wrap").hidden);
 
 /* --- Chains: build, roadmap, reorder, add, remove --- */
 w.location.hash = "#chains";
@@ -129,13 +129,54 @@ w.location.hash = "#model=kimi-k3";
 await new Promise(r => setTimeout(r, 260));
 check("v23: #model= deep link opens detail", !d.getElementById("guide-view").hidden && d.getElementById("db-detail").textContent.includes("Kimi K3"));
 
+/* --- v0.25: inline detail, official links, compare default, radar --- */
+check("v25: radar dot on More button at boot", d.getElementById("nav-more").classList.contains("has-dot"));
+w.location.hash = "#guide";
+await new Promise(r => setTimeout(r, 30));
+d.getElementById("db-search").value = "gpt";
+d.getElementById("db-search").dispatchEvent(new w.Event("input"));
+const hits = d.querySelectorAll("#db-results .db-hit");
+check("v25: search lists several hits", hits.length >= 5);
+hits[2].click();
+const det = d.getElementById("db-detail");
+check("v25: detail opens inline right under the clicked row", det.parentNode === d.getElementById("db-results") && hits[2].nextElementSibling === det && !det.hidden && hits[2].classList.contains("open"));
+check("v25: detail has official link + follow", [...det.querySelectorAll("a.btn-official")].length >= 1 && [...det.querySelectorAll("button")].some(b => b.className.includes("radar-star")));
+hits[2].click();
+check("v25: clicking again closes the detail", det.hidden && !hits[2].classList.contains("open"));
+// compare default: no active output comparison in a fresh view -> specs
+w.eval('window.__wa_cmp_probe = 1');
+w.location.hash = "#compare";
+await new Promise(r => setTimeout(r, 30));
+check("v25: plain #compare defaults to Model comparison", !d.getElementById("cmp-specs-wrap").hidden && d.getElementById("cmp-outputs-wrap").hidden);
+// official link on generated prompt panels
+w.location.hash = "";
+await new Promise(r => setTimeout(r, 30));
+d.getElementById("mode-goal").click();
+d.getElementById("goal").value = "Plan a launch email";
+d.getElementById("generate").click();
+check("v25: prompt panels carry official app links", d.querySelectorAll("#panels .btn-official").length >= 3);
+// radar view
+w.location.hash = "#radar";
+await new Promise(r => setTimeout(r, 30));
+check("v25: radar renders items + filters + upcoming", d.querySelectorAll("#radar-wrap .radar-item").length >= 8 && d.querySelectorAll("#radar-wrap .radar-filters .chip").length === 6);
+const star = d.querySelector("#radar-wrap .radar-star");
+star.click();
+check("v25: follow star toggles", d.querySelector("#radar-wrap .radar-star").textContent.includes("★"));
+check("v25: radar visit clears the dot", !d.getElementById("nav-more").classList.contains("has-dot"));
+// share buttons exist (canvas is not clickable in jsdom)
+w.location.hash = "#stack";
+await new Promise(r => setTimeout(r, 30));
+const goBtn2 = d.querySelector("#stack-wrap .stack-go");
+if (goBtn2 && !goBtn2.disabled) { goBtn2.click(); }
+check("v25: stack result offers share as image", [...d.querySelectorAll("#stack-wrap button")].some(b => b.textContent.includes("Share") || b.textContent.includes("image")));
+
 /* --- v0.24: demo card, More menu, stack, doctor --- */
 w.location.hash = "";
 await new Promise(r => setTimeout(r, 30));
 check("v24: demo card rendered with actions", !d.getElementById("demo-card").hidden && d.querySelectorAll("#demo-card button").length === 2);
 const moreBtn = d.getElementById("nav-more");
 moreBtn.click();
-check("v24: More panel opens with 6 items", !d.getElementById("nav-more-panel").hidden && d.querySelectorAll("#nav-more-panel .more-item").length === 6);
+check("v24: More panel opens with 7 items", !d.getElementById("nav-more-panel").hidden && d.querySelectorAll("#nav-more-panel .more-item").length === 7);
 w.location.hash = "#stack";
 await new Promise(r => setTimeout(r, 30));
 check("v24: stack view opens, panel closed", !d.getElementById("stack-view").hidden && d.getElementById("nav-more-panel").hidden);

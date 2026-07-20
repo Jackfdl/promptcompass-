@@ -300,6 +300,17 @@
         open.type = "button";
         open.addEventListener("click", function () { deps.openModel(s.dbId); });
         actions.appendChild(open);
+        var DBx = DB();
+        var url = DBx && DBx.links ? DBx.links[s.app] : null;
+        if (url) {
+          var oa = document.createElement("a");
+          oa.className = "btn-copy btn-official";
+          oa.href = url;
+          oa.target = "_blank";
+          oa.rel = "noopener";
+          oa.textContent = deps.T("officialOpen") + " " + s.label + " \u2197";
+          actions.appendChild(oa);
+        }
         c.appendChild(actions);
       }
       grid.appendChild(c);
@@ -330,6 +341,23 @@
     fin.type = "button";
     fin.addEventListener("click", function () { deps.openFinder(); });
     actions.appendChild(fin);
+    if (window.WhichAIShare && res.stack.length) {
+      var shareB = el("button", "btn-copy", deps.T("shareBtn"));
+      shareB.type = "button";
+      shareB.addEventListener("click", function () {
+        var rows = res.stack.slice(0, 3).map(function (s) {
+          return { label: s.label, value: s.tasks.map(function (t) { return deps.T("task_" + t); }).join(", ") + (s.paid ? " · $" + s.price + "/mo" : " · free") };
+        });
+        rows.push({ label: "Total", value: "$" + res.newCost.toFixed(2) + "/mo" + (res.currentCost > res.newCost ? " (was $" + res.currentCost.toFixed(2) + ")" : "") });
+        window.WhichAIShare.share({
+          title: "My AI stack",
+          subtitle: "Built with the WhichAI Stack Optimizer",
+          badge: "AI Stack",
+          rows: rows
+        }, function () { shareB.textContent = deps.T("shareDone"); setTimeout(function () { shareB.textContent = deps.T("shareBtn"); }, 2200); });
+      });
+      actions.appendChild(shareB);
+    }
     wrap.appendChild(actions);
 
     root.appendChild(wrap);

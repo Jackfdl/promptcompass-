@@ -305,6 +305,17 @@
       u.type = "button";
       u.addEventListener("click", function () { deps.useModel(offer.family, state.task); });
       actions.appendChild(u);
+      var DBx = window.PromptCompassModelsDB || null;
+      var url = DBx && DBx.links ? DBx.links[offer.family] : null;
+      if (url) {
+        var oa = document.createElement("a");
+        oa.className = "btn-copy btn-official";
+        oa.href = url;
+        oa.target = "_blank";
+        oa.rel = "noopener";
+        oa.textContent = deps.T("officialOpen") + " " + (offer.name.split(" - ")[0] || offer.name) + " \u2197";
+        actions.appendChild(oa);
+      }
     }
     c.appendChild(actions);
     return c;
@@ -333,6 +344,22 @@
     sw.type = "button";
     sw.addEventListener("click", function () { deps.switchToGoal(); });
     nav.appendChild(sw);
+    if (window.WhichAIShare && res.top) {
+      var shareB = el("button", "btn-copy", deps.T("shareBtn"));
+      shareB.type = "button";
+      shareB.addEventListener("click", function () {
+        var rows = [{ label: deps.T("finderTop"), value: res.top.name }];
+        res.alts.forEach(function (o, i) { rows.push({ label: "Alt " + (i + 1), value: o.name }); });
+        if (res.top.score && res.top.score.aa) rows.push({ label: "AA index", value: String((res.top.score.est ? "~" : "") + res.top.score.aa) + " (July 16 snapshot)" });
+        window.WhichAIShare.share({
+          title: "My AI pick: " + res.top.name.split(" - ")[0],
+          subtitle: "Task: " + deps.T("task_" + state.task),
+          badge: "AI Finder",
+          rows: rows
+        }, function () { shareB.textContent = deps.T("shareDone"); setTimeout(function () { shareB.textContent = deps.T("shareBtn"); }, 2200); });
+      });
+      nav.appendChild(shareB);
+    }
     card.appendChild(nav);
   }
 
