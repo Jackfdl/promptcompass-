@@ -4,6 +4,8 @@ Data: 2026-07-12 · Versione in cartella: **v0.20.0** · Live: https://promptcom
 
 Questo file serve a riprendere il progetto su un altro computer con Claude Cowork **senza ricominciare da capo**. Il nuovo Claude deve leggere PRIMA questo file e STATUS.md, poi agire.
 
+**Lavori anche con GPT-5.6 sullo STESSO pc?** Questo non è il file giusto (questo è per il cambio computer). Vedi `AI-SYNC.md` — coordina Claude e GPT-5.6 quando lavorano a sessioni alternate sulla stessa cartella (regole di commit, review, anti-sovrapposizione).
+
 ---
 
 ## A. Checklist per Jack (l'umano) — trasferimento
@@ -59,3 +61,7 @@ Contesto extra: [SE HAI COMPRATO IL DOMINIO SCRIVILO QUI, es. "ho comprato which
 - Architettura: index.html (unica pagina, viste via hash) · styles.css (unico css, blocchi per versione) · js/engine.js (generazione prompt 13 famiglie) · js/benchmarks.js (router per task) · js/models-db.js (103 modelli, score AA + categorie) · js/chains.js (template catene) · js/i18n.js (11 lingue) · js/app.js (wiring UI, runner BYOK, PWA) · sw.js + manifest + icons/ + og-image/robots/sitemap.
 - Docs: README.md (pubblico), STATUS.md (memoria progetto), docs/SETUP-JACK.md (deploy), docs/DECISIONS.md.
 - Ultime sessioni: 15 (DB 102 modelli+filtri), 16 (OpenRouter+responsive), 17 (Run all+PWA), 18 (11 lingue+SEO+share), 19 (review+animazioni), 20 (dark fix+glass+nav autoscroll+handover).
+
+## E. Sviluppo in parallelo con GPT-5.6 (stesso pc, non un trasferimento)
+
+Da sessione 26: il progetto può essere lavorato anche da GPT-5.6 (agente con accesso file, es. Codex CLI/Cursor) in sessioni alternate a Claude, sulla stessa cartella `C:\dev\PromptCompassFolder`. Le regole operative (chi legge cosa a inizio/fine sessione, formato dei commit, test obbligatori prima di committare, anti-sovrapposizione sulle stesse aree, gestione del bug di sync noto) sono TUTTE in `AI-SYNC.md` — non duplicarle qui. In sintesi: git locale è la fonte di verità, ogni sessione (di qualunque AI) committa da sola dopo aver passato `tests/run-tests.mjs` + `tests/smoke-dom.mjs`, e la sessione successiva rivede il diff prima di agire. Jack non deve fare nulla di manuale per "passare il testimone" oltre ad aprire la sessione nello strumento giusto.
