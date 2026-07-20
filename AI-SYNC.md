@@ -34,7 +34,7 @@ File modificati "host-side" possono apparire troncati lato sandbox di Claude. Se
 
 | Sessione | AI | Data | Commit | Area toccata | Nota per la prossima AI |
 |---|---|---|---|---|---|
-| 28 | GPT-5.6 | 2026-07-21 | **pronto al commit** | morph fade-out, wordmark dark mode | v0.27: dissolvenza finale del morph e wordmark SVG chiari nel tema dark; 103 test funzionali + 60 smoke test verdi, verifica visiva desktop completata. |
+| 28 | GPT-5.6 | 2026-07-21 | 2507f34 | morph fade-out, wordmark dark mode | v0.27: dissolvenza finale del morph e wordmark SVG chiari nel tema dark; 103 test funzionali + 60 smoke test verdi, verifica visiva desktop completata. |
 | 27 | GPT-5.6 | 2026-07-20 | 879fe57 | welcome page, morph transition, branding | v0.26 completata: welcome/morph nativi, 76 asset locali, branding app+wiki; 161/161 test verdi e QA browser su 3 temi/breakpoint. Jack deve pubblicare v0.22→v0.26. |
 | 26 | Claude | 2026-07-20 | 0d17fd4 | Solo meta/coordinamento: creati questo file, `AGENTS.md`; aggiornato `HANDOVER.md` (sezione E). Nessun codice app toccato. | Lock obsoleto rimosso da GPT-5.6; 94 test statici + 57 smoke verdi prima del commit richiesto da Jack. |
 | 25 | Claude | 2026-07-20 | a454b96 | accordion scheda modello, More-menu, link ufficiali, compare default, Model Radar, share card | Jack deve pubblicare v0.22→v0.25 insieme. 151/151 test verdi. |
