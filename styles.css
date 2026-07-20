@@ -1970,3 +1970,51 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [role="tab"]:focus
   .btn-copy:hover, .subtab:hover, .finder-opt:hover, .mode-btn { transform: none; transition: none; }
   .finder-dot { transition: none; }
 }
+
+
+/* ============================================================ *
+ *  v0.23 - dark-theme legibility, native control scheme,       *
+ *  unified corner radii                                        *
+ * ============================================================ */
+
+/* Readable accent in dark: the old #2563eb was near-invisible on dark gray.
+   Every link, action link, focus ring and accent now uses a light blue. */
+:root { color-scheme: light; --r-card: 14px; --r-ctl: 10px; }
+[data-theme="dark"] { --focus: #60a5fa; color-scheme: dark; }
+[data-theme="sepia"] { color-scheme: light; }
+
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus,
+[data-theme="dark"] input[type="text"]:focus,
+[data-theme="dark"] input[type="password"]:focus { box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.18); }
+[data-theme="dark"] .finder-top { box-shadow: 0 10px 30px rgba(96, 165, 250, 0.1); }
+[data-theme="dark"] .chip-open-weights { color: #60a5fa; }
+
+/* One radius language for the whole app:
+   surfaces 14px, controls 10px, pills/chips stay fully round (999) by design. */
+.card, .empty-state, .lang-note, .refine-box, .mode-switch, .chain-node, .db-search-hero { border-radius: var(--r-card); }
+.btn-primary, .btn-copy, .icon-btn, .lang-select,
+textarea, select, input[type="text"], input[type="password"],
+.site-nav a, .mode-btn, .db-hit, .db-row,
+.prompt-text, .prompt-edit, .finder-opt { border-radius: var(--r-ctl); }
+a:focus-visible, button:focus-visible, summary:focus-visible, [role="tab"]:focus-visible { border-radius: var(--r-ctl); }
+
+/* --- v0.23: update toast --- */
+.update-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-card);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+  padding: 10px 14px;
+  font-size: 13px;
+  max-width: calc(100vw - 24px);
+}
+.update-toast .btn-primary { width: auto; margin: 0; padding: 8px 14px; }

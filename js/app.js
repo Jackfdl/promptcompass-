@@ -1,5 +1,5 @@
 /*
- * WhichAI — UI wiring (v0.20.0)
+ * WhichAI - UI wiring (v0.20.0)
  * Plain JS, no framework, no build step.
  * Depends on js/engine.js and js/benchmarks.js (loaded first).
  */
@@ -111,7 +111,7 @@
   var THEME_KEY = "pc_theme";
   var DEFAULT_GEMINI_MODEL = "gemini-3.5-flash";
   var DEFAULT_GROQ_MODEL = "llama-3.3-70b-versatile";
-  var APP_VERSION = "v0.22";
+  var APP_VERSION = "v0.23";
   var BRAND = "WhichAI";
   var TASK_ICONS = {
     writing: '<svg class="guide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z"/><path d="M13.5 7.5l3 3"/></svg>',
@@ -241,7 +241,7 @@
     setText("#settings-save", "saveSettings");
     setText("#prefs-reset", "prefsReset");
     var fEl = document.querySelector(".site-footer p");
-    if (fEl) fEl.textContent = BRAND + " " + APP_VERSION + " \u2014 Growth \u00b7 " + T("footerText");
+    if (fEl) fEl.textContent = BRAND + " " + APP_VERSION + " \u00b7 Growth \u00b7 " + T("footerText");
 
     setText("#refine-goal", "refineBtn");
     setText("#refine-hint", "refineHint");
@@ -295,6 +295,17 @@
     if (window.WhichAIModelCompare) window.WhichAIModelCompare.rerender();
     var glv = document.getElementById("glossary-view");
     if (glv && !glv.hidden) initGlossary();
+
+    setText("#keymode-label", "keymodeLabel");
+    setText("#keymode-session-lbl", "keymodeSession");
+    setText("#keymode-local-lbl", "keymodeLocal");
+    setText("#keymode-hint", "keymodeHint");
+    setText("#keys-clear", "keysClear");
+    setText("#data-title", "dataTitle");
+    setText("#data-hint", "dataHint");
+    setText("#data-export", "dataExport");
+    setText("#data-import", "dataImport");
+    setText("#data-wipe", "dataWipe");
 
     var optMap = { none: "optNone", prose: "optProse", markdown: "optMarkdown", bullets: "optBullets", table: "optTable", json: "optJson", code: "optCode", short: "optShort", medium: "optMedium", long: "optLong", professional: "optProfessional", friendly: "optFriendly", casual: "optCasual", persuasive: "optPersuasive", academic: "optAcademic" };
     [$format, $length, $tone].forEach(function (sel) {
@@ -373,12 +384,24 @@
     applyLanguage(currentLang);
   }
 
-  /* ---------- Settings (BYOK — keys live only in this browser) ---------- */
+  /* ---------- Settings (BYOK - keys live only in this browser) ---------- */
+
+  var KEYMODE_KEY = "pc_keymode";
+
+  function keyMode() {
+    try {
+      var m = localStorage.getItem(KEYMODE_KEY);
+      if (m === "session" || m === "local") return m;
+      return localStorage.getItem(SETTINGS_KEY) ? "local" : "session";
+    } catch (e) { return "session"; }
+  }
 
   function loadSettings() {
     var s = {};
     try {
-      s = JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {};
+      var raw = (keyMode() === "local" ? localStorage.getItem(SETTINGS_KEY) : sessionStorage.getItem(SETTINGS_KEY)) ||
+        localStorage.getItem(SETTINGS_KEY) || sessionStorage.getItem(SETTINGS_KEY);
+      s = JSON.parse(raw) || {};
     } catch (e) {
       s = {};
     }
@@ -408,6 +431,109 @@
     wireKeyTest("gemini");
     wireKeyTest("groq");
     wireKeyTest("openrouter");
+    initKeyMode();
+    initDataTools();
+  }
+
+  /* ---------- v0.23: key storage mode (session-first), clear keys ---------- */
+
+  function initKeyMode() {
+    var rs = document.getElementById("keymode-session");
+    var rl = document.getElementById("keymode-local");
+    if (!rs || !rl) return;
+    (keyMode() === "local" ? rl : rs).checked = true;
+    function setMode(mode) {
+      try {
+        localStorage.setItem(KEYMODE_KEY, mode);
+        var dst = mode === "local" ? localStorage : sessionStorage;
+        var other = mode === "local" ? sessionStorage : localStorage;
+        dst.setItem(SETTINGS_KEY, JSON.stringify(settings));
+        other.removeItem(SETTINGS_KEY);
+      } catch (e) { /* ignore */ }
+    }
+    rs.addEventListener("change", function () { if (rs.checked) setMode("session"); });
+    rl.addEventListener("change", function () { if (rl.checked) setMode("local"); });
+    var clearBtn = document.getElementById("keys-clear");
+    var clearSt = document.getElementById("keys-clear-status");
+    if (clearBtn) clearBtn.addEventListener("click", function () {
+      settings.geminiKey = "";
+      settings.groqKey = "";
+      settings.openrouterKey = "";
+      $geminiKey.value = "";
+      $groqKey.value = "";
+      if ($openrouterKey) $openrouterKey.value = "";
+      try {
+        var dst = keyMode() === "local" ? localStorage : sessionStorage;
+        dst.setItem(SETTINGS_KEY, JSON.stringify(settings));
+      } catch (e) { /* ignore */ }
+      if (clearSt) { setRunStatus(clearSt, T("keysCleared"), false); setTimeout(function () { clearSt.hidden = true; }, 2400); }
+    });
+  }
+
+  /* ---------- v0.23: export / import / wipe local data ---------- */
+
+  function pcKeys(store) {
+    var out = [];
+    try {
+      for (var i = 0; i < store.length; i++) {
+        var k = store.key(i);
+        if (k && k.indexOf("pc_") === 0) out.push(k);
+      }
+    } catch (e) { /* ignore */ }
+    return out;
+  }
+
+  function initDataTools() {
+    var ex = document.getElementById("data-export");
+    var im = document.getElementById("data-import");
+    var wp = document.getElementById("data-wipe");
+    var fi = document.getElementById("data-file");
+    var st = document.getElementById("data-status");
+    if (!ex || !im || !wp || !fi) return;
+    ex.addEventListener("click", function () {
+      var dump = { app: "WhichAI", version: APP_VERSION, exported: new Date().toISOString(), local: {}, session: {} };
+      pcKeys(localStorage).forEach(function (k) { dump.local[k] = localStorage.getItem(k); });
+      pcKeys(sessionStorage).forEach(function (k) { dump.session[k] = sessionStorage.getItem(k); });
+      var blob = new Blob([JSON.stringify(dump, null, 2)], { type: "application/json" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "whichai-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+    });
+    im.addEventListener("click", function () { fi.click(); });
+    fi.addEventListener("change", function () {
+      var f = fi.files && fi.files[0];
+      if (!f) return;
+      var reader = new FileReader();
+      reader.onload = function () {
+        try {
+          var dump = JSON.parse(reader.result);
+          if (!dump || dump.app !== "WhichAI" || typeof dump.local !== "object") throw new Error("bad");
+          if (!window.confirm(T("dataImportAsk"))) { fi.value = ""; return; }
+          Object.keys(dump.local || {}).forEach(function (k) {
+            if (k.indexOf("pc_") === 0) try { localStorage.setItem(k, dump.local[k]); } catch (e) { /* ignore */ }
+          });
+          Object.keys(dump.session || {}).forEach(function (k) {
+            if (k.indexOf("pc_") === 0) try { sessionStorage.setItem(k, dump.session[k]); } catch (e) { /* ignore */ }
+          });
+          setRunStatus(st, T("dataImported"), false);
+          setTimeout(function () { location.reload(); }, 900);
+        } catch (e) {
+          setRunStatus(st, T("dataImportBad"), true);
+        }
+        fi.value = "";
+      };
+      reader.readAsText(f);
+    });
+    wp.addEventListener("click", function () {
+      if (!window.confirm(T("dataWipeAsk"))) return;
+      pcKeys(localStorage).forEach(function (k) { try { localStorage.removeItem(k); } catch (e) { /* ignore */ } });
+      pcKeys(sessionStorage).forEach(function (k) { try { sessionStorage.removeItem(k); } catch (e) { /* ignore */ } });
+      location.reload();
+    });
   }
 
   function saveSettings() {
@@ -421,13 +547,16 @@
     }
     var ok = true;
     try {
-      localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+      var dst = keyMode() === "local" ? localStorage : sessionStorage;
+      var other = keyMode() === "local" ? sessionStorage : localStorage;
+      dst.setItem(SETTINGS_KEY, JSON.stringify(settings));
+      other.removeItem(SETTINGS_KEY);
     } catch (e) {
       ok = false;
     }
     $settingsSaved.textContent = ok
-      ? "Saved — keys stay in this browser only."
-      : "Could not save — browser storage unavailable.";
+      ? "Saved - keys stay in this browser only."
+      : "Could not save - browser storage unavailable.";
     $settingsSaved.hidden = false;
     setTimeout(function () { $settingsSaved.hidden = true; }, 2600);
   }
@@ -551,7 +680,7 @@
       call: function (s, prompt) {
         var model = (s.orModels && s.orModels[family] ? s.orModels[family] : "").trim();
         if (!model) {
-          return Promise.reject(new Error("No OpenRouter model ID set for this family. Add one in Settings — IDs ending in \":free\" cost nothing (openrouter.ai/models)."));
+          return Promise.reject(new Error("No OpenRouter model ID set for this family. Add one in Settings - IDs ending in \":free\" cost nothing (openrouter.ai/models)."));
         }
         return fetch("https://openrouter.ai/api/v1/chat/completions", {
           method: "POST",
@@ -576,7 +705,7 @@
     var runner = RUNNERS[entry.model];
     if (!runner) return;
     if (!runner.hasKey(settings)) {
-      setRunStatus(statusEl, "No API key — open Settings and paste your " + runner.keyName + " key.", true);
+      setRunStatus(statusEl, "No API key - open Settings and paste your " + runner.keyName + " key.", true);
       return;
     }
     btn.disabled = true;
@@ -586,7 +715,7 @@
     runner.call(settings, entry.prompt).then(function (text) {
       entry.output = text;
       ta.value = text;
-      setRunStatus(statusEl, "Done — response inserted. Now score it.", false);
+      setRunStatus(statusEl, "Done - response inserted. Now score it.", false);
     }).catch(function (err) {
       setRunStatus(statusEl, "Error: " + (err && err.message ? err.message : "request failed"), true);
     }).then(function () {
@@ -648,7 +777,7 @@
       btn.disabled = true;
       setRunStatus(st, T("setTesting"), false);
       PROVIDER_TESTS[provider]().then(function (detail) {
-        setRunStatus(st, T("setKeyOk") + (detail ? " \u2014 " + detail : ""), false);
+        setRunStatus(st, T("setKeyOk") + (detail ? " \u00b7 " + detail : ""), false);
         st.classList.add("ok");
       }).catch(function (err) {
         st.classList.remove("ok");
@@ -662,7 +791,7 @@
   var REFINE_META =
     "You are an expert prompt engineer. Rewrite the goal below so it is clearer and more complete for an AI assistant: " +
     "keep exactly the same intent and the same language, make implicit details explicit (deliverable, audience, constraints, success criteria) " +
-    "only when they are clearly implied, and keep it under 120 words. Return ONLY the rewritten goal text \u2014 no preamble, no quotes, no markdown.";
+    "only when they are clearly implied, and keep it under 120 words. Return ONLY the rewritten goal text \u00b7 no preamble, no quotes, no markdown.";
 
   function pickRefineRunner() {
     if (settings.geminiKey) return "gemini";
@@ -684,7 +813,7 @@
     $refineBox.hidden = false;
     setRunStatus($refineStatus, T("refineWorking"), false);
     var ctx = $context.value.trim();
-    var meta = REFINE_META + "\n\nGOAL:\n" + goal + (ctx ? "\n\nBACKGROUND (only to disambiguate \u2014 do not merge it into the goal):\n" + ctx : "");
+    var meta = REFINE_META + "\n\nGOAL:\n" + goal + (ctx ? "\n\nBACKGROUND (only to disambiguate \u00b7 do not merge it into the goal):\n" + ctx : "");
     RUNNERS[rid].call(settings, meta).then(function (text) {
       $refineText.value = (text || "").trim();
       $refineStatus.hidden = true;
@@ -742,6 +871,8 @@
     var isGlossary = h.indexOf("#glossary") === 0;
     var isCompare = h.indexOf("#compare") === 0;
     var isFinder = h.indexOf("#finder") === 0;
+    var isModel = h.indexOf("#model=") === 0;
+    if (isModel) { openModelById(decodeURIComponent(h.slice(7))); return; }
     setView(h === "#guide" ? "guide" : isCompare ? "compare" : isChains ? "chains" : isMerge ? "merge" : isAbout ? "about" : isGlossary ? "glossary" : h === "#settings" ? "settings" : "generator");
     if (isChains) importChainFromHash();
     if (isCompare) setCompareTab(h.indexOf("#compare-specs") === 0 ? "specs" : "outputs");
@@ -978,7 +1109,7 @@
     activeChain.steps.push({
       tplId: "custom-" + Date.now(),
       name: "Custom step",
-      description: "Your own step \u2014 edit the instruction below ({goal} inserts your goal).",
+      description: "Your own step \u00b7 edit the instruction below ({goal} inserts your goal).",
       instruction: "Continue working toward this goal: \"{goal}\". Describe here what this step must deliver.",
       model: reco,
       output: "",
@@ -1129,7 +1260,7 @@
       name.className = "router-app";
       name.textContent = app.label + " (" + app.vendor + ")";
       li.appendChild(name);
-      li.appendChild(document.createTextNode(" — " + item.note));
+      li.appendChild(document.createTextNode(" - " + item.note));
       var free = document.createElement("span");
       free.className = "router-free";
       free.textContent = T("freeTier") + " " + app.freeModel;
@@ -1304,7 +1435,7 @@
         name.className = "router-app";
         name.textContent = m.name;
         li.appendChild(name);
-        li.appendChild(document.createTextNode(" — " + m.vendor));
+        li.appendChild(document.createTextNode(" - " + m.vendor));
         var access = document.createElement("span");
         access.className = "router-free";
         access.textContent = "Access: " + m.access;
@@ -1360,7 +1491,7 @@
       score.className = "badge";
       score.textContent = m.score && m.score.aa
         ? "AA " + (m.score.est ? "~" : "") + m.score.aa + (m.score.est ? " est." : "")
-        : "AA —";
+        : "AA n/a";
       head.appendChild(score);
       card.appendChild(head);
 
@@ -1441,7 +1572,7 @@
         card.appendChild(bars);
         var catNote = document.createElement("p");
         catNote.className = "router-meta";
-        catNote.textContent = "Category scores (0–100) are WhichAI blended ratings: public category leaderboards plus editorial judgment — guidance, not official measurements.";
+        catNote.textContent = "Category scores (0–100) are WhichAI blended ratings: public category leaderboards plus editorial judgment - guidance, not official measurements.";
         card.appendChild(catNote);
       }
 
@@ -1463,7 +1594,7 @@
       if (m.score && m.score.est) {
         var est = document.createElement("p");
         est.className = "router-meta";
-        est.textContent = "The score shown is a WhichAI estimate from adjacent benchmarks — not an official measurement.";
+        est.textContent = "The score shown is a WhichAI estimate from adjacent benchmarks - not an official measurement.";
         card.appendChild(est);
       }
 
@@ -1590,7 +1721,7 @@
         hit.appendChild(left);
         var sc = document.createElement("span");
         sc.className = "badge";
-        sc.textContent = m.score && m.score.aa ? "AA " + (m.score.est ? "~" : "") + m.score.aa : "—";
+        sc.textContent = m.score && m.score.aa ? "AA " + (m.score.est ? "~" : "") + m.score.aa : "n/a";
         hit.appendChild(sc);
         hit.addEventListener("click", function () { showDetail(m); });
         resultsEl.appendChild(hit);
@@ -1598,7 +1729,7 @@
       if (matches.length > 20) {
         var more = document.createElement("p");
         more.className = "router-meta";
-        more.textContent = "+" + (matches.length - 20) + " more — refine your search or add a filter.";
+        more.textContent = "+" + (matches.length - 20) + " more - refine your search or add a filter.";
         resultsEl.appendChild(more);
       }
     }
@@ -1692,7 +1823,7 @@
     lines.push("- Result: " + (winners.length === 0 ? "not scored" : winners.length > 1 ? "tie" : "winner " + winners[0]));
     lines.push("");
     cmp.entries.forEach(function (e) {
-      lines.push("## " + e.label + " (" + e.vendor + ") — " + (e.score ? e.score + "/5" : "not scored"));
+      lines.push("## " + e.label + " (" + e.vendor + ") - " + (e.score ? e.score + "/5" : "not scored"));
       lines.push("");
       lines.push("### Prompt");
       lines.push("");
@@ -1706,7 +1837,7 @@
       lines.push("");
     });
     lines.push("---");
-    lines.push("Generated with WhichAI — https://whichai.wiki");
+    lines.push("Generated with WhichAI - https://whichai.wiki");
     return lines.join("\n");
   }
 
@@ -1876,7 +2007,7 @@
     if (idx >= 0) list[idx] = activeCmp;
     else list.push(activeCmp);
     var ok = lsSet(list);
-    $compareSaved.textContent = ok ? "Saved." : "Could not save — browser storage unavailable.";
+    $compareSaved.textContent = ok ? "Saved." : "Could not save - browser storage unavailable.";
     $compareSaved.hidden = false;
     setTimeout(function () { $compareSaved.hidden = true; }, 2200);
     renderHistory();
@@ -1995,7 +2126,7 @@
       if (prev) {
         ctx += (ctx ? "\n\n" : "") + "Output of the previous step (use it as your starting material):\n" + prev;
       } else {
-        ctx += (ctx ? "\n\n" : "") + "Note: the previous step's output is not available yet — state this and proceed as best you can.";
+        ctx += (ctx ? "\n\n" : "") + "Note: the previous step's output is not available yet - state this and proceed as best you can.";
       }
     }
     return Engine.generate({
@@ -2110,7 +2241,7 @@
         var runner = RUNNERS[step.model];
         if (!runner) return;
         if (!runner.hasKey(settings)) {
-          setRunStatus(statusEl, "No API key — open Settings and paste your " + runner.keyName + " key.", true);
+          setRunStatus(statusEl, "No API key - open Settings and paste your " + runner.keyName + " key.", true);
           return;
         }
         runBtn.disabled = true;
@@ -2120,7 +2251,7 @@
         runner.call(settings, buildStepPrompt(i)).then(function (text) {
           step.output = text;
           ta.value = text;
-          setRunStatus(statusEl, "Done — this output will feed the next step.", false);
+          setRunStatus(statusEl, "Done - this output will feed the next step.", false);
         }).catch(function (err) {
           setRunStatus(statusEl, "Error: " + (err && err.message ? err.message : "request failed"), true);
         }).then(function () {
@@ -2162,7 +2293,7 @@
     if (idx >= 0) list[idx] = activeChain;
     else list.push(activeChain);
     var ok = chainLsSet(list);
-    $chainSaved.textContent = ok ? "Saved." : "Could not save — browser storage unavailable.";
+    $chainSaved.textContent = ok ? "Saved." : "Could not save - browser storage unavailable.";
     $chainSaved.hidden = false;
     setTimeout(function () { $chainSaved.hidden = true; }, 2200);
     renderChainHistory();
@@ -2274,7 +2405,7 @@
     lines.push("- Exported: " + new Date().toISOString().slice(0, 10), "");
     activeChain.steps.forEach(function (step, i) {
       var label = Engine.MODELS[step.model] ? Engine.MODELS[step.model].label : step.model;
-      lines.push("## Step " + (i + 1) + " \u2014 " + step.name + " (" + label + ")", "");
+      lines.push("## Step " + (i + 1) + " \u00b7 " + step.name + " (" + label + ")", "");
       lines.push("### Prompt", "", "\u0060\u0060\u0060", buildStepPrompt(i), "\u0060\u0060\u0060", "");
       lines.push("### Output", "", (step.output || "").trim() ? step.output : "_(not filled)_", "");
     });
@@ -2330,7 +2461,7 @@
         })
       };
       renderChain();
-    } catch (e) { /* malformed share link — ignore silently */ }
+    } catch (e) { /* malformed share link - ignore silently */ }
   }
 
   function initChains() {
@@ -2534,7 +2665,33 @@
   });
 
   if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
-    navigator.serviceWorker.register("sw.js").catch(function () { /* PWA is optional — never block the app */ });
+    navigator.serviceWorker.register("sw.js").then(function (reg) {
+      if (!reg) return;
+      reg.addEventListener("updatefound", function () {
+        var nw = reg.installing;
+        if (!nw) return;
+        nw.addEventListener("statechange", function () {
+          if (nw.state === "installed" && navigator.serviceWorker.controller) showUpdateToast();
+        });
+      });
+    }).catch(function () { /* PWA is optional - never block the app */ });
+  }
+
+  function showUpdateToast() {
+    if (document.getElementById("update-toast")) return;
+    var t = document.createElement("div");
+    t.id = "update-toast";
+    t.className = "update-toast";
+    var s = document.createElement("span");
+    s.textContent = T("updateReady");
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "btn-primary btn-inline";
+    b.textContent = T("updateReload");
+    b.addEventListener("click", function () { location.reload(); });
+    t.appendChild(s);
+    t.appendChild(b);
+    document.body.appendChild(t);
   }
 
   function initNavAutoScroll() {

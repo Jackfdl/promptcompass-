@@ -1,8 +1,8 @@
 /*
- * WhichAI — Minimal SVG chart helpers (v0.22.0)
+ * WhichAI - Minimal SVG chart helpers (v0.22.0)
  * Pure functions returning SVG strings. No libraries, theme-aware via CSS variables
  * (inline SVG inherits custom properties from the page). All inputs are local data
- * from models-db.js — labels are still escaped defensively.
+ * from models-db.js - labels are still escaped defensively.
  */
 (function () {
   "use strict";
@@ -50,7 +50,7 @@
 
   /**
    * Scatter plot (price vs performance).
-   * points: [{ x, y, label, est }] — x = blended $/1M tokens, y = index score.
+   * points: [{ x, y, label, est }] - x = blended $/1M tokens, y = index score.
    */
   function scatter(points, opts) {
     opts = opts || {};
@@ -81,7 +81,7 @@
     points.forEach(function (p) {
       var cx = X(p.x), cy = Y(p.y);
       var name = esc(p.label) + (p.est ? " ~" : "");
-      out += '<g class="wc-pt"><title>' + name + " — $" + fmt(p.x) + "/1M blended · score " + fmt(p.y) + "</title>";
+      out += '<g class="wc-pt"><title>' + name + " - $" + fmt(p.x) + "/1M blended · score " + fmt(p.y) + "</title>";
       out += '<circle cx="' + fmt(cx) + '" cy="' + fmt(cy) + '" r="5.5" class="wc-dot' + (p.est ? " wc-est" : "") + '"></circle>';
       var anchor = cx > W - 120 ? "end" : "start";
       var tx = anchor === "end" ? cx - 9 : cx + 9;
@@ -93,7 +93,7 @@
   }
 
   /**
-   * Grouped horizontal bars — compare 2-3 models across categories.
+   * Grouped horizontal bars - compare 2-3 models across categories.
    * cats: ["Coding", ...]; series: [{ name, values: [..], cls }]
    */
   function groupedBars(cats, series, opts) {
@@ -121,13 +121,13 @@
         var v = s.values[ci];
         var y = gy + si * (barH + gap);
         var w = v == null ? 0 : Math.max(2, (v / max) * barW);
-        out += "<g><title>" + esc(s.name) + " — " + esc(cat) + ": " + (v == null ? "not available" : v) + "</title>";
+        out += "<g><title>" + esc(s.name) + " - " + esc(cat) + ": " + (v == null ? "not available" : v) + "</title>";
         out += '<rect x="' + labelW + '" y="' + y + '" width="' + barW + '" height="' + barH + '" rx="5" class="wc-track"></rect>';
         if (v != null) {
           out += '<rect x="' + labelW + '" y="' + y + '" width="' + fmt(w) + '" height="' + barH + '" rx="5" class="wc-fillbar wc-s' + (si + 1) + '"></rect>';
           out += '<text x="' + (labelW + barW + 6) + '" y="' + (y + barH - 2.5) + '" class="wc-value wc-value-sm">' + v + "</text>";
         } else {
-          out += '<text x="' + (labelW + 6) + '" y="' + (y + barH - 2.5) + '" class="wc-tick">—</text>';
+          out += '<text x="' + (labelW + 6) + '" y="' + (y + barH - 2.5) + '" class="wc-tick">-</text>';
         }
         out += "</g>";
       });

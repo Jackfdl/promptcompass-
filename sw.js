@@ -1,9 +1,17 @@
-/* WhichAI service worker — network-first, cache only as offline fallback.
+/* WhichAI service worker: network-first, precached shell, offline fallback.
    Bump CACHE on every release so old assets never linger. */
-var CACHE = "whichai-v0.22.0";
+var CACHE = "whichai-v0.23.0";
+var SHELL = [
+  "./", "index.html", "styles.css", "manifest.webmanifest",
+  "js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js",
+  "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/app.js",
+  "icons/icon-192.png", "icons/icon-512.png", "icons/icon-512-maskable.png", "icons/apple-touch-icon.png"
+];
 
-self.addEventListener("install", function () {
-  self.skipWaiting();
+self.addEventListener("install", function (e) {
+  e.waitUntil(
+    caches.open(CACHE).then(function (c) { return c.addAll(SHELL); }).then(function () { return self.skipWaiting(); })
+  );
 });
 
 self.addEventListener("activate", function (e) {
@@ -26,7 +34,11 @@ self.addEventListener("fetch", function (e) {
       }
       return res;
     }).catch(function () {
-      return caches.match(e.request);
+      return caches.match(e.request).then(function (hit) {
+        if (hit) return hit;
+        if (e.request.mode === "navigate") return caches.match("index.html");
+        return Response.error();
+      });
     })
   );
 });

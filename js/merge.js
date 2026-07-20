@@ -1,5 +1,5 @@
 /*
- * WhichAI — Merge studio (v0.21.0)
+ * WhichAI - Merge studio (v0.21.0)
  * Read model outputs side by side and hand-pick the best parts into one draft.
  * Fully manual by design: the human stays the editor. No network calls.
  * Optional highlight: sentences that appear in 2+ sources get marked, so
@@ -267,18 +267,18 @@
 
   function exportMd() {
     var lines = [];
-    lines.push("# WhichAI — merged draft");
+    lines.push("# WhichAI - merged draft");
     lines.push("");
     if (state.goal) { lines.push("- Goal: " + state.goal); }
     lines.push("- Date: " + new Date().toLocaleString());
-    lines.push("- Sources: " + (state.sources.map(function (s) { return s.label; }).join(", ") || "—"));
+    lines.push("- Sources: " + (state.sources.map(function (s) { return s.label; }).join(", ") || "n/a"));
     lines.push("");
     lines.push("## Draft");
     lines.push("");
     lines.push(state.draft || "_(empty)_");
     lines.push("");
     lines.push("---");
-    lines.push("Assembled by hand in WhichAI Merge studio — https://whichai.wiki");
+    lines.push("Assembled by hand in WhichAI Merge studio - https://whichai.wiki");
     var blob = new Blob([lines.join("\n")], { type: "text/markdown" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
@@ -292,7 +292,7 @@
   restore();
 
   var Merge = {
-    /** load(sources, meta) — called from Compare. Replaces sources, keeps a non-empty draft. */
+    /** load(sources, meta) - called from Compare. Replaces sources, keeps a non-empty draft. */
     load: function (sources, meta) {
       if (sources && sources.length) state.sources = sources.map(function (s) { return { label: s.label, text: s.text }; });
       if (meta && meta.goal) state.goal = meta.goal;

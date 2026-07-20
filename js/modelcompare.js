@@ -1,8 +1,8 @@
 /*
- * WhichAI — Model comparison on paper (v0.22.0)
+ * WhichAI - Model comparison on paper (v0.22.0)
  * Compare 2-3 models from the database side by side: scores, specs, price,
- * strengths. No API calls, no outputs — pure Model-guide data.
- * Estimates are marked "~", unavailable values shown as "—".
+ * strengths. No API calls, no outputs - pure Model-guide data.
+ * Estimates are marked "~", unavailable values shown as "n/a".
  */
 (function () {
   "use strict";
@@ -138,7 +138,7 @@
       var chartBox = el("div", "mc-chart");
       chartBox.innerHTML = C.barChart(items, { max: 70, rowH: 34, aria: "AA Intelligence Index comparison" });
       scoreCard.appendChild(chartBox);
-      scoreCard.appendChild(el("p", "router-meta", "Artificial Analysis Intelligence Index, July 16, 2026 snapshot (2026 rebased scale)." + (anyEst ? " Values marked ~ are WhichAI estimates from adjacent benchmarks — never compare them 1:1 with measured scores." : "")));
+      scoreCard.appendChild(el("p", "router-meta", "Artificial Analysis Intelligence Index, July 16, 2026 snapshot (2026 rebased scale)." + (anyEst ? " Values marked ~ are WhichAI estimates from adjacent benchmarks - never compare them 1:1 with measured scores." : "")));
       root.appendChild(scoreCard);
 
       // Category profile
@@ -151,7 +151,7 @@
       var catBox = el("div", "mc-chart");
       catBox.innerHTML = C.groupedBars(cats.map(function (c) { return c[1]; }), series, { aria: "Category profile comparison" });
       catCard.appendChild(catBox);
-      catCard.appendChild(el("p", "router-meta", "Category scores (0–100) are WhichAI blended ratings — guidance, not official measurements."));
+      catCard.appendChild(el("p", "router-meta", "Category scores (0–100) are WhichAI blended ratings - guidance, not official measurements."));
       root.appendChild(catCard);
     }
 
@@ -162,7 +162,7 @@
       grid.appendChild(el("div", "mc-rowlabel", label));
       vals.forEach(function (v) {
         var cell = el("div", "mc-cell" + (cls ? " " + cls : ""));
-        if (v == null || v === "") cell.appendChild(el("span", "mc-na", "—"));
+        if (v == null || v === "") cell.appendChild(el("span", "mc-na", "n/a"));
         else if (typeof v === "string") cell.textContent = v;
         else cell.appendChild(v);
         grid.appendChild(cell);

@@ -1,5 +1,5 @@
 /*
- * WhichAI — Guided AI finder (v0.22.0)
+ * WhichAI - Guided AI finder (v0.22.0)
  * Short adaptive questionnaire → transparent, rule-based recommendation.
  * No API calls: candidates and facts come from js/models-db.js and js/benchmarks.js,
  * every boost is explained in the "Why this pick" list. Question/answer copy is
@@ -33,14 +33,14 @@
         { v: "dev", label: "Developer / automation", sub: "API, code, scripts or agents" }
       ] },
       { id: "budget", title: "What can you spend?", type: "single", options: [
-        { v: "free", label: "Nothing — free only" },
+        { v: "free", label: "Nothing - free only" },
         { v: "low", label: "Up to about $20/month" },
         { v: "any", label: "Whatever gives the best results" }
       ] },
-      { id: "needs", title: "Anything essential?", sub: "Pick any that apply — or none.", type: "multi", options: [
+      { id: "needs", title: "Anything essential?", sub: "Pick any that apply - or none.", type: "multi", options: [
         { v: "web", label: "Current info from the web, with sources" },
         { v: "files", label: "Working with files or images" },
-        { v: "privacy", label: "Extra privacy — local / open models welcome" },
+        { v: "privacy", label: "Extra privacy - local / open models welcome" },
         { v: "speed", label: "Speed matters more than depth" },
         { v: "long", label: "Very long documents" }
       ] }
@@ -58,8 +58,8 @@
       ] };
     } else if (state.task === "writing") {
       extra = { id: "extra", title: "What kind of writing?", type: "single", options: [
-        { v: "creative", label: "Creative — fiction, voice, style" },
-        { v: "pro", label: "Professional — posts, emails, copy" }
+        { v: "creative", label: "Creative - fiction, voice, style" },
+        { v: "pro", label: "Professional - posts, emails, copy" }
       ] };
     }
     if (extra) qs.push(extra);
@@ -78,7 +78,7 @@
     gemini: { label: "Gemini", bestFor: "generous free use, speed, Google Workspace",
       limit: "Less distinctive on creative voice; tied to a Google account.",
       models: { free: "gemini-3-5-flash", low: "gemini-3-1-pro", any: "gemini-3-1-pro", devLow: "gemini-3-5-flash", devAny: "gemini-3-1-pro", devFree: "gemini-3-5-flash" } },
-    perplexity: { label: "Perplexity", bestFor: "current, sourced answers — a cited replacement for googling",
+    perplexity: { label: "Perplexity", bestFor: "current, sourced answers - a cited replacement for googling",
       limit: "Built for sourced answers, not long creative prose.",
       models: { free: "sonar", low: "sonar-pro", any: "sonar-pro" } }
   };
@@ -86,10 +86,10 @@
   var OPEN_OFFERS = {
     "qwen3-coder": { bestFor: "free auto-run coding via OpenRouter (1M context)", limit: "Free route is rate-limited (~20 req/min, 200/day)." },
     "glm-5-2": { bestFor: "the strongest open-weight coder, cheap on API hosts", limit: "No free hosted route on OpenRouter right now." },
-    "kimi-k3": { bestFor: "frontier-level agentic and coding work at a third of US prices", limit: "Brand new — tooling still maturing; API is paid." },
+    "kimi-k3": { bestFor: "frontier-level agentic and coding work at a third of US prices", limit: "Brand new - tooling still maturing; API is paid." },
     "nemotron-3-ultra": { bestFor: "free, extremely fast drafts and volume work via OpenRouter", limit: "A clear step below frontier quality." },
-    "inkling": { bestFor: "full local control — open weights (Apache 2.0), multimodal", limit: "Needs serious hardware locally; below frontier quality." },
-    "deepseek-v4-pro": { bestFor: "capable free chat app, open weights", limit: "Free chat runs on DeepSeek's servers — check its data policy; no free OpenRouter route." }
+    "inkling": { bestFor: "full local control - open weights (Apache 2.0), multimodal", limit: "Needs serious hardware locally; below frontier quality." },
+    "deepseek-v4-pro": { bestFor: "capable free chat app, open weights", limit: "Free chat runs on DeepSeek's servers - check its data policy; no free OpenRouter route." }
   };
 
   function recommend() {
@@ -114,7 +114,7 @@
       boost("gemini", 2, "Most generous free tier of the big assistants.");
       boost("perplexity", 1, "Free tier includes unlimited basic cited searches.");
       boost("chatgpt", 1, "Solid free tier (message caps apply).");
-      boost("claude", 0.5, "Free tier runs Claude Sonnet 5 — strong free quality.");
+      boost("claude", 0.5, "Free tier runs Claude Sonnet 5 - strong free quality.");
     }
     if (state.needs.indexOf("web") !== -1) {
       boost("perplexity", 4, "Purpose-built for cited, current answers.");
@@ -150,7 +150,7 @@
       var dbId = meta.models[mkey] || meta.models.any;
       var m = db ? db.models.filter(function (x) { return x.id === dbId; })[0] : null;
       return {
-        kind: "app", app: app, name: meta.label + (m ? " — " + m.name : ""), dbId: dbId, family: app,
+        kind: "app", app: app, name: meta.label + (m ? " - " + m.name : ""), dbId: dbId, family: app,
         why: why[app].slice(0, 4), bestFor: meta.bestFor, limit: meta.limit,
         access: m ? m.access : "", score: m && m.score ? m.score : null
       };
@@ -171,15 +171,15 @@
     // Developer mode: open/API alternatives with a free or cheap route
     if (state.mode === "dev") {
       if (state.task === "coding") {
-        if (state.budget === "free") offers.splice(1, 0, modelOffer("qwen3-coder", ["Runnable for free via OpenRouter — auto-run works right here in Compare/Chains."]));
-        else offers.splice(1, 0, modelOffer("kimi-k3", ["#3 on the July 16 AA index (57.1) at $3/$15 per 1M tokens — a fraction of US frontier prices.", "Best published BrowseComp score and #1 Frontend Code Arena at launch."]));
+        if (state.budget === "free") offers.splice(1, 0, modelOffer("qwen3-coder", ["Runnable for free via OpenRouter - auto-run works right here in Compare/Chains."]));
+        else offers.splice(1, 0, modelOffer("kimi-k3", ["#3 on the July 16 AA index (57.1) at $3/$15 per 1M tokens - a fraction of US frontier prices.", "Best published BrowseComp score and #1 Frontend Code Arena at launch."]));
       } else if (state.budget === "free") {
-        offers.splice(2, 0, modelOffer("nemotron-3-ultra", ["Free on OpenRouter and extremely fast (400+ tok/s on some hosts) — auto-run works right here."]));
+        offers.splice(2, 0, modelOffer("nemotron-3-ultra", ["Free on OpenRouter and extremely fast (400+ tok/s on some hosts) - auto-run works right here."]));
       }
     }
     // Privacy: local/open alternative always surfaces
     if (state.needs.indexOf("privacy") !== -1) {
-      offers.splice(1, 0, modelOffer("inkling", ["Open weights under Apache 2.0 — you can run it entirely on your own hardware.", "Natively multimodal (text, image, audio) with a 1M context."]));
+      offers.splice(1, 0, modelOffer("inkling", ["Open weights under Apache 2.0 - you can run it entirely on your own hardware.", "Natively multimodal (text, image, audio) with a 1M context."]));
     }
 
     offers = offers.filter(Boolean);
@@ -321,9 +321,9 @@
       card.appendChild(grid);
     }
     if (state.needs.indexOf("privacy") !== -1) {
-      card.appendChild(el("p", "router-meta", "Note: WhichAI itself runs entirely in your browser — no account, no server. For maximum privacy, open-weight models can run fully on your own hardware."));
+      card.appendChild(el("p", "router-meta", "Note: WhichAI itself runs entirely in your browser - no account, no server. For maximum privacy, open-weight models can run fully on your own hardware."));
     }
-    card.appendChild(el("p", "router-meta", "Guidance from public benchmarks and vendor pages (snapshot July 16, 2026) plus transparent rules — not gospel. Sources are linked in the Model guide."));
+    card.appendChild(el("p", "router-meta", "Guidance from public benchmarks and vendor pages (snapshot July 16, 2026) plus transparent rules - not gospel. Sources are linked in the Model guide."));
     var nav = el("div", "finder-nav");
     var again = el("button", "btn-link", deps.T("finderRestart"));
     again.type = "button";

@@ -1,7 +1,7 @@
 {
   "name": "WhichAI",
   "short_name": "WhichAI",
-  "description": "Which AI should do this? Prompts optimized per model, honest benchmarks, side-by-side compare and chains — free, private, no account.",
+  "description": "Which AI should do this? Prompts optimized per model, honest benchmarks, side-by-side compare and chains. Free, private, no account.",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

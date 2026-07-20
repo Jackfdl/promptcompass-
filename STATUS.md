@@ -1,12 +1,28 @@
 # WhichAI (ex PromptCompass) — STATUS
 
-Ultimo aggiornamento: 2026-07-19 (sessione 22)
-Versione app: v0.22.0 (in cartella; live v0.21 verificata il 19/7 — v0.22 da pubblicare)
+Ultimo aggiornamento: 2026-07-20 (sessione 23)
+Versione app: v0.23.0 (in cartella; live ancora v0.21: da pubblicare v0.22+v0.23 insieme)
 Sito live: https://whichai.wiki · https://promptcompass.vercel.app resta come alias
 
-## Fase corrente: Growth — v0.22 "big session": finder guidato, glossario, compare doppio, grafici, roadmap chains
+## Fase corrente: Growth - fase 1 del piano brainstorming (SEO statico, sicurezza, retention di base)
 
-## Fatto (sessione 22, 2026-07-19 — nuovo PC/profilo, ripresa progetto)
+## Fatto (sessione 23, 2026-07-20)
+
+- **Fix tema scuro (richiesta Jack)**: causa reale trovata: `--focus` non era mai ridefinito in dark, quindi ogni link/azione/anello di focus restava blu scurissimo (#2563eb) su grigio scuro, quasi illeggibile. Ora dark usa #60a5fa; aggiunto `color-scheme: light/dark` per tema (controlli nativi, tendine e scrollbar seguono il tema).
+- **Tipografia (richiesta Jack)**: eliminati TUTTI i 497 trattini lunghi dai testi visibili (i18n ×11 lingue, review DB, note benchmark, prompt engine, HTML, manifest). Separatori diventati "·", prosa con virgole/trattino semplice, simbolo dato-mancante ora "n/a" ovunque. Test automatico che ne impedisce il ritorno.
+- **Raggi unificati (richiesta Jack)**: token unici `--r-card: 14px` (superfici) e `--r-ctl: 10px` (controlli); pillole/chip restano 999 by design (linguaggio "filtro/stato").
+- **BRAINSTORMING FASE 1**:
+  - **Wiki statica SEO (P0)**: nuovo `tools/build-seo.mjs` (rieseguibile: `node tools/build-seo.mjs`) genera 156 pagine HTML pure dal database: 106 schede modello in `/models/`, 8 classifiche `/best-ai-for/`, 26 voci `/glossary/`, 12 testa-a-testa `/compare/` + indici + `sitemap.xml` (157 URL, prima 1!). Pagine senza JS, canonical/OG, data snapshot, "n/a" e "~" onesti, CTA verso l'app. Nuovo deep link `/#model=<id>`.
+  - **Dataset aperto**: `data/models.json` (CC BY 4.0), 105 modelli.
+  - **Sicurezza chiavi (P0)**: default SESSION-ONLY; salvataggio su dispositivo solo opt-in con spiegazione onesta; "Clear all API keys"; CSP restrittiva (script self+hash, connect solo ai 3 provider BYOK); chi aveva già chiavi salvate resta in modalità dispositivo (migrazione automatica).
+  - **Backup dati (6.4)**: Settings > "Your data": export JSON, import, "Delete all data". 16 chiavi i18n ×11 (=210 totali).
+  - **PWA offline vera (7.4)**: precache della shell all'install, navigazione offline, toast "nuova versione pronta".
+  - **Methodology v1.0 (7.2)**: card versionata in About (#about-methodology).
+- **TEST**: 69 statici + 39 smoke DOM = **108/108 PASSATI**.
+- **PENDING (con motivo)**: (1) Personal Benchmark / Blind Arena / Council / Consensus Map: servono output multi-provider ma il BYOK copre solo Gemini/Groq/OpenRouter, risultati distorti; fattibile versione ridotta "arena tra modelli auto-run" se si accetta il limite. (2) Homepage a due percorsi + demo precompilata: decisione prodotto+copy, da fare insieme. (3) AI Stack Optimizer: fattibile client-side, PROSSIMO step consigliato. (4) Prompt Doctor: fattibile in versione statica (checklist+score+diff), step dopo. (5) Model Radar: serve un feed curato dei cambiamenti col refresh mensile. (6) Evals Lite, Local AI Advisor, estensione browser, CI: sforzo alto, fasi 2-4.
+- [ ] **Jack pubblica v0.23** (include la v0.22 mai pubblicata). NUOVE CARTELLE: `models/`, `best-ai-for/`, `glossary/`, `compare/`, `data/`, `tools/`, `tests/`.
+
+## Fatto (sessione 22, 2026-07-19: nuovo PC/profilo, ripresa progetto)
 
 - **Ripresa su nuovo profilo**: HANDOVER/STATUS letti, integrità verificata, **branch git di backup `backup-v0.21`** creato prima di toccare qualsiasi cosa (working tree pulito al commit v0.21). **Bug di sync RICONFERMATO** con test controllato (edit host invisibile in sandbox) → TUTTE le modifiche a file esistenti fatte sandbox-side (script python/node in `_patches/`, poi rimossi); file nuovi via Write (sincronizzano ok).
 - **1) Fix clipping bottoni**: causa trovata — `.site-nav` è scroll container `overflow-x:auto` (header a una riga) che clippa anche in verticale: pill tagliate sopra in hover (translateY(-1px)) e sotto a riposo. Fix: respiro interno al container (`padding-block:5px; margin-block:-5px` + inline) senza rimuovere le animazioni; aggiunti **:focus-visible ring** coerenti ovunque, hover lift uniforme sui `.btn-copy` (solo transform, zero layout shift), wrap dei nomi lunghi.

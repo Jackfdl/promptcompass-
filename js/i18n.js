@@ -1,5 +1,5 @@
 /*
- * WhichAI (formerly WhichAI) — UI translations (v0.21.0) — 11 languages
+ * WhichAI (formerly WhichAI) - UI translations (v0.21.0) - 11 languages
  * Interface chrome in 8 languages. Content (generated prompts, benchmark notes,
  * catalog, chain step instructions) intentionally stays in English: prompt
  * quality and benchmark data are tuned for English. The langNote string
@@ -31,15 +31,15 @@
     trustLine: "No account · No server · Nothing leaves your browser",
     langNote: "",
     genTitle: "Describe your goal",
-    genSubtitle: "WhichAI turns it into a prompt tailored to each AI model — and tells you which model is the best fit for the job, in plain language.",
+    genSubtitle: "WhichAI turns it into a prompt tailored to each AI model - and tells you which model is the best fit for the job, in plain language.",
     goalLabel: "Goal ", optionalTag: "(optional)", tryExample: "Try an example",
     goalPh: "e.g., Write a landing page headline and subheadline for a budgeting app aimed at freelancers",
     goalErr: "Describe your goal to generate prompts.",
-    contextLabel: "Context ", contextPh: "Background, audience, constraints, examples — anything the AI should know",
+    contextLabel: "Context ", contextPh: "Background, audience, constraints, examples - anything the AI should know",
     taskLabel: "Task type", formatLabel: "Output format", lengthLabel: "Length", toneLabel: "Tone",
     targetsLabel: "Target models", groupAssistants: "AI assistants", groupEco: "Ecosystem assistants", groupOpen: "Open models ",
     modelsErr: "Select at least one target model.", generateBtn: "Generate prompts",
-    emptyLead: "Your optimized prompts will appear here — one version per model, plus a recommendation of which model fits this task best.",
+    emptyLead: "Your optimized prompts will appear here - one version per model, plus a recommendation of which model fits this task best.",
     step1: "Describe your goal", step2: "Copy the prompt tailored to each AI", step3: "Compare the answers and iterate",
     resultsTitle: "Optimized prompts", toCompareBtn: "Compare outputs →",
     optNone: "No preference", optProse: "Plain prose", optMarkdown: "Markdown", optBullets: "Bullet points", optTable: "Table", optJson: "JSON", optCode: "Code",
@@ -51,7 +51,7 @@
     routerTitle: "Which model for this task?", bestPick: "Best pick:", benchLabel: "Benchmarks:",
     fullRanking: "Full ranking, free tiers and sources", freeTier: "Free tier:", sourcesLabel: "Sources:",
     whyPrefix: "Why this prompt is built this way for", copy: "Copy", copied: "Copied", copyPrompt: "Copy prompt",
-    guideTitle: "Model guide", guideSub: "Which AI app fits each kind of task — public benchmarks translated into plain language.",
+    guideTitle: "Model guide", guideSub: "Which AI app fits each kind of task - public benchmarks translated into plain language.",
     catalogTitle: "Model catalog",
     compareTitle: "Compare outputs",
     compareSub: "Run the same optimized prompt in each AI app, paste (or auto-run) the answers, and score them side by side. Everything stays in your browser.",
@@ -64,7 +64,7 @@
     buildChain: "Build chain", saveChain: "Save chain", savedChains: "Saved chains",
     promptForStep: "Prompt for this step", stepOutput: "Step output",
     settingsTitle: "Settings",
-    settingsSub: "API keys enable automatic execution in Compare. Keys are stored only in this browser and are sent only to the provider you call — never to any WhichAI server (there is none).",
+    settingsSub: "API keys enable automatic execution in Compare. Keys are stored only in this browser and are sent only to the provider you call - never to any WhichAI server (there is none).",
     saveSettings: "Save settings", prefsReset: "Reset remembered preferences",
     footerText: "Runs entirely in your browser: no account, no server, your keys and data never leave your device."
   };
@@ -76,15 +76,15 @@
     trustLine: "Nessun account · Nessun server · Nulla esce dal tuo browser",
     langNote: "Interfaccia in italiano. Nota: i prompt generati, le note sui benchmark e il rilevamento automatico del tipo di task sono ottimizzati per l'inglese (tutti i modelli AI rendono al meglio con istruzioni in inglese). Puoi comunque scrivere il tuo obiettivo in qualsiasi lingua: l'AI risponderà nella tua lingua.",
     genTitle: "Descrivi il tuo obiettivo",
-    genSubtitle: "WhichAI lo trasforma in un prompt su misura per ogni modello AI — e ti dice quale modello è il più adatto, in parole semplici.",
+    genSubtitle: "WhichAI lo trasforma in un prompt su misura per ogni modello AI - e ti dice quale modello è il più adatto, in parole semplici.",
     goalLabel: "Obiettivo ", optionalTag: "(facoltativo)", tryExample: "Prova un esempio",
     goalPh: "es. Scrivi titolo e sottotitolo per la landing page di un'app di budgeting per freelance",
     goalErr: "Descrivi il tuo obiettivo per generare i prompt.",
-    contextLabel: "Contesto ", contextPh: "Sfondo, pubblico, vincoli, esempi — tutto ciò che l'AI dovrebbe sapere",
+    contextLabel: "Contesto ", contextPh: "Sfondo, pubblico, vincoli, esempi - tutto ciò che l'AI dovrebbe sapere",
     taskLabel: "Tipo di task", formatLabel: "Formato output", lengthLabel: "Lunghezza", toneLabel: "Tono",
     targetsLabel: "Modelli di destinazione", groupAssistants: "Assistenti AI", groupEco: "Assistenti di ecosistema", groupOpen: "Modelli open ",
     modelsErr: "Seleziona almeno un modello.", generateBtn: "Genera i prompt",
-    emptyLead: "I tuoi prompt ottimizzati appariranno qui — una versione per modello, più il consiglio su quale modello è il migliore per questo task.",
+    emptyLead: "I tuoi prompt ottimizzati appariranno qui - una versione per modello, più il consiglio su quale modello è il migliore per questo task.",
     step1: "Descrivi il tuo obiettivo", step2: "Copia il prompt su misura per ogni AI", step3: "Confronta le risposte e itera",
     resultsTitle: "Prompt ottimizzati", toCompareBtn: "Confronta gli output →",
     optNone: "Nessuna preferenza", optProse: "Prosa semplice", optMarkdown: "Markdown", optBullets: "Elenco puntato", optTable: "Tabella", optJson: "JSON", optCode: "Codice",
@@ -96,7 +96,7 @@
     routerTitle: "Quale modello per questo task?", bestPick: "Scelta migliore:", benchLabel: "Benchmark:",
     fullRanking: "Classifica completa, piani gratuiti e fonti", freeTier: "Piano gratuito:", sourcesLabel: "Fonti:",
     whyPrefix: "Perché questo prompt è costruito così per", copy: "Copia", copied: "Copiato", copyPrompt: "Copia prompt",
-    guideTitle: "Guida ai modelli", guideSub: "Quale app AI è adatta a ogni tipo di task — benchmark pubblici tradotti in parole semplici.",
+    guideTitle: "Guida ai modelli", guideSub: "Quale app AI è adatta a ogni tipo di task - benchmark pubblici tradotti in parole semplici.",
     catalogTitle: "Catalogo modelli",
     compareTitle: "Confronta gli output",
     compareSub: "Esegui lo stesso prompt ottimizzato in ogni app AI, incolla (o esegui in automatico) le risposte e valutale fianco a fianco. Tutto resta nel tuo browser.",
@@ -109,7 +109,7 @@
     buildChain: "Costruisci catena", saveChain: "Salva catena", savedChains: "Catene salvate",
     promptForStep: "Prompt per questo passo", stepOutput: "Output del passo",
     settingsTitle: "Impostazioni",
-    settingsSub: "Le chiavi API abilitano l'esecuzione automatica nel Confronto. Restano solo in questo browser e vengono inviate solo al provider che chiami — mai a un server WhichAI (che non esiste).",
+    settingsSub: "Le chiavi API abilitano l'esecuzione automatica nel Confronto. Restano solo in questo browser e vengono inviate solo al provider che chiami - mai a un server WhichAI (che non esiste).",
     saveSettings: "Salva impostazioni", prefsReset: "Ripristina preferenze predefinite",
     footerText: "Funziona interamente nel tuo browser: nessun account, nessun server, chiavi e dati non lasciano mai il tuo dispositivo."
   };
@@ -121,15 +121,15 @@
     trustLine: "Pas de compte · Pas de serveur · Rien ne quitte votre navigateur",
     langNote: "Interface en français. Remarque : les prompts générés, les notes de benchmark et la détection automatique du type de tâche sont optimisés pour l'anglais (tous les modèles d'IA fonctionnent mieux avec des instructions en anglais). Vous pouvez écrire votre objectif dans n'importe quelle langue : l'IA répondra dans votre langue.",
     genTitle: "Décrivez votre objectif",
-    genSubtitle: "WhichAI le transforme en un prompt adapté à chaque modèle d'IA — et vous dit quel modèle convient le mieux, en langage simple.",
+    genSubtitle: "WhichAI le transforme en un prompt adapté à chaque modèle d'IA - et vous dit quel modèle convient le mieux, en langage simple.",
     goalLabel: "Objectif ", optionalTag: "(facultatif)", tryExample: "Essayer un exemple",
     goalPh: "ex. Rédigez le titre d'une landing page pour une app de budget destinée aux freelances",
     goalErr: "Décrivez votre objectif pour générer les prompts.",
-    contextLabel: "Contexte ", contextPh: "Contexte, public, contraintes, exemples — tout ce que l'IA devrait savoir",
+    contextLabel: "Contexte ", contextPh: "Contexte, public, contraintes, exemples - tout ce que l'IA devrait savoir",
     taskLabel: "Type de tâche", formatLabel: "Format de sortie", lengthLabel: "Longueur", toneLabel: "Ton",
     targetsLabel: "Modèles cibles", groupAssistants: "Assistants IA", groupEco: "Assistants d'écosystème", groupOpen: "Modèles ouverts ",
     modelsErr: "Sélectionnez au moins un modèle.", generateBtn: "Générer les prompts",
-    emptyLead: "Vos prompts optimisés apparaîtront ici — une version par modèle, plus une recommandation du modèle le mieux adapté.",
+    emptyLead: "Vos prompts optimisés apparaîtront ici - une version par modèle, plus une recommandation du modèle le mieux adapté.",
     step1: "Décrivez votre objectif", step2: "Copiez le prompt adapté à chaque IA", step3: "Comparez les réponses et itérez",
     resultsTitle: "Prompts optimisés", toCompareBtn: "Comparer les réponses →",
     optNone: "Sans préférence", optProse: "Prose simple", optMarkdown: "Markdown", optBullets: "Liste à puces", optTable: "Tableau", optJson: "JSON", optCode: "Code",
@@ -141,7 +141,7 @@
     routerTitle: "Quel modèle pour cette tâche ?", bestPick: "Meilleur choix :", benchLabel: "Benchmarks :",
     fullRanking: "Classement complet, offres gratuites et sources", freeTier: "Offre gratuite :", sourcesLabel: "Sources :",
     whyPrefix: "Pourquoi ce prompt est construit ainsi pour", copy: "Copier", copied: "Copié", copyPrompt: "Copier le prompt",
-    guideTitle: "Guide des modèles", guideSub: "Quelle app d'IA convient à chaque type de tâche — benchmarks publics traduits en langage simple.",
+    guideTitle: "Guide des modèles", guideSub: "Quelle app d'IA convient à chaque type de tâche - benchmarks publics traduits en langage simple.",
     catalogTitle: "Catalogue des modèles",
     compareTitle: "Comparer les réponses",
     compareSub: "Exécutez le même prompt optimisé dans chaque app d'IA, collez (ou exécutez automatiquement) les réponses et notez-les côte à côte. Tout reste dans votre navigateur.",
@@ -154,7 +154,7 @@
     buildChain: "Construire la chaîne", saveChain: "Enregistrer la chaîne", savedChains: "Chaînes enregistrées",
     promptForStep: "Prompt de cette étape", stepOutput: "Sortie de l'étape",
     settingsTitle: "Paramètres",
-    settingsSub: "Les clés API activent l'exécution automatique. Elles restent uniquement dans ce navigateur et ne sont envoyées qu'au fournisseur appelé — jamais à un serveur WhichAI (il n'y en a pas).",
+    settingsSub: "Les clés API activent l'exécution automatique. Elles restent uniquement dans ce navigateur et ne sont envoyées qu'au fournisseur appelé - jamais à un serveur WhichAI (il n'y en a pas).",
     saveSettings: "Enregistrer", prefsReset: "Réinitialiser les préférences",
     footerText: "Fonctionne entièrement dans votre navigateur : pas de compte, pas de serveur, vos clés et données ne quittent jamais votre appareil."
   };
@@ -166,15 +166,15 @@
     trustLine: "Sin cuenta · Sin servidor · Nada sale de tu navegador",
     langNote: "Interfaz en español. Nota: los prompts generados, las notas de benchmarks y la detección automática del tipo de tarea están optimizados para el inglés (todos los modelos de IA rinden mejor con instrucciones en inglés). Puedes escribir tu objetivo en cualquier idioma: la IA responderá en tu idioma.",
     genTitle: "Describe tu objetivo",
-    genSubtitle: "WhichAI lo convierte en un prompt a medida para cada modelo de IA — y te dice qué modelo encaja mejor, en lenguaje sencillo.",
+    genSubtitle: "WhichAI lo convierte en un prompt a medida para cada modelo de IA - y te dice qué modelo encaja mejor, en lenguaje sencillo.",
     goalLabel: "Objetivo ", optionalTag: "(opcional)", tryExample: "Probar un ejemplo",
     goalPh: "p. ej., Escribe el titular de una landing page para una app de presupuestos para freelancers",
     goalErr: "Describe tu objetivo para generar los prompts.",
-    contextLabel: "Contexto ", contextPh: "Antecedentes, público, restricciones, ejemplos — todo lo que la IA deba saber",
+    contextLabel: "Contexto ", contextPh: "Antecedentes, público, restricciones, ejemplos - todo lo que la IA deba saber",
     taskLabel: "Tipo de tarea", formatLabel: "Formato de salida", lengthLabel: "Longitud", toneLabel: "Tono",
     targetsLabel: "Modelos de destino", groupAssistants: "Asistentes de IA", groupEco: "Asistentes de ecosistema", groupOpen: "Modelos abiertos ",
     modelsErr: "Selecciona al menos un modelo.", generateBtn: "Generar prompts",
-    emptyLead: "Tus prompts optimizados aparecerán aquí — una versión por modelo, más una recomendación del modelo que mejor encaja.",
+    emptyLead: "Tus prompts optimizados aparecerán aquí - una versión por modelo, más una recomendación del modelo que mejor encaja.",
     step1: "Describe tu objetivo", step2: "Copia el prompt a medida de cada IA", step3: "Compara las respuestas e itera",
     resultsTitle: "Prompts optimizados", toCompareBtn: "Comparar respuestas →",
     optNone: "Sin preferencia", optProse: "Prosa simple", optMarkdown: "Markdown", optBullets: "Viñetas", optTable: "Tabla", optJson: "JSON", optCode: "Código",
@@ -186,7 +186,7 @@
     routerTitle: "¿Qué modelo para esta tarea?", bestPick: "Mejor opción:", benchLabel: "Benchmarks:",
     fullRanking: "Clasificación completa, planes gratuitos y fuentes", freeTier: "Plan gratuito:", sourcesLabel: "Fuentes:",
     whyPrefix: "Por qué este prompt está construido así para", copy: "Copiar", copied: "Copiado", copyPrompt: "Copiar prompt",
-    guideTitle: "Guía de modelos", guideSub: "Qué app de IA encaja con cada tipo de tarea — benchmarks públicos traducidos a lenguaje sencillo.",
+    guideTitle: "Guía de modelos", guideSub: "Qué app de IA encaja con cada tipo de tarea - benchmarks públicos traducidos a lenguaje sencillo.",
     catalogTitle: "Catálogo de modelos",
     compareTitle: "Comparar respuestas",
     compareSub: "Ejecuta el mismo prompt optimizado en cada app de IA, pega (o ejecuta automáticamente) las respuestas y puntúalas lado a lado. Todo se queda en tu navegador.",
@@ -199,7 +199,7 @@
     buildChain: "Construir cadena", saveChain: "Guardar cadena", savedChains: "Cadenas guardadas",
     promptForStep: "Prompt de este paso", stepOutput: "Salida del paso",
     settingsTitle: "Ajustes",
-    settingsSub: "Las claves API activan la ejecución automática. Se guardan solo en este navegador y se envían solo al proveedor que llamas — nunca a un servidor de WhichAI (no existe).",
+    settingsSub: "Las claves API activan la ejecución automática. Se guardan solo en este navegador y se envían solo al proveedor que llamas - nunca a un servidor de WhichAI (no existe).",
     saveSettings: "Guardar ajustes", prefsReset: "Restablecer preferencias",
     footerText: "Funciona por completo en tu navegador: sin cuenta, sin servidor, tus claves y datos nunca salen de tu dispositivo."
   };
@@ -209,17 +209,17 @@
     privacyPill: "Privat by Design",
     privacyTip: "Läuft vollständig in deinem Browser. Kein Konto, kein Server, kein Tracking. API-Schlüssel bleiben auf deinem Gerät.",
     trustLine: "Kein Konto · Kein Server · Nichts verlässt deinen Browser",
-    langNote: "Oberfläche auf Deutsch. Hinweis: Generierte Prompts, Benchmark-Notizen und die automatische Aufgabenerkennung sind für Englisch optimiert (alle KI-Modelle arbeiten mit englischen Anweisungen am besten). Dein Ziel kannst du in jeder Sprache schreiben — die KI antwortet in deiner Sprache.",
+    langNote: "Oberfläche auf Deutsch. Hinweis: Generierte Prompts, Benchmark-Notizen und die automatische Aufgabenerkennung sind für Englisch optimiert (alle KI-Modelle arbeiten mit englischen Anweisungen am besten). Dein Ziel kannst du in jeder Sprache schreiben - die KI antwortet in deiner Sprache.",
     genTitle: "Beschreibe dein Ziel",
-    genSubtitle: "WhichAI macht daraus einen auf jedes KI-Modell zugeschnittenen Prompt — und sagt dir in einfachen Worten, welches Modell am besten passt.",
+    genSubtitle: "WhichAI macht daraus einen auf jedes KI-Modell zugeschnittenen Prompt - und sagt dir in einfachen Worten, welches Modell am besten passt.",
     goalLabel: "Ziel ", optionalTag: "(optional)", tryExample: "Beispiel laden",
     goalPh: "z. B. Schreibe die Headline einer Landingpage für eine Budget-App für Freelancer",
     goalErr: "Beschreibe dein Ziel, um Prompts zu generieren.",
-    contextLabel: "Kontext ", contextPh: "Hintergrund, Zielgruppe, Einschränkungen, Beispiele — alles, was die KI wissen sollte",
+    contextLabel: "Kontext ", contextPh: "Hintergrund, Zielgruppe, Einschränkungen, Beispiele - alles, was die KI wissen sollte",
     taskLabel: "Aufgabentyp", formatLabel: "Ausgabeformat", lengthLabel: "Länge", toneLabel: "Ton",
     targetsLabel: "Zielmodelle", groupAssistants: "KI-Assistenten", groupEco: "Ökosystem-Assistenten", groupOpen: "Offene Modelle ",
     modelsErr: "Wähle mindestens ein Modell.", generateBtn: "Prompts generieren",
-    emptyLead: "Deine optimierten Prompts erscheinen hier — eine Version pro Modell, plus eine Empfehlung, welches Modell am besten passt.",
+    emptyLead: "Deine optimierten Prompts erscheinen hier - eine Version pro Modell, plus eine Empfehlung, welches Modell am besten passt.",
     step1: "Beschreibe dein Ziel", step2: "Kopiere den auf jede KI zugeschnittenen Prompt", step3: "Vergleiche die Antworten und iteriere",
     resultsTitle: "Optimierte Prompts", toCompareBtn: "Antworten vergleichen →",
     optNone: "Keine Präferenz", optProse: "Fließtext", optMarkdown: "Markdown", optBullets: "Stichpunkte", optTable: "Tabelle", optJson: "JSON", optCode: "Code",
@@ -231,7 +231,7 @@
     routerTitle: "Welches Modell für diese Aufgabe?", bestPick: "Beste Wahl:", benchLabel: "Benchmarks:",
     fullRanking: "Komplettes Ranking, Gratis-Angebote und Quellen", freeTier: "Gratis-Angebot:", sourcesLabel: "Quellen:",
     whyPrefix: "Warum dieser Prompt so aufgebaut ist für", copy: "Kopieren", copied: "Kopiert", copyPrompt: "Prompt kopieren",
-    guideTitle: "Modell-Guide", guideSub: "Welche KI-App zu welcher Aufgabe passt — öffentliche Benchmarks in einfache Worte übersetzt.",
+    guideTitle: "Modell-Guide", guideSub: "Welche KI-App zu welcher Aufgabe passt - öffentliche Benchmarks in einfache Worte übersetzt.",
     catalogTitle: "Modellkatalog",
     compareTitle: "Antworten vergleichen",
     compareSub: "Führe denselben optimierten Prompt in jeder KI-App aus, füge die Antworten ein (oder führe sie automatisch aus) und bewerte sie nebeneinander. Alles bleibt in deinem Browser.",
@@ -244,7 +244,7 @@
     buildChain: "Kette erstellen", saveChain: "Kette speichern", savedChains: "Gespeicherte Ketten",
     promptForStep: "Prompt für diesen Schritt", stepOutput: "Schritt-Ausgabe",
     settingsTitle: "Einstellungen",
-    settingsSub: "API-Schlüssel aktivieren die automatische Ausführung. Sie bleiben nur in diesem Browser und gehen nur an den aufgerufenen Anbieter — nie an einen WhichAI-Server (es gibt keinen).",
+    settingsSub: "API-Schlüssel aktivieren die automatische Ausführung. Sie bleiben nur in diesem Browser und gehen nur an den aufgerufenen Anbieter - nie an einen WhichAI-Server (es gibt keinen).",
     saveSettings: "Einstellungen speichern", prefsReset: "Einstellungen zurücksetzen",
     footerText: "Läuft vollständig in deinem Browser: kein Konto, kein Server, deine Schlüssel und Daten verlassen nie dein Gerät."
   };
@@ -256,15 +256,15 @@
     trustLine: "Sem conta · Sem servidor · Nada sai do seu navegador",
     langNote: "Interface em português. Nota: os prompts gerados, as notas de benchmark e a detecção automática do tipo de tarefa são otimizados para o inglês (todos os modelos de IA funcionam melhor com instruções em inglês). Você pode escrever seu objetivo em qualquer idioma: a IA responderá no seu idioma.",
     genTitle: "Descreva seu objetivo",
-    genSubtitle: "O WhichAI o transforma em um prompt sob medida para cada modelo de IA — e diz qual modelo é o mais adequado, em linguagem simples.",
+    genSubtitle: "O WhichAI o transforma em um prompt sob medida para cada modelo de IA - e diz qual modelo é o mais adequado, em linguagem simples.",
     goalLabel: "Objetivo ", optionalTag: "(opcional)", tryExample: "Testar um exemplo",
     goalPh: "ex.: Escreva o título de uma landing page para um app de orçamento para freelancers",
     goalErr: "Descreva seu objetivo para gerar os prompts.",
-    contextLabel: "Contexto ", contextPh: "Contexto, público, restrições, exemplos — tudo o que a IA deve saber",
+    contextLabel: "Contexto ", contextPh: "Contexto, público, restrições, exemplos - tudo o que a IA deve saber",
     taskLabel: "Tipo de tarefa", formatLabel: "Formato de saída", lengthLabel: "Comprimento", toneLabel: "Tom",
     targetsLabel: "Modelos de destino", groupAssistants: "Assistentes de IA", groupEco: "Assistentes de ecossistema", groupOpen: "Modelos abertos ",
     modelsErr: "Selecione pelo menos um modelo.", generateBtn: "Gerar prompts",
-    emptyLead: "Seus prompts otimizados aparecerão aqui — uma versão por modelo, mais a recomendação do modelo mais adequado.",
+    emptyLead: "Seus prompts otimizados aparecerão aqui - uma versão por modelo, mais a recomendação do modelo mais adequado.",
     step1: "Descreva seu objetivo", step2: "Copie o prompt sob medida para cada IA", step3: "Compare as respostas e itere",
     resultsTitle: "Prompts otimizados", toCompareBtn: "Comparar respostas →",
     optNone: "Sem preferência", optProse: "Prosa simples", optMarkdown: "Markdown", optBullets: "Tópicos", optTable: "Tabela", optJson: "JSON", optCode: "Código",
@@ -276,7 +276,7 @@
     routerTitle: "Qual modelo para esta tarefa?", bestPick: "Melhor escolha:", benchLabel: "Benchmarks:",
     fullRanking: "Classificação completa, planos gratuitos e fontes", freeTier: "Plano gratuito:", sourcesLabel: "Fontes:",
     whyPrefix: "Por que este prompt é construído assim para", copy: "Copiar", copied: "Copiado", copyPrompt: "Copiar prompt",
-    guideTitle: "Guia de modelos", guideSub: "Qual app de IA combina com cada tipo de tarefa — benchmarks públicos traduzidos em linguagem simples.",
+    guideTitle: "Guia de modelos", guideSub: "Qual app de IA combina com cada tipo de tarefa - benchmarks públicos traduzidos em linguagem simples.",
     catalogTitle: "Catálogo de modelos",
     compareTitle: "Comparar respostas",
     compareSub: "Execute o mesmo prompt otimizado em cada app de IA, cole (ou execute automaticamente) as respostas e avalie-as lado a lado. Tudo fica no seu navegador.",
@@ -289,7 +289,7 @@
     buildChain: "Construir cadeia", saveChain: "Salvar cadeia", savedChains: "Cadeias salvas",
     promptForStep: "Prompt desta etapa", stepOutput: "Saída da etapa",
     settingsTitle: "Configurações",
-    settingsSub: "As chaves de API ativam a execução automática. Ficam apenas neste navegador e são enviadas somente ao provedor chamado — nunca a um servidor do WhichAI (não existe).",
+    settingsSub: "As chaves de API ativam a execução automática. Ficam apenas neste navegador e são enviadas somente ao provedor chamado - nunca a um servidor do WhichAI (não existe).",
     saveSettings: "Salvar configurações", prefsReset: "Redefinir preferências",
     footerText: "Funciona inteiramente no seu navegador: sem conta, sem servidor, suas chaves e dados nunca saem do seu dispositivo."
   };
@@ -305,11 +305,11 @@
     goalLabel: "目标 ", optionalTag: "（可选）", tryExample: "试试示例",
     goalPh: "例如：为一款面向自由职业者的记账应用撰写落地页标题和副标题",
     goalErr: "请描述您的目标以生成提示词。",
-    contextLabel: "背景 ", contextPh: "背景、受众、限制、示例——任何 AI 应该知道的信息",
+    contextLabel: "背景 ", contextPh: "背景、受众、限制、示例：任何 AI 应该知道的信息",
     taskLabel: "任务类型", formatLabel: "输出格式", lengthLabel: "长度", toneLabel: "语气",
     targetsLabel: "目标模型", groupAssistants: "AI 助手", groupEco: "生态系统助手", groupOpen: "开源模型 ",
     modelsErr: "请至少选择一个模型。", generateBtn: "生成提示词",
-    emptyLead: "优化后的提示词将显示在这里——每个模型一个版本，并推荐最适合此任务的模型。",
+    emptyLead: "优化后的提示词将显示在这里：每个模型一个版本，并推荐最适合此任务的模型。",
     step1: "描述您的目标", step2: "复制为每个 AI 定制的提示词", step3: "对比回答并迭代",
     resultsTitle: "优化的提示词", toCompareBtn: "对比输出 →",
     optNone: "无偏好", optProse: "普通文本", optMarkdown: "Markdown", optBullets: "要点列表", optTable: "表格", optJson: "JSON", optCode: "代码",
@@ -321,7 +321,7 @@
     routerTitle: "这项任务用哪个模型？", bestPick: "最佳选择：", benchLabel: "基准测试：",
     fullRanking: "完整排名、免费方案与来源", freeTier: "免费方案：", sourcesLabel: "来源：",
     whyPrefix: "为什么这样为其构建提示词：", copy: "复制", copied: "已复制", copyPrompt: "复制提示词",
-    guideTitle: "模型指南", guideSub: "哪个 AI 应用适合哪类任务——把公开基准测试翻译成通俗语言。",
+    guideTitle: "模型指南", guideSub: "哪个 AI 应用适合哪类任务：把公开基准测试翻译成通俗语言。",
     catalogTitle: "模型目录",
     compareTitle: "对比输出",
     compareSub: "在每个 AI 应用中运行同一优化提示词，粘贴（或自动运行）回答并并排打分。一切都保存在您的浏览器中。",
@@ -334,7 +334,7 @@
     buildChain: "构建任务链", saveChain: "保存任务链", savedChains: "已保存的任务链",
     promptForStep: "此步骤的提示词", stepOutput: "步骤输出",
     settingsTitle: "设置",
-    settingsSub: "API 密钥用于自动运行。密钥仅保存在本浏览器中，只发送给您调用的提供商——绝不会发送到 WhichAI 服务器（根本不存在服务器）。",
+    settingsSub: "API 密钥用于自动运行。密钥仅保存在本浏览器中，只发送给您调用的提供商：绝不会发送到 WhichAI 服务器（根本不存在服务器）。",
     saveSettings: "保存设置", prefsReset: "重置偏好设置",
     footerText: "完全在您的浏览器中运行：无需账户、无服务器，您的密钥和数据绝不离开设备。"
   };
@@ -346,15 +346,15 @@
     trustLine: "कोई खाता नहीं · कोई सर्वर नहीं · कुछ भी ब्राउज़र से बाहर नहीं जाता",
     langNote: "इंटरफ़ेस हिन्दी में है। ध्यान दें: जनरेट किए गए प्रॉम्प्ट, बेंचमार्क नोट्स और कार्य-प्रकार की स्वतः पहचान अंग्रेज़ी के लिए अनुकूलित हैं (सभी AI मॉडल अंग्रेज़ी निर्देशों पर सबसे अच्छा काम करते हैं)। आप अपना लक्ष्य किसी भी भाषा में लिख सकते हैं: AI आपकी भाषा में उत्तर देगा।",
     genTitle: "अपना लक्ष्य बताइए",
-    genSubtitle: "WhichAI इसे हर AI मॉडल के लिए तैयार प्रॉम्प्ट में बदलता है — और सरल भाषा में बताता है कि कौन सा मॉडल सबसे उपयुक्त है।",
+    genSubtitle: "WhichAI इसे हर AI मॉडल के लिए तैयार प्रॉम्प्ट में बदलता है - और सरल भाषा में बताता है कि कौन सा मॉडल सबसे उपयुक्त है।",
     goalLabel: "लक्ष्य ", optionalTag: "(वैकल्पिक)", tryExample: "उदाहरण आज़माएँ",
     goalPh: "जैसे: फ्रीलांसरों के लिए बजट ऐप की लैंडिंग पेज हेडलाइन लिखें",
     goalErr: "प्रॉम्प्ट बनाने के लिए अपना लक्ष्य बताइए।",
-    contextLabel: "संदर्भ ", contextPh: "पृष्ठभूमि, दर्शक, सीमाएँ, उदाहरण — जो कुछ AI को पता होना चाहिए",
+    contextLabel: "संदर्भ ", contextPh: "पृष्ठभूमि, दर्शक, सीमाएँ, उदाहरण - जो कुछ AI को पता होना चाहिए",
     taskLabel: "कार्य का प्रकार", formatLabel: "आउटपुट फ़ॉर्मेट", lengthLabel: "लंबाई", toneLabel: "लहजा",
     targetsLabel: "लक्षित मॉडल", groupAssistants: "AI सहायक", groupEco: "इकोसिस्टम सहायक", groupOpen: "ओपन मॉडल ",
     modelsErr: "कम से कम एक मॉडल चुनें।", generateBtn: "प्रॉम्प्ट बनाएँ",
-    emptyLead: "आपके अनुकूलित प्रॉम्प्ट यहाँ दिखेंगे — हर मॉडल के लिए एक संस्करण, साथ ही सबसे उपयुक्त मॉडल की सिफ़ारिश।",
+    emptyLead: "आपके अनुकूलित प्रॉम्प्ट यहाँ दिखेंगे - हर मॉडल के लिए एक संस्करण, साथ ही सबसे उपयुक्त मॉडल की सिफ़ारिश।",
     step1: "अपना लक्ष्य बताइए", step2: "हर AI के लिए तैयार प्रॉम्प्ट कॉपी करें", step3: "उत्तरों की तुलना करें और सुधारें",
     resultsTitle: "अनुकूलित प्रॉम्प्ट", toCompareBtn: "आउटपुट की तुलना करें →",
     optNone: "कोई प्राथमिकता नहीं", optProse: "सादा गद्य", optMarkdown: "Markdown", optBullets: "बुलेट सूची", optTable: "तालिका", optJson: "JSON", optCode: "कोड",
@@ -366,7 +366,7 @@
     routerTitle: "इस कार्य के लिए कौन सा मॉडल?", bestPick: "सर्वश्रेष्ठ विकल्प:", benchLabel: "बेंचमार्क:",
     fullRanking: "पूरी रैंकिंग, मुफ़्त प्लान और स्रोत", freeTier: "मुफ़्त प्लान:", sourcesLabel: "स्रोत:",
     whyPrefix: "यह प्रॉम्प्ट इस तरह क्यों बनाया गया है:", copy: "कॉपी", copied: "कॉपी हो गया", copyPrompt: "प्रॉम्प्ट कॉपी करें",
-    guideTitle: "मॉडल गाइड", guideSub: "किस तरह के कार्य के लिए कौन सा AI ऐप उपयुक्त है — सार्वजनिक बेंचमार्क सरल भाषा में।",
+    guideTitle: "मॉडल गाइड", guideSub: "किस तरह के कार्य के लिए कौन सा AI ऐप उपयुक्त है - सार्वजनिक बेंचमार्क सरल भाषा में।",
     catalogTitle: "मॉडल कैटलॉग",
     compareTitle: "आउटपुट की तुलना करें",
     compareSub: "हर AI ऐप में वही अनुकूलित प्रॉम्प्ट चलाएँ, उत्तर चिपकाएँ (या स्वतः चलाएँ) और साथ-साथ अंक दें। सब कुछ आपके ब्राउज़र में रहता है।",
@@ -379,20 +379,20 @@
     buildChain: "चेन बनाएँ", saveChain: "चेन सहेजें", savedChains: "सहेजी गई चेन",
     promptForStep: "इस चरण का प्रॉम्प्ट", stepOutput: "चरण का आउटपुट",
     settingsTitle: "सेटिंग्स",
-    settingsSub: "API कुंजियाँ स्वतः-चालन सक्षम करती हैं। ये केवल इस ब्राउज़र में रहती हैं और सिर्फ़ उसी प्रदाता को भेजी जाती हैं जिसे आप कॉल करते हैं — कभी किसी WhichAI सर्वर को नहीं (कोई सर्वर है ही नहीं)।",
+    settingsSub: "API कुंजियाँ स्वतः-चालन सक्षम करती हैं। ये केवल इस ब्राउज़र में रहती हैं और सिर्फ़ उसी प्रदाता को भेजी जाती हैं जिसे आप कॉल करते हैं - कभी किसी WhichAI सर्वर को नहीं (कोई सर्वर है ही नहीं)।",
     saveSettings: "सेटिंग्स सहेजें", prefsReset: "प्राथमिकताएँ रीसेट करें",
     footerText: "पूरी तरह आपके ब्राउज़र में चलता है: कोई खाता नहीं, कोई सर्वर नहीं, आपकी कुंजियाँ और डेटा कभी डिवाइस से बाहर नहीं जाते।"
   };
 
 
-  S.en.dbTitle = "Model database"; S.en.dbSub = "Every notable AI model we track — including private and preview models, listed for information. Estimated scores are marked."; S.en.dbSearchPh = "Search models, vendors, tags…"; S.en.dbNoResults = "No models match your search.";
-  S.it.dbTitle = "Database dei modelli"; S.it.dbSub = "Tutti i modelli AI rilevanti che seguiamo — inclusi quelli privati e in anteprima, presenti a scopo informativo. I punteggi stimati sono contrassegnati."; S.it.dbSearchPh = "Cerca modelli, produttori, tag…"; S.it.dbNoResults = "Nessun modello corrisponde alla ricerca.";
-  S.fr.dbTitle = "Base de données des modèles"; S.fr.dbSub = "Tous les modèles d'IA notables que nous suivons — y compris privés et en préversion, à titre informatif. Les scores estimés sont signalés."; S.fr.dbSearchPh = "Rechercher modèles, éditeurs, tags…"; S.fr.dbNoResults = "Aucun modèle ne correspond à votre recherche.";
-  S.es.dbTitle = "Base de datos de modelos"; S.es.dbSub = "Todos los modelos de IA relevantes que seguimos — incluidos privados y en vista previa, con fines informativos. Las puntuaciones estimadas están marcadas."; S.es.dbSearchPh = "Buscar modelos, proveedores, etiquetas…"; S.es.dbNoResults = "Ningún modelo coincide con tu búsqueda.";
-  S.de.dbTitle = "Modell-Datenbank"; S.de.dbSub = "Alle relevanten KI-Modelle, die wir verfolgen — einschließlich privater und Preview-Modelle, zur Information. Geschätzte Werte sind markiert."; S.de.dbSearchPh = "Modelle, Anbieter, Tags suchen…"; S.de.dbNoResults = "Keine Modelle entsprechen deiner Suche.";
-  S.pt.dbTitle = "Banco de dados de modelos"; S.pt.dbSub = "Todos os modelos de IA relevantes que acompanhamos — incluindo privados e em prévia, para fins informativos. Pontuações estimadas estão marcadas."; S.pt.dbSearchPh = "Buscar modelos, fornecedores, tags…"; S.pt.dbNoResults = "Nenhum modelo corresponde à sua busca.";
-  S.zh.dbTitle = "模型数据库"; S.zh.dbSub = "我们追踪的所有重要 AI 模型——包括私有和预览模型，仅供参考。估算分数已标注。"; S.zh.dbSearchPh = "搜索模型、厂商、标签…"; S.zh.dbNoResults = "没有匹配的模型。";
-  S.hi.dbTitle = "मॉडल डेटाबेस"; S.hi.dbSub = "हम जिन सभी उल्लेखनीय AI मॉडलों पर नज़र रखते हैं — निजी और पूर्वावलोकन मॉडल सहित, केवल जानकारी के लिए। अनुमानित स्कोर चिह्नित हैं।"; S.hi.dbSearchPh = "मॉडल, विक्रेता, टैग खोजें…"; S.hi.dbNoResults = "आपकी खोज से कोई मॉडल मेल नहीं खाता।";
+  S.en.dbTitle = "Model database"; S.en.dbSub = "Every notable AI model we track - including private and preview models, listed for information. Estimated scores are marked."; S.en.dbSearchPh = "Search models, vendors, tags…"; S.en.dbNoResults = "No models match your search.";
+  S.it.dbTitle = "Database dei modelli"; S.it.dbSub = "Tutti i modelli AI rilevanti che seguiamo - inclusi quelli privati e in anteprima, presenti a scopo informativo. I punteggi stimati sono contrassegnati."; S.it.dbSearchPh = "Cerca modelli, produttori, tag…"; S.it.dbNoResults = "Nessun modello corrisponde alla ricerca.";
+  S.fr.dbTitle = "Base de données des modèles"; S.fr.dbSub = "Tous les modèles d'IA notables que nous suivons - y compris privés et en préversion, à titre informatif. Les scores estimés sont signalés."; S.fr.dbSearchPh = "Rechercher modèles, éditeurs, tags…"; S.fr.dbNoResults = "Aucun modèle ne correspond à votre recherche.";
+  S.es.dbTitle = "Base de datos de modelos"; S.es.dbSub = "Todos los modelos de IA relevantes que seguimos - incluidos privados y en vista previa, con fines informativos. Las puntuaciones estimadas están marcadas."; S.es.dbSearchPh = "Buscar modelos, proveedores, etiquetas…"; S.es.dbNoResults = "Ningún modelo coincide con tu búsqueda.";
+  S.de.dbTitle = "Modell-Datenbank"; S.de.dbSub = "Alle relevanten KI-Modelle, die wir verfolgen - einschließlich privater und Preview-Modelle, zur Information. Geschätzte Werte sind markiert."; S.de.dbSearchPh = "Modelle, Anbieter, Tags suchen…"; S.de.dbNoResults = "Keine Modelle entsprechen deiner Suche.";
+  S.pt.dbTitle = "Banco de dados de modelos"; S.pt.dbSub = "Todos os modelos de IA relevantes que acompanhamos - incluindo privados e em prévia, para fins informativos. Pontuações estimadas estão marcadas."; S.pt.dbSearchPh = "Buscar modelos, fornecedores, tags…"; S.pt.dbNoResults = "Nenhum modelo corresponde à sua busca.";
+  S.zh.dbTitle = "模型数据库"; S.zh.dbSub = "我们追踪的所有重要 AI 模型：包括私有和预览模型，仅供参考。估算分数已标注。"; S.zh.dbSearchPh = "搜索模型、厂商、标签…"; S.zh.dbNoResults = "没有匹配的模型。";
+  S.hi.dbTitle = "मॉडल डेटाबेस"; S.hi.dbSub = "हम जिन सभी उल्लेखनीय AI मॉडलों पर नज़र रखते हैं - निजी और पूर्वावलोकन मॉडल सहित, केवल जानकारी के लिए। अनुमानित स्कोर चिह्नित हैं।"; S.hi.dbSearchPh = "मॉडल, विक्रेता, टैग खोजें…"; S.hi.dbNoResults = "आपकी खोज से कोई मॉडल मेल नहीं खाता।";
 
 
   S.ru = {
@@ -404,7 +404,7 @@
     privacyPill: "Приватность по умолчанию",
     privacyTip: "Работает полностью в вашем браузере. Без аккаунта, без сервера, без трекинга. API-ключи остаются на вашем устройстве.",
     trustLine: "Без аккаунта · Без сервера · Ничего не покидает ваш браузер",
-    langNote: "Интерфейс на русском. Примечание: сгенерированные промпты, заметки о бенчмарках и автоопределение типа задачи оптимизированы для английского (все ИИ-модели работают лучше с англоязычными инструкциями). Цель можно писать на любом языке — ИИ ответит на вашем языке.",
+    langNote: "Интерфейс на русском. Примечание: сгенерированные промпты, заметки о бенчмарках и автоопределение типа задачи оптимизированы для английского (все ИИ-модели работают лучше с англоязычными инструкциями). Цель можно писать на любом языке - ИИ ответит на вашем языке.",
     genTitle: "Опишите вашу цель",
     genSubtitle: "WhichAI превратит её в промпт, адаптированный под каждую ИИ-модель, и простым языком подскажет, какая модель лучше подходит для задачи.",
     goalLabel: "Цель ",
@@ -413,7 +413,7 @@
     goalPh: "напр., Напиши заголовок и подзаголовок лендинга для приложения бюджетирования для фрилансеров",
     goalErr: "Опишите цель, чтобы сгенерировать промпты.",
     contextLabel: "Контекст ",
-    contextPh: "Фон, аудитория, ограничения, примеры — всё, что ИИ должен знать",
+    contextPh: "Фон, аудитория, ограничения, примеры - всё, что ИИ должен знать",
     taskLabel: "Тип задачи",
     formatLabel: "Формат ответа",
     lengthLabel: "Длина",
@@ -424,7 +424,7 @@
     groupOpen: "Открытые модели ",
     modelsErr: "Выберите хотя бы одну модель.",
     generateBtn: "Сгенерировать промпты",
-    emptyLead: "Здесь появятся ваши оптимизированные промпты — по версии на модель, плюс рекомендация, какая модель лучше подходит.",
+    emptyLead: "Здесь появятся ваши оптимизированные промпты - по версии на модель, плюс рекомендация, какая модель лучше подходит.",
     step1: "Опишите цель",
     step2: "Скопируйте промпт под каждую ИИ",
     step3: "Сравните ответы и улучшайте",
@@ -466,7 +466,7 @@
     copied: "Скопировано",
     copyPrompt: "Копировать промпт",
     guideTitle: "Гид по моделям",
-    guideSub: "Какая ИИ подходит для каждого типа задач — публичные бенчмарки простым языком.",
+    guideSub: "Какая ИИ подходит для каждого типа задач - публичные бенчмарки простым языком.",
     catalogTitle: "Каталог моделей",
     compareTitle: "Сравнение ответов",
     compareSub: "Запустите один и тот же промпт в каждой ИИ, вставьте (или запустите автоматически) ответы и оцените их рядом. Всё остаётся в вашем браузере.",
@@ -484,23 +484,23 @@
     openBtn: "Открыть",
     deleteBtn: "Удалить",
     chainsTitle: "Цепочки",
-    chainsSub: "Разбейте сложную цель на связанные шаги: каждый шаг получает свой промпт, а результат одного шага питает следующий. Автозапуск там, где есть бесплатный ключ; в остальных — копипаст.",
+    chainsSub: "Разбейте сложную цель на связанные шаги: каждый шаг получает свой промпт, а результат одного шага питает следующий. Автозапуск там, где есть бесплатный ключ; в остальных - копипаст.",
     buildChain: "Построить цепочку",
     saveChain: "Сохранить цепочку",
     savedChains: "Сохранённые цепочки",
     promptForStep: "Промпт для этого шага",
     stepOutput: "Результат шага",
     settingsTitle: "Настройки",
-    settingsSub: "API-ключи включают автозапуск в Сравнении. Ключи хранятся только в этом браузере и отправляются только выбранному провайдеру — никогда на сервер WhichAI (его нет).",
+    settingsSub: "API-ключи включают автозапуск в Сравнении. Ключи хранятся только в этом браузере и отправляются только выбранному провайдеру - никогда на сервер WhichAI (его нет).",
     saveSettings: "Сохранить настройки",
     prefsReset: "Сбросить запомненные предпочтения",
     footerText: "Работает полностью в вашем браузере: без аккаунта, без сервера, ключи и данные не покидают устройство.",
     dbTitle: "База моделей",
-    dbSub: "Все значимые ИИ-модели, которые мы отслеживаем, включая приватные и превью — для информации. Оценочные баллы помечены.",
+    dbSub: "Все значимые ИИ-модели, которые мы отслеживаем, включая приватные и превью - для информации. Оценочные баллы помечены.",
     dbSearchPh: "Поиск моделей, вендоров, тегов…",
     dbNoResults: "Ничего не найдено.",
     navAbout: "О проекте",
-    dbHint: "моделей в базе — начните вводить (частичные имена работают)."
+    dbHint: "моделей в базе - начните вводить (частичные имена работают)."
   };
 
   S.ja = {
@@ -512,7 +512,7 @@
     privacyPill: "プライバシー第一",
     privacyTip: "すべてブラウザ内で動作。アカウント不要、サーバーなし、トラッキングなし。APIキーは端末内に保存されます。",
     trustLine: "アカウント不要 · サーバーなし · データはブラウザの外に出ません",
-    langNote: "インターフェースは日本語です。注: 生成されるプロンプト、ベンチマークの注記、タスク自動判定は英語向けに最適化されています（どのAIモデルも英語の指示で最高の性能を発揮します）。目標はどの言語で書いてもかまいません — AIはあなたの言語で回答します。",
+    langNote: "インターフェースは日本語です。注: 生成されるプロンプト、ベンチマークの注記、タスク自動判定は英語向けに最適化されています（どのAIモデルも英語の指示で最高の性能を発揮します）。目標はどの言語で書いてもかまいません - AIはあなたの言語で回答します。",
     genTitle: "目標を記述してください",
     genSubtitle: "WhichAIがそれを各AIモデルに合わせたプロンプトに変換し、どのモデルが最適かをわかりやすく提案します。",
     goalLabel: "目標 ",
@@ -521,7 +521,7 @@
     goalPh: "例: フリーランサー向け家計簿アプリのランディングページの見出しとサブ見出しを書いて",
     goalErr: "プロンプトを生成するには目標を記述してください。",
     contextLabel: "コンテキスト ",
-    contextPh: "背景、対象読者、制約、例など — AIが知っておくべきこと",
+    contextPh: "背景、対象読者、制約、例など - AIが知っておくべきこと",
     taskLabel: "タスクの種類",
     formatLabel: "出力形式",
     lengthLabel: "長さ",
@@ -532,7 +532,7 @@
     groupOpen: "オープンモデル ",
     modelsErr: "対象モデルを1つ以上選択してください。",
     generateBtn: "プロンプトを生成",
-    emptyLead: "最適化されたプロンプトがここに表示されます — モデルごとに1つ、さらに最適モデルの推薦付き。",
+    emptyLead: "最適化されたプロンプトがここに表示されます - モデルごとに1つ、さらに最適モデルの推薦付き。",
     step1: "目標を記述",
     step2: "各AI向けのプロンプトをコピー",
     step3: "回答を比較して改善",
@@ -569,12 +569,12 @@
     fullRanking: "全ランキング・無料枠・出典",
     freeTier: "無料枠:",
     sourcesLabel: "出典:",
-    whyPrefix: "このプロンプトの設計理由 —",
+    whyPrefix: "このプロンプトの設計理由 -",
     copy: "コピー",
     copied: "コピー済み",
     copyPrompt: "プロンプトをコピー",
     guideTitle: "モデルガイド",
-    guideSub: "タスクごとに最適なAIアプリ — 公開ベンチマークをわかりやすく翻訳。",
+    guideSub: "タスクごとに最適なAIアプリ - 公開ベンチマークをわかりやすく翻訳。",
     catalogTitle: "モデルカタログ",
     compareTitle: "出力を比較",
     compareSub: "同じプロンプトを各AIで実行し、回答を貼り付け（または自動実行）して並べて採点。すべてブラウザ内に保存されます。",
@@ -599,16 +599,16 @@
     promptForStep: "このステップのプロンプト",
     stepOutput: "ステップの出力",
     settingsTitle: "設定",
-    settingsSub: "APIキーで比較の自動実行が有効になります。キーはこのブラウザにのみ保存され、呼び出すプロバイダーだけに送信されます — WhichAIのサーバーには送信されません（存在しません）。",
+    settingsSub: "APIキーで比較の自動実行が有効になります。キーはこのブラウザにのみ保存され、呼び出すプロバイダーだけに送信されます - WhichAIのサーバーには送信されません（存在しません）。",
     saveSettings: "設定を保存",
     prefsReset: "記憶した設定をリセット",
     footerText: "すべてブラウザ内で動作: アカウント不要、サーバーなし、キーとデータは端末から出ません。",
     dbTitle: "モデルデータベース",
-    dbSub: "追跡中の注目AIモデルすべて — 非公開・プレビュー版も情報として掲載。推定スコアには印が付いています。",
+    dbSub: "追跡中の注目AIモデルすべて - 非公開・プレビュー版も情報として掲載。推定スコアには印が付いています。",
     dbSearchPh: "モデル・ベンダー・タグを検索…",
     dbNoResults: "該当するモデルがありません。",
     navAbout: "概要",
-    dbHint: "件のモデルを収録 — 入力して検索（部分一致OK）。"
+    dbHint: "件のモデルを収録 - 入力して検索（部分一致OK）。"
   };
 
   S.ar = {
@@ -620,16 +620,16 @@
     privacyPill: "خصوصية بالتصميم",
     privacyTip: "يعمل بالكامل في متصفحك. بلا حساب، بلا خادم، بلا تتبّع. مفاتيح API تبقى على جهازك.",
     trustLine: "بلا حساب · بلا خادم · لا شيء يغادر متصفحك",
-    langNote: "الواجهة بالعربية. ملاحظة: البرومبتات المولّدة وملاحظات المعايير والكشف التلقائي لنوع المهمة مُحسّنة للإنجليزية (كل النماذج تعمل بأفضل أداء مع تعليمات إنجليزية). يمكنك كتابة هدفك بأي لغة — وسيجيب الذكاء الاصطناعي بلغتك.",
+    langNote: "الواجهة بالعربية. ملاحظة: البرومبتات المولّدة وملاحظات المعايير والكشف التلقائي لنوع المهمة مُحسّنة للإنجليزية (كل النماذج تعمل بأفضل أداء مع تعليمات إنجليزية). يمكنك كتابة هدفك بأي لغة - وسيجيب الذكاء الاصطناعي بلغتك.",
     genTitle: "صِف هدفك",
-    genSubtitle: "يحوّله WhichAI إلى برومبت مُخصّص لكل نموذج ذكاء اصطناعي — ويخبرك بلغة بسيطة أي نموذج هو الأنسب للمهمة.",
+    genSubtitle: "يحوّله WhichAI إلى برومبت مُخصّص لكل نموذج ذكاء اصطناعي - ويخبرك بلغة بسيطة أي نموذج هو الأنسب للمهمة.",
     goalLabel: "الهدف ",
     optionalTag: "(اختياري)",
     tryExample: "جرّب مثالاً",
     goalPh: "مثال: اكتب عنواناً رئيسياً وفرعياً لصفحة هبوط لتطبيق ميزانية موجّه للمستقلين",
     goalErr: "صِف هدفك لتوليد البرومبتات.",
     contextLabel: "السياق ",
-    contextPh: "الخلفية، الجمهور، القيود، أمثلة — كل ما يجب أن يعرفه الذكاء الاصطناعي",
+    contextPh: "الخلفية، الجمهور، القيود، أمثلة - كل ما يجب أن يعرفه الذكاء الاصطناعي",
     taskLabel: "نوع المهمة",
     formatLabel: "صيغة المخرجات",
     lengthLabel: "الطول",
@@ -640,7 +640,7 @@
     groupOpen: "نماذج مفتوحة ",
     modelsErr: "اختر نموذجاً واحداً على الأقل.",
     generateBtn: "ولّد البرومبتات",
-    emptyLead: "ستظهر برومبتاتك المُحسّنة هنا — نسخة لكل نموذج، مع توصية بالنموذج الأنسب لهذه المهمة.",
+    emptyLead: "ستظهر برومبتاتك المُحسّنة هنا - نسخة لكل نموذج، مع توصية بالنموذج الأنسب لهذه المهمة.",
     step1: "صِف هدفك",
     step2: "انسخ البرومبت المخصص لكل ذكاء اصطناعي",
     step3: "قارن الإجابات وحسّن",
@@ -682,7 +682,7 @@
     copied: "تم النسخ",
     copyPrompt: "انسخ البرومبت",
     guideTitle: "دليل النماذج",
-    guideSub: "أي تطبيق ذكاء اصطناعي يناسب كل نوع مهمة — معايير عامة مترجمة بلغة بسيطة.",
+    guideSub: "أي تطبيق ذكاء اصطناعي يناسب كل نوع مهمة - معايير عامة مترجمة بلغة بسيطة.",
     catalogTitle: "كتالوج النماذج",
     compareTitle: "قارن المخرجات",
     compareSub: "شغّل البرومبت المُحسّن نفسه في كل تطبيق، الصق الإجابات (أو شغّلها تلقائياً) وقيّمها جنباً إلى جنب. كل شيء يبقى في متصفحك.",
@@ -707,26 +707,26 @@
     promptForStep: "برومبت هذه الخطوة",
     stepOutput: "مخرجات الخطوة",
     settingsTitle: "الإعدادات",
-    settingsSub: "مفاتيح API تتيح التشغيل التلقائي في المقارنة. تُحفظ المفاتيح في هذا المتصفح فقط وتُرسل فقط إلى المزوّد الذي تستدعيه — أبداً إلى خادم WhichAI (لا يوجد أصلاً).",
+    settingsSub: "مفاتيح API تتيح التشغيل التلقائي في المقارنة. تُحفظ المفاتيح في هذا المتصفح فقط وتُرسل فقط إلى المزوّد الذي تستدعيه - أبداً إلى خادم WhichAI (لا يوجد أصلاً).",
     saveSettings: "احفظ الإعدادات",
     prefsReset: "إعادة ضبط التفضيلات المحفوظة",
     footerText: "يعمل بالكامل في متصفحك: بلا حساب، بلا خادم، مفاتيحك وبياناتك لا تغادر جهازك.",
     dbTitle: "قاعدة النماذج",
-    dbSub: "كل نموذج ذكاء اصطناعي مهم نتتبعه — بما في ذلك الخاصة والتجريبية، للمعلومة. الدرجات التقديرية مُعلّمة.",
+    dbSub: "كل نموذج ذكاء اصطناعي مهم نتتبعه - بما في ذلك الخاصة والتجريبية، للمعلومة. الدرجات التقديرية مُعلّمة.",
     dbSearchPh: "ابحث في النماذج والشركات والوسوم…",
     dbNoResults: "لا نماذج تطابق بحثك.",
     navAbout: "حول",
-    dbHint: "نموذجاً في القاعدة — ابدأ الكتابة للبحث (الأسماء الجزئية تعمل)."
+    dbHint: "نموذجاً في القاعدة - ابدأ الكتابة للبحث (الأسماء الجزئية تعمل)."
   };
 
-  S.en.navAbout = "About"; S.en.dbHint = "models tracked — start typing to search (partial names work).";
-  S.it.navAbout = "Info"; S.it.dbHint = "modelli censiti — inizia a digitare per cercare (valgono anche nomi parziali).";
-  S.fr.navAbout = "À propos"; S.fr.dbHint = "modèles suivis — tapez pour rechercher (noms partiels acceptés).";
-  S.es.navAbout = "Acerca de"; S.es.dbHint = "modelos registrados — escribe para buscar (valen nombres parciales).";
-  S.de.navAbout = "Über"; S.de.dbHint = "Modelle erfasst — tippe, um zu suchen (Teilnamen genügen).";
-  S.pt.navAbout = "Sobre"; S.pt.dbHint = "modelos registrados — digite para buscar (nomes parciais funcionam).";
-  S.zh.navAbout = "关于"; S.zh.dbHint = "个模型已收录——输入即可搜索（支持部分名称）。";
-  S.hi.navAbout = "परिचय"; S.hi.dbHint = "मॉडल दर्ज हैं — खोजने के लिए टाइप करें (आंशिक नाम भी चलेंगे)।";
+  S.en.navAbout = "About"; S.en.dbHint = "models tracked - start typing to search (partial names work).";
+  S.it.navAbout = "Info"; S.it.dbHint = "modelli censiti - inizia a digitare per cercare (valgono anche nomi parziali).";
+  S.fr.navAbout = "À propos"; S.fr.dbHint = "modèles suivis - tapez pour rechercher (noms partiels acceptés).";
+  S.es.navAbout = "Acerca de"; S.es.dbHint = "modelos registrados - escribe para buscar (valen nombres parciales).";
+  S.de.navAbout = "Über"; S.de.dbHint = "Modelle erfasst - tippe, um zu suchen (Teilnamen genügen).";
+  S.pt.navAbout = "Sobre"; S.pt.dbHint = "modelos registrados - digite para buscar (nomes parciais funcionam).";
+  S.zh.navAbout = "关于"; S.zh.dbHint = "个模型已收录：输入即可搜索（支持部分名称）。";
+  S.hi.navAbout = "परिचय"; S.hi.dbHint = "मॉडल दर्ज हैं - खोजने के लिए टाइप करें (आंशिक नाम भी चलेंगे)।";
 
 
   /* ---------- v0.21: settings tests, AI refine, merge studio, themes ---------- */
@@ -739,7 +739,7 @@
   S.en.setKeyMissing = "Paste a key first";
   S.en.themeTip = "Theme: light → dark → sepia";
   S.en.refineBtn = "Refine with AI";
-  S.en.refineHint = "Uses your free API key to make the goal clearer and more complete — you review before applying.";
+  S.en.refineHint = "Uses your free API key to make the goal clearer and more complete - you review before applying.";
   S.en.refineApply = "Use this version";
   S.en.refineDiscard = "Keep mine";
   S.en.refineNeedKey = "Add a free API key in Settings first (Gemini, Groq or OpenRouter).";
@@ -748,7 +748,7 @@
   S.en.refineLabel = "Suggested goal (editable):";
   S.en.mergeOpenBtn = "Merge studio →";
   S.en.mergeTitle = "Merge studio";
-  S.en.mergeSub = "Read every answer side by side and hand-pick the best parts into one final draft. Nothing is automatic — you stay the editor.";
+  S.en.mergeSub = "Read every answer side by side and hand-pick the best parts into one final draft. Nothing is automatic - you stay the editor.";
   S.en.mergeBase = "Use as base";
   S.en.mergeAddSel = "Add selection";
   S.en.mergeAddAll = "Append all";
@@ -758,7 +758,7 @@
   S.en.mergeCopy = "Copy draft";
   S.en.mergeClear = "Clear";
   S.en.mergeWords = "words";
-  S.en.mergeEmpty = "No outputs yet — run or paste answers in Compare first.";
+  S.en.mergeEmpty = "No outputs yet - run or paste answers in Compare first.";
   S.en.mergeBack = "← Back to Compare";
   S.en.mergeAddSource = "Add another output";
   S.en.mergeSourceName = "Label (e.g. GPT-5.6)";
@@ -773,7 +773,7 @@
   S.it.setKeyMissing = "Prima incolla una chiave";
   S.it.themeTip = "Tema: chiaro → scuro → seppia";
   S.it.refineBtn = "Rifinisci con l'AI";
-  S.it.refineHint = "Usa la tua chiave API gratuita per rendere l'obiettivo più chiaro e completo — lo rivedi prima di applicarlo.";
+  S.it.refineHint = "Usa la tua chiave API gratuita per rendere l'obiettivo più chiaro e completo - lo rivedi prima di applicarlo.";
   S.it.refineApply = "Usa questa versione";
   S.it.refineDiscard = "Tieni il mio";
   S.it.refineNeedKey = "Aggiungi prima una chiave API gratuita nelle Impostazioni (Gemini, Groq o OpenRouter).";
@@ -792,7 +792,7 @@
   S.it.mergeCopy = "Copia bozza";
   S.it.mergeClear = "Svuota";
   S.it.mergeWords = "parole";
-  S.it.mergeEmpty = "Nessun output — esegui o incolla le risposte in Confronta prima.";
+  S.it.mergeEmpty = "Nessun output - esegui o incolla le risposte in Confronta prima.";
   S.it.mergeBack = "← Torna a Confronta";
   S.it.mergeAddSource = "Aggiungi un altro output";
   S.it.mergeSourceName = "Etichetta (es. GPT-5.6)";
@@ -807,7 +807,7 @@
   S.fr.setKeyMissing = "Collez d'abord une clé";
   S.fr.themeTip = "Thème : clair → sombre → sépia";
   S.fr.refineBtn = "Affiner avec l'IA";
-  S.fr.refineHint = "Utilise votre clé API gratuite pour clarifier et compléter l'objectif — vous validez avant d'appliquer.";
+  S.fr.refineHint = "Utilise votre clé API gratuite pour clarifier et compléter l'objectif - vous validez avant d'appliquer.";
   S.fr.refineApply = "Utiliser cette version";
   S.fr.refineDiscard = "Garder le mien";
   S.fr.refineNeedKey = "Ajoutez d'abord une clé API gratuite dans les Réglages (Gemini, Groq ou OpenRouter).";
@@ -826,7 +826,7 @@
   S.fr.mergeCopy = "Copier le brouillon";
   S.fr.mergeClear = "Vider";
   S.fr.mergeWords = "mots";
-  S.fr.mergeEmpty = "Aucune sortie — exécutez ou collez d'abord des réponses dans Comparer.";
+  S.fr.mergeEmpty = "Aucune sortie - exécutez ou collez d'abord des réponses dans Comparer.";
   S.fr.mergeBack = "← Retour à Comparer";
   S.fr.mergeAddSource = "Ajouter une autre sortie";
   S.fr.mergeSourceName = "Étiquette (ex. GPT-5.6)";
@@ -841,7 +841,7 @@
   S.es.setKeyMissing = "Pega primero una clave";
   S.es.themeTip = "Tema: claro → oscuro → sepia";
   S.es.refineBtn = "Refinar con IA";
-  S.es.refineHint = "Usa tu clave API gratuita para hacer el objetivo más claro y completo — lo revisas antes de aplicarlo.";
+  S.es.refineHint = "Usa tu clave API gratuita para hacer el objetivo más claro y completo - lo revisas antes de aplicarlo.";
   S.es.refineApply = "Usar esta versión";
   S.es.refineDiscard = "Mantener el mío";
   S.es.refineNeedKey = "Añade primero una clave API gratuita en Ajustes (Gemini, Groq u OpenRouter).";
@@ -860,7 +860,7 @@
   S.es.mergeCopy = "Copiar borrador";
   S.es.mergeClear = "Vaciar";
   S.es.mergeWords = "palabras";
-  S.es.mergeEmpty = "Sin salidas — ejecuta o pega respuestas en Comparar primero.";
+  S.es.mergeEmpty = "Sin salidas - ejecuta o pega respuestas en Comparar primero.";
   S.es.mergeBack = "← Volver a Comparar";
   S.es.mergeAddSource = "Añadir otra salida";
   S.es.mergeSourceName = "Etiqueta (p. ej. GPT-5.6)";
@@ -875,7 +875,7 @@
   S.de.setKeyMissing = "Zuerst einen Schlüssel einfügen";
   S.de.themeTip = "Design: hell → dunkel → sepia";
   S.de.refineBtn = "Mit KI verfeinern";
-  S.de.refineHint = "Nutzt deinen kostenlosen API-Schlüssel, um das Ziel klarer und vollständiger zu machen — du prüfst vor dem Übernehmen.";
+  S.de.refineHint = "Nutzt deinen kostenlosen API-Schlüssel, um das Ziel klarer und vollständiger zu machen - du prüfst vor dem Übernehmen.";
   S.de.refineApply = "Diese Version verwenden";
   S.de.refineDiscard = "Meins behalten";
   S.de.refineNeedKey = "Füge zuerst einen kostenlosen API-Schlüssel in den Einstellungen hinzu (Gemini, Groq oder OpenRouter).";
@@ -884,7 +884,7 @@
   S.de.refineLabel = "Vorgeschlagenes Ziel (bearbeitbar):";
   S.de.mergeOpenBtn = "Merge-Studio →";
   S.de.mergeTitle = "Merge-Studio";
-  S.de.mergeSub = "Lies alle Antworten nebeneinander und stelle die besten Teile von Hand zu einem finalen Entwurf zusammen. Nichts ist automatisch — du bleibst der Redakteur.";
+  S.de.mergeSub = "Lies alle Antworten nebeneinander und stelle die besten Teile von Hand zu einem finalen Entwurf zusammen. Nichts ist automatisch - du bleibst der Redakteur.";
   S.de.mergeBase = "Als Basis verwenden";
   S.de.mergeAddSel = "Auswahl hinzufügen";
   S.de.mergeAddAll = "Alles anhängen";
@@ -894,7 +894,7 @@
   S.de.mergeCopy = "Entwurf kopieren";
   S.de.mergeClear = "Leeren";
   S.de.mergeWords = "Wörter";
-  S.de.mergeEmpty = "Noch keine Ausgaben — führe erst Antworten in Vergleichen aus oder füge sie ein.";
+  S.de.mergeEmpty = "Noch keine Ausgaben - führe erst Antworten in Vergleichen aus oder füge sie ein.";
   S.de.mergeBack = "← Zurück zu Vergleichen";
   S.de.mergeAddSource = "Weitere Ausgabe hinzufügen";
   S.de.mergeSourceName = "Bezeichnung (z. B. GPT-5.6)";
@@ -909,7 +909,7 @@
   S.pt.setKeyMissing = "Cole uma chave primeiro";
   S.pt.themeTip = "Tema: claro → escuro → sépia";
   S.pt.refineBtn = "Refinar com IA";
-  S.pt.refineHint = "Usa sua chave de API gratuita para tornar o objetivo mais claro e completo — você revisa antes de aplicar.";
+  S.pt.refineHint = "Usa sua chave de API gratuita para tornar o objetivo mais claro e completo - você revisa antes de aplicar.";
   S.pt.refineApply = "Usar esta versão";
   S.pt.refineDiscard = "Manter o meu";
   S.pt.refineNeedKey = "Adicione primeiro uma chave de API gratuita em Configurações (Gemini, Groq ou OpenRouter).";
@@ -918,7 +918,7 @@
   S.pt.refineLabel = "Objetivo sugerido (editável):";
   S.pt.mergeOpenBtn = "Estúdio de fusão →";
   S.pt.mergeTitle = "Estúdio de fusão";
-  S.pt.mergeSub = "Leia todas as respostas lado a lado e escolha a dedo as melhores partes para um rascunho final. Nada é automático — o editor é você.";
+  S.pt.mergeSub = "Leia todas as respostas lado a lado e escolha a dedo as melhores partes para um rascunho final. Nada é automático - o editor é você.";
   S.pt.mergeBase = "Usar como base";
   S.pt.mergeAddSel = "Adicionar seleção";
   S.pt.mergeAddAll = "Anexar tudo";
@@ -928,7 +928,7 @@
   S.pt.mergeCopy = "Copiar rascunho";
   S.pt.mergeClear = "Limpar";
   S.pt.mergeWords = "palavras";
-  S.pt.mergeEmpty = "Sem saídas — execute ou cole respostas em Comparar primeiro.";
+  S.pt.mergeEmpty = "Sem saídas - execute ou cole respostas em Comparar primeiro.";
   S.pt.mergeBack = "← Voltar a Comparar";
   S.pt.mergeAddSource = "Adicionar outra saída";
   S.pt.mergeSourceName = "Rótulo (ex.: GPT-5.6)";
@@ -943,7 +943,7 @@
   S.zh.setKeyMissing = "请先粘贴密钥";
   S.zh.themeTip = "主题：浅色 → 深色 → 棕褐";
   S.zh.refineBtn = "用 AI 优化";
-  S.zh.refineHint = "使用你的免费 API 密钥，让目标更清晰完整——应用前由你审核。";
+  S.zh.refineHint = "使用你的免费 API 密钥，让目标更清晰完整：应用前由你审核。";
   S.zh.refineApply = "使用此版本";
   S.zh.refineDiscard = "保留我的";
   S.zh.refineNeedKey = "请先在设置中添加免费 API 密钥（Gemini、Groq 或 OpenRouter）。";
@@ -952,7 +952,7 @@
   S.zh.refineLabel = "建议的目标（可编辑）：";
   S.zh.mergeOpenBtn = "合并工作台 →";
   S.zh.mergeTitle = "合并工作台";
-  S.zh.mergeSub = "并排阅读所有回答，手动挑选最佳部分，合成最终草稿。没有任何自动操作——编辑权在你。";
+  S.zh.mergeSub = "并排阅读所有回答，手动挑选最佳部分，合成最终草稿。没有任何自动操作：编辑权在你。";
   S.zh.mergeBase = "设为底稿";
   S.zh.mergeAddSel = "添加所选";
   S.zh.mergeAddAll = "全部追加";
@@ -962,7 +962,7 @@
   S.zh.mergeCopy = "复制草稿";
   S.zh.mergeClear = "清空";
   S.zh.mergeWords = "词";
-  S.zh.mergeEmpty = "还没有输出——请先在对比页运行或粘贴回答。";
+  S.zh.mergeEmpty = "还没有输出：请先在对比页运行或粘贴回答。";
   S.zh.mergeBack = "← 返回对比";
   S.zh.mergeAddSource = "添加其他输出";
   S.zh.mergeSourceName = "标签（如 GPT-5.6）";
@@ -977,7 +977,7 @@
   S.hi.setKeyMissing = "पहले कुंजी चिपकाएँ";
   S.hi.themeTip = "थीम: हल्की → गहरी → सीपिया";
   S.hi.refineBtn = "AI से निखारें";
-  S.hi.refineHint = "आपकी मुफ़्त API कुंजी से लक्ष्य को स्पष्ट और पूर्ण बनाता है — लागू करने से पहले आप समीक्षा करते हैं।";
+  S.hi.refineHint = "आपकी मुफ़्त API कुंजी से लक्ष्य को स्पष्ट और पूर्ण बनाता है - लागू करने से पहले आप समीक्षा करते हैं।";
   S.hi.refineApply = "यह संस्करण उपयोग करें";
   S.hi.refineDiscard = "मेरा ही रखें";
   S.hi.refineNeedKey = "पहले सेटिंग्स में एक मुफ़्त API कुंजी जोड़ें (Gemini, Groq या OpenRouter)।";
@@ -986,7 +986,7 @@
   S.hi.refineLabel = "सुझाया गया लक्ष्य (संपादन योग्य):";
   S.hi.mergeOpenBtn = "मर्ज स्टूडियो →";
   S.hi.mergeTitle = "मर्ज स्टूडियो";
-  S.hi.mergeSub = "सभी उत्तर साथ-साथ पढ़ें और सर्वश्रेष्ठ हिस्से चुनकर एक अंतिम मसौदा बनाएँ। कुछ भी स्वचालित नहीं — संपादक आप हैं।";
+  S.hi.mergeSub = "सभी उत्तर साथ-साथ पढ़ें और सर्वश्रेष्ठ हिस्से चुनकर एक अंतिम मसौदा बनाएँ। कुछ भी स्वचालित नहीं - संपादक आप हैं।";
   S.hi.mergeBase = "आधार बनाएँ";
   S.hi.mergeAddSel = "चयन जोड़ें";
   S.hi.mergeAddAll = "सब जोड़ें";
@@ -996,7 +996,7 @@
   S.hi.mergeCopy = "मसौदा कॉपी करें";
   S.hi.mergeClear = "खाली करें";
   S.hi.mergeWords = "शब्द";
-  S.hi.mergeEmpty = "अभी कोई आउटपुट नहीं — पहले तुलना में उत्तर चलाएँ या चिपकाएँ।";
+  S.hi.mergeEmpty = "अभी कोई आउटपुट नहीं - पहले तुलना में उत्तर चलाएँ या चिपकाएँ।";
   S.hi.mergeBack = "← तुलना पर लौटें";
   S.hi.mergeAddSource = "एक और आउटपुट जोड़ें";
   S.hi.mergeSourceName = "लेबल (जैसे GPT-5.6)";
@@ -1011,7 +1011,7 @@
   S.ru.setKeyMissing = "Сначала вставьте ключ";
   S.ru.themeTip = "Тема: светлая → тёмная → сепия";
   S.ru.refineBtn = "Улучшить с ИИ";
-  S.ru.refineHint = "Использует ваш бесплатный API-ключ, чтобы сделать цель яснее и полнее — вы проверяете перед применением.";
+  S.ru.refineHint = "Использует ваш бесплатный API-ключ, чтобы сделать цель яснее и полнее - вы проверяете перед применением.";
   S.ru.refineApply = "Использовать эту версию";
   S.ru.refineDiscard = "Оставить мою";
   S.ru.refineNeedKey = "Сначала добавьте бесплатный API-ключ в настройках (Gemini, Groq или OpenRouter).";
@@ -1020,7 +1020,7 @@
   S.ru.refineLabel = "Предложенная цель (можно править):";
   S.ru.mergeOpenBtn = "Студия слияния →";
   S.ru.mergeTitle = "Студия слияния";
-  S.ru.mergeSub = "Читайте все ответы рядом и вручную собирайте лучшее в один финальный черновик. Ничего автоматического — редактор здесь вы.";
+  S.ru.mergeSub = "Читайте все ответы рядом и вручную собирайте лучшее в один финальный черновик. Ничего автоматического - редактор здесь вы.";
   S.ru.mergeBase = "Взять за основу";
   S.ru.mergeAddSel = "Добавить выделенное";
   S.ru.mergeAddAll = "Добавить всё";
@@ -1030,7 +1030,7 @@
   S.ru.mergeCopy = "Копировать черновик";
   S.ru.mergeClear = "Очистить";
   S.ru.mergeWords = "слов";
-  S.ru.mergeEmpty = "Пока нет ответов — сначала запустите или вставьте их в «Сравнить».";
+  S.ru.mergeEmpty = "Пока нет ответов - сначала запустите или вставьте их в «Сравнить».";
   S.ru.mergeBack = "← Назад к сравнению";
   S.ru.mergeAddSource = "Добавить ещё один ответ";
   S.ru.mergeSourceName = "Метка (напр. GPT-5.6)";
@@ -1079,7 +1079,7 @@
   S.ar.setKeyMissing = "الصق مفتاحًا أولًا";
   S.ar.themeTip = "السمة: فاتح → داكن → بُنّي";
   S.ar.refineBtn = "تحسين بالذكاء الاصطناعي";
-  S.ar.refineHint = "يستخدم مفتاح API المجاني الخاص بك لجعل الهدف أوضح وأكمل — أنت تراجع قبل التطبيق.";
+  S.ar.refineHint = "يستخدم مفتاح API المجاني الخاص بك لجعل الهدف أوضح وأكمل - أنت تراجع قبل التطبيق.";
   S.ar.refineApply = "استخدم هذه النسخة";
   S.ar.refineDiscard = "احتفظ بنسختي";
   S.ar.refineNeedKey = "أضف أولًا مفتاح API مجانيًا في الإعدادات (Gemini أو Groq أو OpenRouter).";
@@ -1088,7 +1088,7 @@
   S.ar.refineLabel = "الهدف المقترح (قابل للتعديل):";
   S.ar.mergeOpenBtn = "استوديو الدمج ←";
   S.ar.mergeTitle = "استوديو الدمج";
-  S.ar.mergeSub = "اقرأ كل الإجابات جنبًا إلى جنب واختر يدويًا أفضل الأجزاء في مسودة نهائية واحدة. لا شيء تلقائي — أنت المحرر.";
+  S.ar.mergeSub = "اقرأ كل الإجابات جنبًا إلى جنب واختر يدويًا أفضل الأجزاء في مسودة نهائية واحدة. لا شيء تلقائي - أنت المحرر.";
   S.ar.mergeBase = "اجعله الأساس";
   S.ar.mergeAddSel = "أضف التحديد";
   S.ar.mergeAddAll = "أضف الكل";
@@ -1098,7 +1098,7 @@
   S.ar.mergeCopy = "انسخ المسودة";
   S.ar.mergeClear = "مسح";
   S.ar.mergeWords = "كلمات";
-  S.ar.mergeEmpty = "لا مخرجات بعد — شغّل أو الصق الإجابات في «قارن» أولًا.";
+  S.ar.mergeEmpty = "لا مخرجات بعد - شغّل أو الصق الإجابات في «قارن» أولًا.";
   S.ar.mergeBack = "← الرجوع إلى المقارنة";
   S.ar.mergeAddSource = "أضف مخرجًا آخر";
   S.ar.mergeSourceName = "تسمية (مثل GPT-5.6)";
@@ -1115,7 +1115,7 @@
   S.en.modeGoal = "Describe a goal";
   S.en.modeFinder = "Guided finder";
   S.en.finderTitle = "Find the right AI";
-  S.en.finderSub = "Answer a few quick questions — get a recommendation with reasons, limits and pricing. No prompt needed.";
+  S.en.finderSub = "Answer a few quick questions - get a recommendation with reasons, limits and pricing. No prompt needed.";
   S.en.finderBack = "← Back";
   S.en.finderNext = "Next";
   S.en.finderRestart = "Start over";
@@ -1130,14 +1130,14 @@
   S.en.finderSwitchGoal = "Prefer to describe your goal? Switch to prompt mode →";
   S.en.finderTop = "Top match";
   S.en.glossTitle = "AI glossary";
-  S.en.glossSub = "Every AI term in plain words — one sentence each, examples included.";
+  S.en.glossSub = "Every AI term in plain words - one sentence each, examples included.";
   S.en.glossSearchPh = "Search terms…";
   S.en.glossNoRes = "No matching term.";
   S.en.glossCount = "terms";
   S.en.cmpTabOutputs = "Output comparison";
   S.en.cmpTabSpecs = "Model comparison";
   S.en.mcTitle = "Compare models on paper";
-  S.en.mcSub = "Pick two or three models and compare scores, context, price and strengths — no API calls needed.";
+  S.en.mcSub = "Pick two or three models and compare scores, context, price and strengths - no API calls needed.";
   S.en.mcAdd = "+ Add a third model";
   S.en.mcRemove = "Remove";
   S.en.mcOpenGuide = "Open in guide →";
@@ -1153,9 +1153,9 @@
   S.en.mcProfile = "Category profile";
   S.en.mcStrengths = "Strengths";
   S.en.mcReview = "In one line";
-  S.en.mcFootnote = "— = not published or not yet verified (checked July 19, 2026). Scores marked ~ are WhichAI estimates — never read small differences between an estimate and a measured score as real.";
+  S.en.mcFootnote = "n/a = not published or not yet verified (checked July 19, 2026). Scores marked ~ are WhichAI estimates - never read small differences between an estimate and a measured score as real.";
   S.en.insightsTitle = "Market at a glance";
-  S.en.chartTopTitle = "Top models — intelligence index";
+  S.en.chartTopTitle = "Top models - intelligence index";
   S.en.chartPpTitle = "Price vs performance";
   S.en.chainMapTitle = "Workflow roadmap";
   S.en.chainAddStep = "+ Add step";
@@ -1194,7 +1194,7 @@
   S.it.cmpTabOutputs = "Confronto output";
   S.it.cmpTabSpecs = "Confronto modelli";
   S.it.mcTitle = "Confronta i modelli sulla carta";
-  S.it.mcSub = "Scegli due o tre modelli e confronta punteggi, contesto, prezzi e punti di forza — senza chiamate API.";
+  S.it.mcSub = "Scegli due o tre modelli e confronta punteggi, contesto, prezzi e punti di forza - senza chiamate API.";
   S.it.mcAdd = "+ Aggiungi un terzo modello";
   S.it.mcRemove = "Rimuovi";
   S.it.mcOpenGuide = "Apri nella guida →";
@@ -1210,9 +1210,9 @@
   S.it.mcProfile = "Profilo per categoria";
   S.it.mcStrengths = "Punti di forza";
   S.it.mcReview = "In una riga";
-  S.it.mcFootnote = "— = non pubblicato o non ancora verificato (controllo del 19 luglio 2026). I punteggi con ~ sono stime WhichAI: mai leggere piccole differenze tra una stima e un punteggio misurato come reali.";
+  S.it.mcFootnote = "n/a = non pubblicato o non ancora verificato (controllo del 19 luglio 2026). I punteggi con ~ sono stime WhichAI: mai leggere piccole differenze tra una stima e un punteggio misurato come reali.";
   S.it.insightsTitle = "Il mercato a colpo d'occhio";
-  S.it.chartTopTitle = "Modelli top — indice di intelligenza";
+  S.it.chartTopTitle = "Modelli top - indice di intelligenza";
   S.it.chartPpTitle = "Prezzo vs prestazioni";
   S.it.chainMapTitle = "Roadmap del flusso";
   S.it.chainAddStep = "+ Aggiungi step";
@@ -1251,7 +1251,7 @@
   S.fr.cmpTabOutputs = "Comparaison des réponses";
   S.fr.cmpTabSpecs = "Comparaison des modèles";
   S.fr.mcTitle = "Comparer les modèles sur le papier";
-  S.fr.mcSub = "Choisissez deux ou trois modèles et comparez scores, contexte, prix et forces — sans appel API.";
+  S.fr.mcSub = "Choisissez deux ou trois modèles et comparez scores, contexte, prix et forces - sans appel API.";
   S.fr.mcAdd = "+ Ajouter un troisième modèle";
   S.fr.mcRemove = "Retirer";
   S.fr.mcOpenGuide = "Ouvrir dans le guide →";
@@ -1267,9 +1267,9 @@
   S.fr.mcProfile = "Profil par catégorie";
   S.fr.mcStrengths = "Points forts";
   S.fr.mcReview = "En une ligne";
-  S.fr.mcFootnote = "— = non publié ou non vérifié (contrôle du 19 juillet 2026). Les scores marqués ~ sont des estimations WhichAI : ne lisez jamais de petits écarts entre une estimation et un score mesuré comme réels.";
+  S.fr.mcFootnote = "n/a = non publié ou non vérifié (contrôle du 19 juillet 2026). Les scores marqués ~ sont des estimations WhichAI : ne lisez jamais de petits écarts entre une estimation et un score mesuré comme réels.";
   S.fr.insightsTitle = "Le marché en un coup d'œil";
-  S.fr.chartTopTitle = "Meilleurs modèles — indice d'intelligence";
+  S.fr.chartTopTitle = "Meilleurs modèles - indice d'intelligence";
   S.fr.chartPpTitle = "Prix vs performance";
   S.fr.chainMapTitle = "Feuille de route du flux";
   S.fr.chainAddStep = "+ Ajouter une étape";
@@ -1308,7 +1308,7 @@
   S.es.cmpTabOutputs = "Comparar respuestas";
   S.es.cmpTabSpecs = "Comparar modelos";
   S.es.mcTitle = "Compara modelos sobre el papel";
-  S.es.mcSub = "Elige dos o tres modelos y compara puntuaciones, contexto, precios y fortalezas — sin llamadas a la API.";
+  S.es.mcSub = "Elige dos o tres modelos y compara puntuaciones, contexto, precios y fortalezas - sin llamadas a la API.";
   S.es.mcAdd = "+ Añadir un tercer modelo";
   S.es.mcRemove = "Quitar";
   S.es.mcOpenGuide = "Abrir en la guía →";
@@ -1324,9 +1324,9 @@
   S.es.mcProfile = "Perfil por categoría";
   S.es.mcStrengths = "Fortalezas";
   S.es.mcReview = "En una línea";
-  S.es.mcFootnote = "— = no publicado o sin verificar (comprobado el 19 de julio de 2026). Las puntuaciones con ~ son estimaciones de WhichAI: nunca tomes pequeñas diferencias entre una estimación y una medición como reales.";
+  S.es.mcFootnote = "n/a = no publicado o sin verificar (comprobado el 19 de julio de 2026). Las puntuaciones con ~ son estimaciones de WhichAI: nunca tomes pequeñas diferencias entre una estimación y una medición como reales.";
   S.es.insightsTitle = "El mercado de un vistazo";
-  S.es.chartTopTitle = "Mejores modelos — índice de inteligencia";
+  S.es.chartTopTitle = "Mejores modelos - índice de inteligencia";
   S.es.chartPpTitle = "Precio vs rendimiento";
   S.es.chainMapTitle = "Hoja de ruta del flujo";
   S.es.chainAddStep = "+ Añadir paso";
@@ -1343,7 +1343,7 @@
   S.de.modeGoal = "Ziel beschreiben";
   S.de.modeFinder = "Geführte Suche";
   S.de.finderTitle = "Finde die richtige KI";
-  S.de.finderSub = "Beantworte ein paar kurze Fragen — du bekommst eine Empfehlung mit Gründen, Grenzen und Preisen. Ganz ohne Prompt.";
+  S.de.finderSub = "Beantworte ein paar kurze Fragen - du bekommst eine Empfehlung mit Gründen, Grenzen und Preisen. Ganz ohne Prompt.";
   S.de.finderBack = "← Zurück";
   S.de.finderNext = "Weiter";
   S.de.finderRestart = "Neu starten";
@@ -1365,7 +1365,7 @@
   S.de.cmpTabOutputs = "Antworten vergleichen";
   S.de.cmpTabSpecs = "Modelle vergleichen";
   S.de.mcTitle = "Modelle auf dem Papier vergleichen";
-  S.de.mcSub = "Wähle zwei oder drei Modelle und vergleiche Scores, Kontext, Preise und Stärken — ganz ohne API-Aufrufe.";
+  S.de.mcSub = "Wähle zwei oder drei Modelle und vergleiche Scores, Kontext, Preise und Stärken - ganz ohne API-Aufrufe.";
   S.de.mcAdd = "+ Drittes Modell hinzufügen";
   S.de.mcRemove = "Entfernen";
   S.de.mcOpenGuide = "Im Guide öffnen →";
@@ -1381,9 +1381,9 @@
   S.de.mcProfile = "Kategorienprofil";
   S.de.mcStrengths = "Stärken";
   S.de.mcReview = "In einer Zeile";
-  S.de.mcFootnote = "— = nicht veröffentlicht oder noch nicht verifiziert (Stand 19. Juli 2026). Scores mit ~ sind WhichAI-Schätzungen: kleine Unterschiede zwischen Schätzung und Messung nie als real lesen.";
+  S.de.mcFootnote = "n/a = nicht veröffentlicht oder noch nicht verifiziert (Stand 19. Juli 2026). Scores mit ~ sind WhichAI-Schätzungen: kleine Unterschiede zwischen Schätzung und Messung nie als real lesen.";
   S.de.insightsTitle = "Der Markt auf einen Blick";
-  S.de.chartTopTitle = "Top-Modelle — Intelligenz-Index";
+  S.de.chartTopTitle = "Top-Modelle - Intelligenz-Index";
   S.de.chartPpTitle = "Preis vs. Leistung";
   S.de.chainMapTitle = "Workflow-Roadmap";
   S.de.chainAddStep = "+ Schritt hinzufügen";
@@ -1391,7 +1391,7 @@
   S.de.chainMoveDown = "Schritt nach unten";
   S.de.chainRemoveStep = "Schritt entfernen";
   S.de.specCompareBtn = "Vergleichen →";
-  S.de.compareSub = "Zwei Wege zu vergleichen: echte Antworten nebeneinander ausführen — oder Modelle auf dem Papier aus der Datenbank vergleichen.";
+  S.de.compareSub = "Zwei Wege zu vergleichen: echte Antworten nebeneinander ausführen - oder Modelle auf dem Papier aus der Datenbank vergleichen.";
 
   S.pt.footFaq = "FAQ";
   S.pt.footSimilar = "Ferramentas semelhantes";
@@ -1422,7 +1422,7 @@
   S.pt.cmpTabOutputs = "Comparar respostas";
   S.pt.cmpTabSpecs = "Comparar modelos";
   S.pt.mcTitle = "Compare modelos no papel";
-  S.pt.mcSub = "Escolha dois ou três modelos e compare pontuações, contexto, preços e pontos fortes — sem chamadas de API.";
+  S.pt.mcSub = "Escolha dois ou três modelos e compare pontuações, contexto, preços e pontos fortes - sem chamadas de API.";
   S.pt.mcAdd = "+ Adicionar um terceiro modelo";
   S.pt.mcRemove = "Remover";
   S.pt.mcOpenGuide = "Abrir no guia →";
@@ -1438,9 +1438,9 @@
   S.pt.mcProfile = "Perfil por categoria";
   S.pt.mcStrengths = "Pontos fortes";
   S.pt.mcReview = "Em uma linha";
-  S.pt.mcFootnote = "— = não publicado ou ainda não verificado (checado em 19 de julho de 2026). Pontuações com ~ são estimativas do WhichAI: nunca leia pequenas diferenças entre estimativa e medição como reais.";
+  S.pt.mcFootnote = "n/a = não publicado ou ainda não verificado (checado em 19 de julho de 2026). Pontuações com ~ são estimativas do WhichAI: nunca leia pequenas diferenças entre estimativa e medição como reais.";
   S.pt.insightsTitle = "O mercado num relance";
-  S.pt.chartTopTitle = "Melhores modelos — índice de inteligência";
+  S.pt.chartTopTitle = "Melhores modelos - índice de inteligência";
   S.pt.chartPpTitle = "Preço vs desempenho";
   S.pt.chainMapTitle = "Roteiro do fluxo";
   S.pt.chainAddStep = "+ Adicionar etapa";
@@ -1479,7 +1479,7 @@
   S.zh.cmpTabOutputs = "输出对比";
   S.zh.cmpTabSpecs = "模型对比";
   S.zh.mcTitle = "纸面对比模型";
-  S.zh.mcSub = "选择两到三个模型，对比分数、上下文、价格与优势——无需调用 API。";
+  S.zh.mcSub = "选择两到三个模型，对比分数、上下文、价格与优势：无需调用 API。";
   S.zh.mcAdd = "+ 添加第三个模型";
   S.zh.mcRemove = "移除";
   S.zh.mcOpenGuide = "在指南中打开 →";
@@ -1495,9 +1495,9 @@
   S.zh.mcProfile = "分类能力";
   S.zh.mcStrengths = "优势";
   S.zh.mcReview = "一句话点评";
-  S.zh.mcFootnote = "— = 未公布或尚未核实（2026 年 7 月 19 日检查）。带 ~ 的分数为 WhichAI 估计值：不要把估计值与实测分数之间的细微差异当作真实差距。";
+  S.zh.mcFootnote = "n/a = 未公布或尚未核实（2026 年 7 月 19 日检查）。带 ~ 的分数为 WhichAI 估计值：不要把估计值与实测分数之间的细微差异当作真实差距。";
   S.zh.insightsTitle = "市场一览";
-  S.zh.chartTopTitle = "顶级模型——智能指数";
+  S.zh.chartTopTitle = "顶级模型：智能指数";
   S.zh.chartPpTitle = "价格与性能";
   S.zh.chainMapTitle = "工作流路线图";
   S.zh.chainAddStep = "+ 添加步骤";
@@ -1514,7 +1514,7 @@
   S.hi.modeGoal = "लक्ष्य बताएं";
   S.hi.modeFinder = "गाइडेड फ़ाइंडर";
   S.hi.finderTitle = "सही AI चुनें";
-  S.hi.finderSub = "कुछ छोटे सवालों के जवाब दें — कारण, सीमाएँ और कीमत के साथ सिफ़ारिश पाएं। प्रॉम्प्ट की ज़रूरत नहीं।";
+  S.hi.finderSub = "कुछ छोटे सवालों के जवाब दें - कारण, सीमाएँ और कीमत के साथ सिफ़ारिश पाएं। प्रॉम्प्ट की ज़रूरत नहीं।";
   S.hi.finderBack = "← पीछे";
   S.hi.finderNext = "आगे";
   S.hi.finderRestart = "फिर से शुरू करें";
@@ -1529,14 +1529,14 @@
   S.hi.finderSwitchGoal = "खुद लक्ष्य लिखना चाहते हैं? प्रॉम्प्ट मोड पर जाएँ →";
   S.hi.finderTop = "सर्वश्रेष्ठ विकल्प";
   S.hi.glossTitle = "AI शब्दावली";
-  S.hi.glossSub = "हर AI शब्द आसान भाषा में — एक-एक वाक्य, उदाहरण सहित।";
+  S.hi.glossSub = "हर AI शब्द आसान भाषा में - एक-एक वाक्य, उदाहरण सहित।";
   S.hi.glossSearchPh = "शब्द खोजें…";
   S.hi.glossNoRes = "कोई शब्द नहीं मिला।";
   S.hi.glossCount = "शब्द";
   S.hi.cmpTabOutputs = "आउटपुट तुलना";
   S.hi.cmpTabSpecs = "मॉडल तुलना";
   S.hi.mcTitle = "कागज़ पर मॉडलों की तुलना";
-  S.hi.mcSub = "दो या तीन मॉडल चुनें और स्कोर, कॉन्टेक्स्ट, कीमत और ताकत की तुलना करें — बिना API कॉल के।";
+  S.hi.mcSub = "दो या तीन मॉडल चुनें और स्कोर, कॉन्टेक्स्ट, कीमत और ताकत की तुलना करें - बिना API कॉल के।";
   S.hi.mcAdd = "+ तीसरा मॉडल जोड़ें";
   S.hi.mcRemove = "हटाएँ";
   S.hi.mcOpenGuide = "गाइड में खोलें →";
@@ -1552,9 +1552,9 @@
   S.hi.mcProfile = "श्रेणी प्रोफ़ाइल";
   S.hi.mcStrengths = "ताकत";
   S.hi.mcReview = "एक पंक्ति में";
-  S.hi.mcFootnote = "— = प्रकाशित नहीं या अभी सत्यापित नहीं (19 जुलाई 2026 को जाँचा गया)। ~ वाले स्कोर WhichAI के अनुमान हैं: अनुमान और मापे गए स्कोर के छोटे अंतर को वास्तविक न मानें।";
+  S.hi.mcFootnote = "n/a = प्रकाशित नहीं या अभी सत्यापित नहीं (19 जुलाई 2026 को जाँचा गया)। ~ वाले स्कोर WhichAI के अनुमान हैं: अनुमान और मापे गए स्कोर के छोटे अंतर को वास्तविक न मानें।";
   S.hi.insightsTitle = "बाज़ार एक नज़र में";
-  S.hi.chartTopTitle = "शीर्ष मॉडल — इंटेलिजेंस इंडेक्स";
+  S.hi.chartTopTitle = "शीर्ष मॉडल - इंटेलिजेंस इंडेक्स";
   S.hi.chartPpTitle = "कीमत बनाम प्रदर्शन";
   S.hi.chainMapTitle = "वर्कफ़्लो रोडमैप";
   S.hi.chainAddStep = "+ स्टेप जोड़ें";
@@ -1571,7 +1571,7 @@
   S.ru.modeGoal = "Описать цель";
   S.ru.modeFinder = "Подбор по вопросам";
   S.ru.finderTitle = "Найдите подходящий ИИ";
-  S.ru.finderSub = "Ответьте на несколько коротких вопросов — получите рекомендацию с причинами, ограничениями и ценами. Промпт не нужен.";
+  S.ru.finderSub = "Ответьте на несколько коротких вопросов - получите рекомендацию с причинами, ограничениями и ценами. Промпт не нужен.";
   S.ru.finderBack = "← Назад";
   S.ru.finderNext = "Далее";
   S.ru.finderRestart = "Начать заново";
@@ -1593,7 +1593,7 @@
   S.ru.cmpTabOutputs = "Сравнение ответов";
   S.ru.cmpTabSpecs = "Сравнение моделей";
   S.ru.mcTitle = "Сравните модели на бумаге";
-  S.ru.mcSub = "Выберите две-три модели и сравните оценки, контекст, цены и сильные стороны — без вызовов API.";
+  S.ru.mcSub = "Выберите две-три модели и сравните оценки, контекст, цены и сильные стороны - без вызовов API.";
   S.ru.mcAdd = "+ Добавить третью модель";
   S.ru.mcRemove = "Убрать";
   S.ru.mcOpenGuide = "Открыть в гиде →";
@@ -1609,9 +1609,9 @@
   S.ru.mcProfile = "Профиль по категориям";
   S.ru.mcStrengths = "Сильные стороны";
   S.ru.mcReview = "Одной строкой";
-  S.ru.mcFootnote = "— = не опубликовано или ещё не проверено (проверка 19 июля 2026). Оценки с ~ — это оценки WhichAI: не принимайте малые различия между оценкой и измерением за реальные.";
+  S.ru.mcFootnote = "n/a = не опубликовано или ещё не проверено (проверка 19 июля 2026). Оценки с ~ - это оценки WhichAI: не принимайте малые различия между оценкой и измерением за реальные.";
   S.ru.insightsTitle = "Рынок одним взглядом";
-  S.ru.chartTopTitle = "Лучшие модели — индекс интеллекта";
+  S.ru.chartTopTitle = "Лучшие модели - индекс интеллекта";
   S.ru.chartPpTitle = "Цена и производительность";
   S.ru.chainMapTitle = "Дорожная карта процесса";
   S.ru.chainAddStep = "+ Добавить шаг";
@@ -1666,9 +1666,9 @@
   S.ja.mcProfile = "カテゴリ別プロフィール";
   S.ja.mcStrengths = "強み";
   S.ja.mcReview = "ひとことで";
-  S.ja.mcFootnote = "— = 未公表または未検証（2026年7月19日確認）。~付きスコアはWhichAIの推定値です。推定値と実測値のわずかな差を実際の差と読まないでください。";
+  S.ja.mcFootnote = "n/a = 未公表または未検証（2026年7月19日確認）。~付きスコアはWhichAIの推定値です。推定値と実測値のわずかな差を実際の差と読まないでください。";
   S.ja.insightsTitle = "市場をひと目で";
-  S.ja.chartTopTitle = "トップモデル — 知能指数";
+  S.ja.chartTopTitle = "トップモデル - 知能指数";
   S.ja.chartPpTitle = "価格 vs 性能";
   S.ja.chainMapTitle = "ワークフロー・ロードマップ";
   S.ja.chainAddStep = "+ ステップを追加";
@@ -1707,7 +1707,7 @@
   S.ar.cmpTabOutputs = "مقارنة المخرجات";
   S.ar.cmpTabSpecs = "مقارنة النماذج";
   S.ar.mcTitle = "قارن النماذج على الورق";
-  S.ar.mcSub = "اختر نموذجين أو ثلاثة وقارن الدرجات والسياق والأسعار ونقاط القوة — دون استدعاءات API.";
+  S.ar.mcSub = "اختر نموذجين أو ثلاثة وقارن الدرجات والسياق والأسعار ونقاط القوة - دون استدعاءات API.";
   S.ar.mcAdd = "+ أضف نموذجًا ثالثًا";
   S.ar.mcRemove = "إزالة";
   S.ar.mcOpenGuide = "افتح في الدليل";
@@ -1723,9 +1723,9 @@
   S.ar.mcProfile = "الملف حسب الفئة";
   S.ar.mcStrengths = "نقاط القوة";
   S.ar.mcReview = "في سطر واحد";
-  S.ar.mcFootnote = "— = غير منشور أو لم يُتحقق منه بعد (فُحص في 19 يوليو 2026). الدرجات المميزة بـ ~ تقديرات من WhichAI: لا تقرأ الفروق الصغيرة بين تقدير وقياس فعلي على أنها حقيقية.";
+  S.ar.mcFootnote = "n/a = غير منشور أو لم يُتحقق منه بعد (فُحص في 19 يوليو 2026). الدرجات المميزة بـ ~ تقديرات من WhichAI: لا تقرأ الفروق الصغيرة بين تقدير وقياس فعلي على أنها حقيقية.";
   S.ar.insightsTitle = "السوق في لمحة";
-  S.ar.chartTopTitle = "أفضل النماذج — مؤشر الذكاء";
+  S.ar.chartTopTitle = "أفضل النماذج - مؤشر الذكاء";
   S.ar.chartPpTitle = "السعر مقابل الأداء";
   S.ar.chainMapTitle = "خارطة سير العمل";
   S.ar.chainAddStep = "+ أضف خطوة";
@@ -1746,6 +1746,207 @@
   S.ru.compareTitle = "Сравнение";
   S.ja.compareTitle = "比較";
   S.ar.compareTitle = "المقارنة";
+
+
+  /* ---------------- v0.23: key storage, data backup, update toast ---------------- */
+
+  S.en.keymodeLabel = "Where to keep API keys";
+  S.en.keymodeSession = "This session only (safer)";
+  S.en.keymodeLocal = "Saved on this device";
+  S.en.keymodeHint = "Keys never reach any WhichAI server (there is none). Session-only forgets them when the browser closes; saving on this device uses browser storage, which any script on this page could read, so it stays opt-in.";
+  S.en.keysClear = "Clear all API keys";
+  S.en.keysCleared = "Keys removed from this browser.";
+  S.en.dataTitle = "Your data";
+  S.en.dataHint = "Everything WhichAI saves lives in this browser: preferences, comparisons, chains, merge drafts and (if you chose so) API keys. Export a backup before switching device or clearing the browser.";
+  S.en.dataExport = "Export backup (.json)";
+  S.en.dataImport = "Import backup";
+  S.en.dataWipe = "Delete all data";
+  S.en.dataWipeAsk = "Delete ALL WhichAI data in this browser? Comparisons, chains, preferences and keys will be removed.";
+  S.en.dataImportAsk = "Import this backup? Existing data with the same names will be overwritten.";
+  S.en.dataImported = "Backup imported. Reloading.";
+  S.en.dataImportBad = "Invalid backup file.";
+  S.en.updateReady = "A new version of WhichAI is ready.";
+  S.en.updateReload = "Refresh";
+
+  S.it.keymodeLabel = "Dove tenere le chiavi API";
+  S.it.keymodeSession = "Solo questa sessione (più sicuro)";
+  S.it.keymodeLocal = "Salvate su questo dispositivo";
+  S.it.keymodeHint = "Le chiavi non raggiungono mai un server WhichAI (non esiste). Con la modalità sessione si cancellano alla chiusura del browser; salvarle sul dispositivo usa lo storage del browser, leggibile da qualsiasi script su questa pagina, quindi resta una scelta esplicita.";
+  S.it.keysClear = "Cancella tutte le chiavi API";
+  S.it.keysCleared = "Chiavi rimosse da questo browser.";
+  S.it.dataTitle = "I tuoi dati";
+  S.it.dataHint = "Tutto ciò che WhichAI salva vive in questo browser: preferenze, confronti, catene, bozze e (se lo hai scelto) chiavi API. Esporta un backup prima di cambiare dispositivo o pulire il browser.";
+  S.it.dataExport = "Esporta backup (.json)";
+  S.it.dataImport = "Importa backup";
+  S.it.dataWipe = "Elimina tutti i dati";
+  S.it.dataWipeAsk = "Eliminare TUTTI i dati WhichAI in questo browser? Confronti, catene, preferenze e chiavi verranno rimossi.";
+  S.it.dataImportAsk = "Importare questo backup? I dati esistenti con lo stesso nome verranno sovrascritti.";
+  S.it.dataImported = "Backup importato. Ricarico.";
+  S.it.dataImportBad = "File di backup non valido.";
+  S.it.updateReady = "È pronta una nuova versione di WhichAI.";
+  S.it.updateReload = "Aggiorna";
+
+  S.fr.keymodeLabel = "Où conserver les clés API";
+  S.fr.keymodeSession = "Cette session seulement (plus sûr)";
+  S.fr.keymodeLocal = "Enregistrées sur cet appareil";
+  S.fr.keymodeHint = "Les clés n'atteignent jamais un serveur WhichAI (il n'y en a pas). En mode session, elles disparaissent à la fermeture du navigateur ; l'enregistrement sur l'appareil utilise le stockage du navigateur, lisible par tout script de cette page, donc il reste optionnel.";
+  S.fr.keysClear = "Effacer toutes les clés API";
+  S.fr.keysCleared = "Clés supprimées de ce navigateur.";
+  S.fr.dataTitle = "Vos données";
+  S.fr.dataHint = "Tout ce que WhichAI enregistre vit dans ce navigateur : préférences, comparaisons, chaînes, brouillons et (si vous l'avez choisi) clés API. Exportez une sauvegarde avant de changer d'appareil.";
+  S.fr.dataExport = "Exporter la sauvegarde (.json)";
+  S.fr.dataImport = "Importer une sauvegarde";
+  S.fr.dataWipe = "Supprimer toutes les données";
+  S.fr.dataWipeAsk = "Supprimer TOUTES les données WhichAI de ce navigateur ? Comparaisons, chaînes, préférences et clés seront effacées.";
+  S.fr.dataImportAsk = "Importer cette sauvegarde ? Les données existantes portant le même nom seront écrasées.";
+  S.fr.dataImported = "Sauvegarde importée. Rechargement.";
+  S.fr.dataImportBad = "Fichier de sauvegarde invalide.";
+  S.fr.updateReady = "Une nouvelle version de WhichAI est prête.";
+  S.fr.updateReload = "Actualiser";
+
+  S.es.keymodeLabel = "Dónde guardar las claves API";
+  S.es.keymodeSession = "Solo esta sesión (más seguro)";
+  S.es.keymodeLocal = "Guardadas en este dispositivo";
+  S.es.keymodeHint = "Las claves nunca llegan a un servidor de WhichAI (no existe). En modo sesión se borran al cerrar el navegador; guardarlas en el dispositivo usa el almacenamiento del navegador, legible por cualquier script de esta página, así que es una elección explícita.";
+  S.es.keysClear = "Borrar todas las claves API";
+  S.es.keysCleared = "Claves eliminadas de este navegador.";
+  S.es.dataTitle = "Tus datos";
+  S.es.dataHint = "Todo lo que WhichAI guarda vive en este navegador: preferencias, comparaciones, cadenas, borradores y (si lo elegiste) claves API. Exporta una copia antes de cambiar de dispositivo.";
+  S.es.dataExport = "Exportar copia (.json)";
+  S.es.dataImport = "Importar copia";
+  S.es.dataWipe = "Eliminar todos los datos";
+  S.es.dataWipeAsk = "¿Eliminar TODOS los datos de WhichAI en este navegador? Se borrarán comparaciones, cadenas, preferencias y claves.";
+  S.es.dataImportAsk = "¿Importar esta copia? Los datos existentes con el mismo nombre se sobrescribirán.";
+  S.es.dataImported = "Copia importada. Recargando.";
+  S.es.dataImportBad = "Archivo de copia no válido.";
+  S.es.updateReady = "Hay una nueva versión de WhichAI lista.";
+  S.es.updateReload = "Actualizar";
+
+  S.de.keymodeLabel = "Wo API-Schlüssel liegen sollen";
+  S.de.keymodeSession = "Nur diese Sitzung (sicherer)";
+  S.de.keymodeLocal = "Auf diesem Gerät gespeichert";
+  S.de.keymodeHint = "Schlüssel erreichen nie einen WhichAI-Server (es gibt keinen). Im Sitzungsmodus verschwinden sie beim Schließen des Browsers; das Speichern auf dem Gerät nutzt den Browser-Speicher, den jedes Skript dieser Seite lesen könnte, deshalb bleibt es Opt-in.";
+  S.de.keysClear = "Alle API-Schlüssel löschen";
+  S.de.keysCleared = "Schlüssel aus diesem Browser entfernt.";
+  S.de.dataTitle = "Deine Daten";
+  S.de.dataHint = "Alles, was WhichAI speichert, lebt in diesem Browser: Einstellungen, Vergleiche, Chains, Entwürfe und (falls gewählt) API-Schlüssel. Exportiere ein Backup, bevor du das Gerät wechselst.";
+  S.de.dataExport = "Backup exportieren (.json)";
+  S.de.dataImport = "Backup importieren";
+  S.de.dataWipe = "Alle Daten löschen";
+  S.de.dataWipeAsk = "ALLE WhichAI-Daten in diesem Browser löschen? Vergleiche, Chains, Einstellungen und Schlüssel werden entfernt.";
+  S.de.dataImportAsk = "Dieses Backup importieren? Vorhandene Daten mit gleichem Namen werden überschrieben.";
+  S.de.dataImported = "Backup importiert. Neu laden.";
+  S.de.dataImportBad = "Ungültige Backup-Datei.";
+  S.de.updateReady = "Eine neue Version von WhichAI ist bereit.";
+  S.de.updateReload = "Aktualisieren";
+
+  S.pt.keymodeLabel = "Onde guardar as chaves API";
+  S.pt.keymodeSession = "Só esta sessão (mais seguro)";
+  S.pt.keymodeLocal = "Salvas neste dispositivo";
+  S.pt.keymodeHint = "As chaves nunca chegam a um servidor do WhichAI (não existe). No modo sessão, somem ao fechar o navegador; salvá-las no dispositivo usa o armazenamento do navegador, legível por qualquer script desta página, então é uma escolha explícita.";
+  S.pt.keysClear = "Apagar todas as chaves API";
+  S.pt.keysCleared = "Chaves removidas deste navegador.";
+  S.pt.dataTitle = "Seus dados";
+  S.pt.dataHint = "Tudo o que o WhichAI salva vive neste navegador: preferências, comparações, cadeias, rascunhos e (se você escolheu) chaves API. Exporte um backup antes de trocar de dispositivo.";
+  S.pt.dataExport = "Exportar backup (.json)";
+  S.pt.dataImport = "Importar backup";
+  S.pt.dataWipe = "Excluir todos os dados";
+  S.pt.dataWipeAsk = "Excluir TODOS os dados do WhichAI neste navegador? Comparações, cadeias, preferências e chaves serão removidas.";
+  S.pt.dataImportAsk = "Importar este backup? Dados existentes com o mesmo nome serão sobrescritos.";
+  S.pt.dataImported = "Backup importado. Recarregando.";
+  S.pt.dataImportBad = "Arquivo de backup inválido.";
+  S.pt.updateReady = "Uma nova versão do WhichAI está pronta.";
+  S.pt.updateReload = "Atualizar";
+
+  S.zh.keymodeLabel = "API 密钥保存位置";
+  S.zh.keymodeSession = "仅本次会话（更安全）";
+  S.zh.keymodeLocal = "保存在此设备上";
+  S.zh.keymodeHint = "密钥绝不会发送到 WhichAI 服务器（根本没有服务器）。会话模式下关闭浏览器即清除；保存在设备上会使用浏览器存储，本页面的任何脚本都可能读取，因此需要你主动选择。";
+  S.zh.keysClear = "清除所有 API 密钥";
+  S.zh.keysCleared = "已从此浏览器移除密钥。";
+  S.zh.dataTitle = "你的数据";
+  S.zh.dataHint = "WhichAI 保存的一切都在此浏览器中：偏好、对比、链、草稿以及（如你选择）API 密钥。换设备或清理浏览器前请先导出备份。";
+  S.zh.dataExport = "导出备份 (.json)";
+  S.zh.dataImport = "导入备份";
+  S.zh.dataWipe = "删除所有数据";
+  S.zh.dataWipeAsk = "删除此浏览器中的全部 WhichAI 数据？对比、链、偏好和密钥都将被移除。";
+  S.zh.dataImportAsk = "导入此备份？同名的现有数据将被覆盖。";
+  S.zh.dataImported = "备份已导入，正在刷新。";
+  S.zh.dataImportBad = "备份文件无效。";
+  S.zh.updateReady = "WhichAI 新版本已就绪。";
+  S.zh.updateReload = "刷新";
+
+  S.hi.keymodeLabel = "API कुंजियाँ कहाँ रखें";
+  S.hi.keymodeSession = "केवल इस सत्र में (अधिक सुरक्षित)";
+  S.hi.keymodeLocal = "इस डिवाइस पर सहेजें";
+  S.hi.keymodeHint = "कुंजियाँ कभी किसी WhichAI सर्वर तक नहीं जातीं (सर्वर है ही नहीं)। सत्र मोड में ब्राउज़र बंद करते ही मिट जाती हैं; डिवाइस पर सहेजना ब्राउज़र स्टोरेज उपयोग करता है, जिसे इस पेज की कोई भी स्क्रिप्ट पढ़ सकती है, इसलिए यह आपकी स्पष्ट पसंद पर है।";
+  S.hi.keysClear = "सभी API कुंजियाँ हटाएँ";
+  S.hi.keysCleared = "कुंजियाँ इस ब्राउज़र से हटा दी गईं।";
+  S.hi.dataTitle = "आपका डेटा";
+  S.hi.dataHint = "WhichAI जो कुछ सहेजता है वह इसी ब्राउज़र में रहता है: प्राथमिकताएँ, तुलनाएँ, चेन, ड्राफ़्ट और (यदि चुना हो) API कुंजियाँ। डिवाइस बदलने से पहले बैकअप निर्यात करें।";
+  S.hi.dataExport = "बैकअप निर्यात करें (.json)";
+  S.hi.dataImport = "बैकअप आयात करें";
+  S.hi.dataWipe = "सारा डेटा हटाएँ";
+  S.hi.dataWipeAsk = "इस ब्राउज़र का सारा WhichAI डेटा हटाएँ? तुलनाएँ, चेन, प्राथमिकताएँ और कुंजियाँ हट जाएँगी।";
+  S.hi.dataImportAsk = "यह बैकअप आयात करें? समान नाम का मौजूदा डेटा अधिलेखित होगा।";
+  S.hi.dataImported = "बैकअप आयात हुआ। रीलोड हो रहा है।";
+  S.hi.dataImportBad = "अमान्य बैकअप फ़ाइल।";
+  S.hi.updateReady = "WhichAI का नया संस्करण तैयार है।";
+  S.hi.updateReload = "रीफ़्रेश";
+
+  S.ru.keymodeLabel = "Где хранить API-ключи";
+  S.ru.keymodeSession = "Только эта сессия (безопаснее)";
+  S.ru.keymodeLocal = "Сохранить на этом устройстве";
+  S.ru.keymodeHint = "Ключи никогда не попадают на сервер WhichAI (его нет). В режиме сессии они исчезают при закрытии браузера; сохранение на устройстве использует хранилище браузера, доступное любому скрипту этой страницы, поэтому это осознанный выбор.";
+  S.ru.keysClear = "Удалить все API-ключи";
+  S.ru.keysCleared = "Ключи удалены из этого браузера.";
+  S.ru.dataTitle = "Ваши данные";
+  S.ru.dataHint = "Всё, что сохраняет WhichAI, живёт в этом браузере: настройки, сравнения, цепочки, черновики и (если вы выбрали) API-ключи. Экспортируйте резервную копию перед сменой устройства.";
+  S.ru.dataExport = "Экспорт копии (.json)";
+  S.ru.dataImport = "Импорт копии";
+  S.ru.dataWipe = "Удалить все данные";
+  S.ru.dataWipeAsk = "Удалить ВСЕ данные WhichAI в этом браузере? Сравнения, цепочки, настройки и ключи будут удалены.";
+  S.ru.dataImportAsk = "Импортировать эту копию? Существующие данные с теми же именами будут перезаписаны.";
+  S.ru.dataImported = "Копия импортирована. Перезагрузка.";
+  S.ru.dataImportBad = "Недопустимый файл копии.";
+  S.ru.updateReady = "Новая версия WhichAI готова.";
+  S.ru.updateReload = "Обновить";
+
+  S.ja.keymodeLabel = "APIキーの保存場所";
+  S.ja.keymodeSession = "このセッションのみ（より安全）";
+  S.ja.keymodeLocal = "この端末に保存";
+  S.ja.keymodeHint = "キーがWhichAIのサーバーに送られることはありません（サーバー自体がありません）。セッションのみの場合、ブラウザを閉じると消えます。端末への保存はブラウザのストレージを使い、このページのスクリプトから読める可能性があるため、明示的な選択制です。";
+  S.ja.keysClear = "すべてのAPIキーを削除";
+  S.ja.keysCleared = "このブラウザからキーを削除しました。";
+  S.ja.dataTitle = "あなたのデータ";
+  S.ja.dataHint = "WhichAIが保存するものはすべてこのブラウザ内にあります：設定、比較、チェーン、下書き、（選択した場合）APIキー。端末を変える前にバックアップを書き出してください。";
+  S.ja.dataExport = "バックアップを書き出す (.json)";
+  S.ja.dataImport = "バックアップを読み込む";
+  S.ja.dataWipe = "すべてのデータを削除";
+  S.ja.dataWipeAsk = "このブラウザのWhichAIデータをすべて削除しますか？比較、チェーン、設定、キーが削除されます。";
+  S.ja.dataImportAsk = "このバックアップを読み込みますか？同名の既存データは上書きされます。";
+  S.ja.dataImported = "バックアップを読み込みました。再読み込みします。";
+  S.ja.dataImportBad = "無効なバックアップファイルです。";
+  S.ja.updateReady = "WhichAIの新しいバージョンが利用できます。";
+  S.ja.updateReload = "更新";
+
+  S.ar.keymodeLabel = "أين تُحفظ مفاتيح API";
+  S.ar.keymodeSession = "هذه الجلسة فقط (أكثر أمانًا)";
+  S.ar.keymodeLocal = "محفوظة على هذا الجهاز";
+  S.ar.keymodeHint = "المفاتيح لا تصل أبدًا إلى خادم WhichAI (لا يوجد خادم أصلًا). في وضع الجلسة تُمحى عند إغلاق المتصفح؛ الحفظ على الجهاز يستخدم تخزين المتصفح الذي يمكن لأي سكربت في هذه الصفحة قراءته، لذا يبقى خيارًا صريحًا.";
+  S.ar.keysClear = "امسح كل مفاتيح API";
+  S.ar.keysCleared = "أُزيلت المفاتيح من هذا المتصفح.";
+  S.ar.dataTitle = "بياناتك";
+  S.ar.dataHint = "كل ما يحفظه WhichAI يعيش في هذا المتصفح: التفضيلات والمقارنات والسلاسل والمسودات و(إن اخترت) مفاتيح API. صدّر نسخة احتياطية قبل تغيير الجهاز.";
+  S.ar.dataExport = "تصدير نسخة احتياطية (.json)";
+  S.ar.dataImport = "استيراد نسخة احتياطية";
+  S.ar.dataWipe = "احذف كل البيانات";
+  S.ar.dataWipeAsk = "حذف كل بيانات WhichAI في هذا المتصفح؟ ستُزال المقارنات والسلاسل والتفضيلات والمفاتيح.";
+  S.ar.dataImportAsk = "استيراد هذه النسخة؟ ستُستبدل البيانات الحالية التي تحمل الأسماء نفسها.";
+  S.ar.dataImported = "تم استيراد النسخة. جارٍ التحديث.";
+  S.ar.dataImportBad = "ملف نسخة احتياطية غير صالح.";
+  S.ar.updateReady = "نسخة جديدة من WhichAI جاهزة.";
+  S.ar.updateReload = "تحديث";
 
   var I18n = {
     LANGS: LANGS,

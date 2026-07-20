@@ -1,5 +1,5 @@
 /*
- * PromptCompass — Chain templates (Phase 4, v0.9.0)
+ * PromptCompass - Chain templates (Phase 4, v0.9.0)
  * Multi-step workflow blueprints per task type. Each step's {goal} placeholder
  * is filled with the user's goal; the previous step's output is injected as context.
  */
@@ -35,7 +35,7 @@
     education: [
       { id: "map", name: "Learning map", description: "Order the concepts before diving in.", instruction: "Create a learning map for this goal: \"{goal}\": the concepts to master, in the right order, with one line on why each matters." },
       { id: "teach", name: "Explanation", description: "Learn the material with analogies and examples.", instruction: "Teach the material for this goal: \"{goal}\", following the learning map from the previous step. Use one concrete analogy or example per key concept." },
-      { id: "practice", name: "Practice & check", description: "Test the understanding with graded questions.", instruction: "Based on the explanation from the previous step, create practice questions with answers for this goal: \"{goal}\" — ordered from easy to hard — plus a short self-assessment checklist." }
+      { id: "practice", name: "Practice & check", description: "Test the understanding with graded questions.", instruction: "Based on the explanation from the previous step, create practice questions with answers for this goal: \"{goal}\" - ordered from easy to hard - plus a short self-assessment checklist." }
     ],
     business: [
       { id: "situation", name: "Situation & objective", description: "Clarify objective, audience and what success means.", instruction: "Clarify the business situation for this goal: \"{goal}\": the objective, the audience, the constraints, and what success looks like in measurable terms." },

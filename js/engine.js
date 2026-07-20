@@ -1,7 +1,7 @@
 /*
- * WhichAI (formerly PromptCompass) — Prompt Engine (v0.21.0)
+ * WhichAI (formerly PromptCompass) - Prompt Engine (v0.21.0)
  * v0.21: goal decomposition (audience & constraints), per-task workflow phases,
- * final self-check — richer prompts, same meaning, still zero network calls.
+ * final self-check - richer prompts, same meaning, still zero network calls.
  * Pure client-side template engine. No network calls, no API keys.
  * Exposed as window.PromptCompassEngine (browser) and module.exports (Node, for tests).
  */
@@ -145,7 +145,7 @@
    *  v0.21: goal decomposition & task workflows   *
    * -------------------------------------------- */
 
-  // Three working phases per task type — injected into every prompt as an
+  // Three working phases per task type - injected into every prompt as an
   // explicit approach, so models decompose the job instead of answering flat.
   var WORKFLOWS = {
     writing: ["map the sharpest angle and outline the structure", "write the complete draft following the outline", "revise for flow, tightness and a strong opening and closing"],
@@ -168,7 +168,7 @@
 
   /**
    * goalMeta(input) -> { audience, constraints[] }
-   * Light heuristics (EN + IT) that surface what the goal already says —
+   * Light heuristics (EN + IT) that surface what the goal already says -
    * never inventing new intent, only making implicit details explicit.
    */
   function goalMeta(input) {
@@ -340,13 +340,13 @@
     });
     p.push("");
     p.push(
-      "Follow the approach phases in order and the requirements exactly. Do not add disclaimers, introductions or meta-commentary — deliver the answer directly. " +
+      "Follow the approach phases in order and the requirements exactly. Do not add disclaimers, introductions or meta-commentary - deliver the answer directly. " +
         "If key information is missing, state your assumptions in one line, then answer. " + SELF_CHECK
     );
     return p.join("\n");
   }
 
-  // Perplexity: search-first — lead with the task, demand citations and recency.
+  // Perplexity: search-first - lead with the task, demand citations and recency.
   function buildPerplexity(input, task) {
     var p = [];
     p.push(input.goal);
@@ -402,7 +402,7 @@
       vendor: "Google",
       build: buildGemini,
       why: [
-        "Google's prompting guide is built on four components — Persona, Task, Context, Format — so this prompt mirrors exactly the structure Gemini is optimized for.",
+        "Google's prompting guide is built on four components - Persona, Task, Context, Format - so this prompt mirrors exactly the structure Gemini is optimized for.",
         "Short, directive sentences work better with Gemini than long nested instructions.",
         "Asking Gemini to surface its assumptions up front counters its tendency to fill information gaps without flagging them."
       ]
@@ -412,9 +412,9 @@
       vendor: "Meta · via Groq",
       build: buildLlama,
       why: [
-        "Open models like Llama respond best to explicit, tightly structured Markdown instructions — ambiguity degrades their output faster than on the frontier closed models.",
+        "Open models like Llama respond best to explicit, tightly structured Markdown instructions - ambiguity degrades their output faster than on the frontier closed models.",
         "A direct \"no meta-commentary\" closing counters open models' tendency to add disclaimers and filler around the answer.",
-        "Running on Groq's free tier, Llama replies near-instantly — great for fast iteration and drafts, with quality a step below the frontier three."
+        "Running on Groq's free tier, Llama replies near-instantly - great for fast iteration and drafts, with quality a step below the frontier three."
       ]
     },
     perplexity: {
@@ -423,7 +423,7 @@
       build: buildPerplexity,
       why: [
         "Perplexity runs a live web search for every answer: leading with the task itself (not a long role preamble) keeps the retrieval focused on what you actually need.",
-        "Explicitly asking for citations and recent, authoritative sources steers both the search and the answer — it is what Perplexity does best.",
+        "Explicitly asking for citations and recent, authoritative sources steers both the search and the answer - it is what Perplexity does best.",
         "Asking it to flag disagreements between sources counters the tendency of search-based answers to blend conflicting information into one confident claim."
       ]
     },
@@ -433,7 +433,7 @@
       build: buildLlama,
       why: [
         "GLM-5.2 is the strongest open-weight coder (leads SWE-bench Pro among open models): precise, structured specs pay off more here than on chatty assistants.",
-        "Open models follow tight Markdown instructions best — ambiguity degrades their output faster than on the frontier closed models.",
+        "Open models follow tight Markdown instructions best - ambiguity degrades their output faster than on the frontier closed models.",
         "The direct no-meta-commentary closing keeps answers on point; open models tend to add filler around the answer."
       ]
     },
@@ -442,7 +442,7 @@
       vendor: "Moonshot AI · open",
       build: buildLlama,
       why: [
-        "Kimi K2.6 tops the open-weight intelligence indexes and is tuned for long, multi-part agentic tasks — numbered requirements map cleanly onto that.",
+        "Kimi K2.6 tops the open-weight intelligence indexes and is tuned for long, multi-part agentic tasks - numbered requirements map cleanly onto that.",
         "Explicit structure and delivery constraints matter more on open models than on frontier assistants.",
         "A direct closing instruction counters filler and disclaimers."
       ]
@@ -452,7 +452,7 @@
       vendor: "NVIDIA · open",
       build: buildLlama,
       why: [
-        "Nemotron 3 Ultra is reasoning-tuned and extremely fast (400+ tokens/second on some hosts, free via OpenRouter) — ideal for quick iterations on a tight, explicit prompt.",
+        "Nemotron 3 Ultra is reasoning-tuned and extremely fast (400+ tokens/second on some hosts, free via OpenRouter) - ideal for quick iterations on a tight, explicit prompt.",
         "Like other open models, it rewards unambiguous Markdown structure with numbered requirements.",
         "Direct, no-preamble instructions keep its speed advantage from being spent on filler."
       ]
@@ -462,9 +462,9 @@
       vendor: "xAI",
       build: buildChatGPT,
       why: [
-        "Grok is tuned for candid, direct answers with real-time access to X data and a huge 2M-token context — Markdown structure with numbered requirements keeps it focused.",
+        "Grok is tuned for candid, direct answers with real-time access to X data and a huge 2M-token context - Markdown structure with numbered requirements keeps it focused.",
         "Explicit tone instructions matter more than usual: by default Grok leans irreverent, so state the register you want.",
-        "It measures among the lowest hallucination rates of the frontier assistants — inviting clarifying questions plays to that carefulness."
+        "It measures among the lowest hallucination rates of the frontier assistants - inviting clarifying questions plays to that carefulness."
       ]
     },
     copilot: {
@@ -483,7 +483,7 @@
       build: buildLlama,
       why: [
         "Meta AI runs on Llama models, so the same tight open-model structure applies: explicit Markdown and numbered requirements.",
-        "It is free inside WhatsApp, Instagram and the meta.ai web app — keep prompts self-contained, since its chat-context features are thinner.",
+        "It is free inside WhatsApp, Instagram and the meta.ai web app - keep prompts self-contained, since its chat-context features are thinner.",
         "The no-meta-commentary closing counters filler, which Llama-family models are prone to."
       ]
     },
@@ -492,9 +492,9 @@
       vendor: "DeepSeek · open",
       build: buildLlama,
       why: [
-        "DeepSeek's reasoning-first models do their best work when requirements are explicit and verifiable — structure pays off on hard problems.",
+        "DeepSeek's reasoning-first models do their best work when requirements are explicit and verifiable - structure pays off on hard problems.",
         "The free app and open weights make it the most accessible strong reasoner worldwide.",
-        "A direct closing keeps answers lean — its reasoning mode can otherwise over-explain."
+        "A direct closing keeps answers lean - its reasoning mode can otherwise over-explain."
       ]
     },
     qwen: {
@@ -502,7 +502,7 @@
       vendor: "Alibaba · open",
       build: buildLlama,
       why: [
-        "Qwen follows strict Markdown instructions well and is notably strong multilingually — state the output language explicitly.",
+        "Qwen follows strict Markdown instructions well and is notably strong multilingually - state the output language explicitly.",
         "It is among the top open-weight lines for coding and general tasks; explicit specs narrow the gap with frontier models.",
         "The direct closing counters boilerplate and disclaimers."
       ]

@@ -1,31 +1,35 @@
 # WhichAI  
-*(formerly PromptCompass — same project, new home: [whichai.wiki](https://whichai.wiki))*
+*(formerly PromptCompass - same project, new home: [whichai.wiki](https://whichai.wiki))*
 
-Turn a plain-language goal into prompts optimized for each AI model — and know which model to use for the job.
+Turn a plain-language goal into prompts optimized for each AI model - and know which model to use for the job.
 
-**Live:** https://whichai.wiki · **Status:** Growth · v0.22.0 · zero-cost architecture (free tiers only) · responsive & installable (PWA)
+**Live:** https://whichai.wiki · **Status:** Growth · v0.23.0 · zero-cost architecture (free tiers only) · responsive, installable (PWA) and offline-capable
 
-**Two ways in.** Describe a goal and get optimized prompts — or take the **guided finder**: a few quick questions (task, budget, must-haves) and WhichAI recommends the right AI with reasons, honest limitations and pricing. No prompt needed.
+**Two ways in.** Describe a goal and get optimized prompts - or take the **guided finder**: a few quick questions (task, budget, must-haves) and WhichAI recommends the right AI with reasons, honest limitations and pricing. No prompt needed.
 
 **Thirteen prompt targets, grouped.** AI assistants (Claude, ChatGPT, Gemini, Perplexity), ecosystem assistants (Grok, Copilot, Meta AI) and open models (Llama, GLM, Kimi, Nemotron, DeepSeek, Qwen), each with its own prompt style and "why it works" notes.
 
 **Private by design.** No account, no server, no tracking: everything runs client-side, and API keys never leave the browser.
 
-**Auto-run with your own free keys (BYOK).** Compare and Chains can execute prompts directly from the browser with free keys: Google AI Studio (Gemini), Groq (Llama) and OpenRouter (Nemotron 3 Ultra and Qwen3 Coder on genuinely free ":free" routes — ~20 requests/min, 200/day). Keys never leave the browser.
+**Auto-run with your own free keys (BYOK).** Compare and Chains can execute prompts directly from the browser with free keys: Google AI Studio (Gemini), Groq (Llama) and OpenRouter (Nemotron 3 Ultra and Qwen3 Coder on genuinely free ":free" routes - ~20 requests/min, 200/day). Keys never leave the browser.
 
-**Searchable model database with real specs.** 105 models from 34 vendors — public, private (Claude Mythos 5), preview, legacy and clearly-flagged rumored entries. Search matches partial names, vendors, tags and strengths; filter chips narrow by status and strength. Every model gets an overall score (Artificial Analysis index, July 16, 2026 snapshot, where published — clearly-marked estimates elsewhere), four 0–100 category ratings, and — where sourced — release date, context window, modalities, API price and speed. A **Market at a glance** section adds two minimal SVG charts: top measured scores and price-vs-performance (only models with published price *and* measured score are plotted).
+**Searchable model database with real specs.** 105 models from 34 vendors - public, private (Claude Mythos 5), preview, legacy and clearly-flagged rumored entries. Search matches partial names, vendors, tags and strengths; filter chips narrow by status and strength. Every model gets an overall score (Artificial Analysis index, July 16, 2026 snapshot, where published - clearly-marked estimates elsewhere), four 0–100 category ratings, and - where sourced - release date, context window, modalities, API price and speed. A **Market at a glance** section adds two minimal SVG charts: top measured scores and price-vs-performance (only models with published price *and* measured score are plotted).
 
-**Compare, two modes.** *Output comparison*: run the same optimized prompt in each AI app (auto-run where you have a key), paste answers, score them 1–5, save versions, export Markdown, merge the best parts in the Merge studio. *Model comparison*: pick 2–3 models and compare them on paper — scores, category profiles, context, price, strengths — with unavailable values shown honestly as "—" and estimates marked "~".
+**Compare, two modes.** *Output comparison*: run the same optimized prompt in each AI app (auto-run where you have a key), paste answers, score them 1–5, save versions, export Markdown, merge the best parts in the Merge studio. *Model comparison*: pick 2–3 models and compare them on paper - scores, category profiles, context, price, strengths - with unavailable values shown honestly as "n/a" and estimates marked "~".
 
 **Chains with a visual roadmap.** Break a complex goal into linked steps: numbered connected nodes show each step's model, purpose and input→output flow; each step gets a fresh optimized prompt and the previous output feeds the next. Reorder, remove or add custom steps; **Run all** executes the chain with your free keys; share a chain via URL; export everything as Markdown.
 
-**Glossary.** 26 AI terms (token, context window, RAG, agent, hallucination…) explained in one plain sentence each, with everyday examples and links into the app — searchable, linked from the footer of every page.
+**Glossary.** 26 AI terms (token, context window, RAG, agent, hallucination…) explained in one plain sentence each, with everyday examples and links into the app - searchable, linked from the footer of every page.
 
-**11 languages & three themes.** Interface in English, Italiano, Français, Español, Deutsch, Português, 中文, हिन्दी, Русский, 日本語 and العربية — full right-to-left layout for Arabic — plus light, dark and a warm sepia reading theme, with a soft cross-fade on switch.
+**11 languages & three themes.** Interface in English, Italiano, Français, Español, Deutsch, Português, 中文, हिन्दी, Русский, 日本語 and العربية - full right-to-left layout for Arabic - plus light, dark and a warm sepia reading theme, with a soft cross-fade on switch.
 
 **About & FAQ.** What the project is (open, free, sincere), an 8-question FAQ, a fair list of similar tools and what each does better, and how to contribute on [GitHub](https://github.com/Jackfdl/promptcompass-) or reach the author on [LinkedIn](https://www.linkedin.com/in/giacomo-fedeli-277765239/). FAQ, Similar tools, Contribute and Glossary are one tap away in the footer of every view.
 
 **Installable (PWA).** Add WhichAI to your phone's home screen: standalone window, compass icon, offline fallback via a network-first service worker that never serves stale versions.
+
+**A real wiki.** 156 static pages are generated straight from the database (`node tools/build-seo.mjs`): a page per model, per task ranking, per glossary term and curated head-to-heads, all indexed in `sitemap.xml`. The full database is an open dataset at `/data/models.json` (CC BY 4.0).
+
+**Keys and data, handled honestly.** API keys default to session-only storage and never leave the browser; saving on the device is an explicit opt-in. A strict Content Security Policy limits connections to the three BYOK providers. Settings includes full JSON export/import and a delete-everything button. Methodology is versioned and public in About.
 
 ## Run locally
 
@@ -34,8 +38,8 @@ Open `index.html` in any modern browser. No installation or build step required.
 ## Tests
 
 ```
-node tests/run-tests.mjs     # 57 static checks — no dependencies
-node tests/smoke-dom.mjs     # full DOM smoke test — requires `npm i jsdom`
+node tests/run-tests.mjs     # 57 static checks - no dependencies
+node tests/smoke-dom.mjs     # full DOM smoke test - requires `npm i jsdom`
 ```
 
 ## Deploy
@@ -48,26 +52,26 @@ Static site: deploy the folder as-is to any static host (Vercel, Netlify, GitHub
 - **Static-first:** vanilla HTML/CSS/JS, no build, no framework, no chart libraries
 - **BYOK (bring your own key):** API features use the user's own free-tier keys, stored locally
 - **Manual paste mode:** closed models without free APIs are supported by pasting prompts/outputs manually
-- **Honest data:** benchmark snapshots are dated, confidence-labeled and source-linked; estimates are marked "~"; unavailable values are shown as "—"; near-ties are stated as ties
+- **Honest data:** benchmark snapshots are dated, confidence-labeled and source-linked; estimates are marked "~"; unavailable values are shown as "n/a"; near-ties are stated as ties
 
 ## Project structure
 
 ```
-index.html          — app entry point (all views, hash-routed)
-styles.css          — design system (3 themes, responsive, RTL-aware)
-js/engine.js        — prompt generation engine + task auto-detection (13 families)
-js/benchmarks.js    — curated benchmark dataset + per-task model router (update ~monthly)
-js/models-db.js     — 105-model database: scores, categories, specs, prices (update ~monthly)
-js/chains.js        — multi-step workflow templates per task type
-js/finder.js        — guided finder: adaptive questionnaire → transparent recommendation
-js/modelcompare.js  — on-paper model comparison (2–3 models)
-js/charts.js        — dependency-free SVG chart helpers (bars, scatter, grouped)
-js/glossary.js      — plain-language AI glossary
-js/merge.js         — Merge studio (hand-pick the best of several outputs)
-js/i18n.js          — 11-language UI dictionary (193 keys, completeness-tested)
-js/app.js           — UI wiring, BYOK runners, PWA registration
-sw.js               — network-first service worker (bump CACHE each release)
-tests/              — static test suite + jsdom smoke test
-docs/               — internal docs (Italian) · CHANGELOG.md — release notes
-STATUS.md           — project state and roadmap (Italian)
+index.html          - app entry point (all views, hash-routed)
+styles.css          - design system (3 themes, responsive, RTL-aware)
+js/engine.js        - prompt generation engine + task auto-detection (13 families)
+js/benchmarks.js    - curated benchmark dataset + per-task model router (update ~monthly)
+js/models-db.js     - 105-model database: scores, categories, specs, prices (update ~monthly)
+js/chains.js        - multi-step workflow templates per task type
+js/finder.js        - guided finder: adaptive questionnaire → transparent recommendation
+js/modelcompare.js  - on-paper model comparison (2–3 models)
+js/charts.js        - dependency-free SVG chart helpers (bars, scatter, grouped)
+js/glossary.js      - plain-language AI glossary
+js/merge.js         - Merge studio (hand-pick the best of several outputs)
+js/i18n.js          - 11-language UI dictionary (193 keys, completeness-tested)
+js/app.js           - UI wiring, BYOK runners, PWA registration
+sw.js               - network-first service worker (bump CACHE each release)
+tests/              - static test suite + jsdom smoke test
+docs/               - internal docs (Italian) · CHANGELOG.md - release notes
+STATUS.md           - project state and roadmap (Italian)
 ```

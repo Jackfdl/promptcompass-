@@ -156,7 +156,7 @@ const MC = require("../js/modelcompare.js");
       if (id.includes("-" + '" +')) continue;
       if (/\$\{|" \+/.test(id)) continue;
       if (["test-gemini", "test-groq", "test-openrouter"].includes(id)) continue; // dynamic prefix ids exist
-      if (!htmlIds.has(id) && !["chain-map", "glossary-view"].includes(id)) {
+      if (!htmlIds.has(id) && !["chain-map", "glossary-view", "update-toast"].includes(id)) {
         // dynamically created ids are allowed only if created in JS
         if (!/createElement/.test(src.slice(Math.max(0, m.index - 400), m.index)) && !htmlIds.has(id)) missing.push(f + ":" + id);
       }
@@ -178,10 +178,28 @@ const MC = require("../js/modelcompare.js");
   const html = readFileSync("index.html", "utf8");
   const app = readFileSync("js/app.js", "utf8");
   const sw = readFileSync("sw.js", "utf8");
-  check("version: badge v0.22", html.includes(">v0.22 · Growth<"));
-  check("version: footer v0.22", html.includes("WhichAI v0.22"));
-  check("version: APP_VERSION v0.22", app.includes('APP_VERSION = "v0.22"'));
-  check("version: SW cache v0.22", sw.includes('"whichai-v0.22.0"'));
+  check("version: badge v0.23", html.includes(">v0.23 · Growth<"));
+  check("version: footer v0.23", html.includes("WhichAI v0.23"));
+  check("version: APP_VERSION v0.23", app.includes('APP_VERSION = "v0.23"'));
+  check("version: SW cache v0.23", sw.includes('"whichai-v0.23.0"'));
+  check("v0.23: CSP meta present", html.includes("Content-Security-Policy") && html.includes("connect-src 'self' https://generativelanguage.googleapis.com"));
+  check("v0.23: key storage + data tools ids", ["keymode-session", "keymode-local", "keys-clear", "data-export", "data-import", "data-wipe", "data-file"].every(id => html.includes('id="' + id + '"')));
+  check("v0.23: methodology card", html.includes('id="about-methodology"') && html.includes("Methodology v1.0"));
+  check("v0.23: SW precaches shell", sw.includes("js/finder.js") && sw.includes("icons/icon-512.png") && sw.includes("addAll"));
+  {
+    const noDash = ["js/i18n.js", "js/models-db.js", "js/benchmarks.js", "js/engine.js", "js/finder.js", "js/glossary.js", "js/modelcompare.js", "js/charts.js", "js/app.js", "js/merge.js", "js/chains.js", "index.html", "manifest.webmanifest"];
+    const dirty = noDash.filter(f => readFileSync(f, "utf8").includes("\u2014"));
+    check("v0.23: no em dashes in visible files", dirty.length === 0, dirty.join(", "));
+  }
+  {
+    const sm = readFileSync("sitemap.xml", "utf8");
+    const urlCount = (sm.match(/<loc>/g) || []).length;
+    check("v0.23: sitemap has 150+ urls (" + urlCount + ")", urlCount >= 150);
+    check("v0.23: model page generated + clean", existsSync("models/fable-5.html") && existsSync("models/index.html") && !readFileSync("models/fable-5.html", "utf8").includes("\u2014"));
+    check("v0.23: best-ai-for + glossary + compare + dataset", existsSync("best-ai-for/coding.html") && existsSync("glossary/token.html") && existsSync("compare/fable-5-vs-gpt-5-6-sol.html") && existsSync("data/models.json"));
+    const ds = JSON.parse(readFileSync("data/models.json", "utf8"));
+    check("v0.23: open dataset valid (" + ds.count + " models)", ds.count === ds.models.length && ds.count >= 105);
+  }
   check("version: scripts include new modules", ["charts.js", "glossary.js", "finder.js", "modelcompare.js"].every(s => html.includes("js/" + s)));
 }
 
@@ -192,6 +210,9 @@ const MC = require("../js/modelcompare.js");
   check("css: clip fix present", css.includes("padding-block: 5px") && css.includes("margin-block: -5px"));
   check("css: focus-visible ring", css.includes(":focus-visible"));
   check("css: sepia take 2", css.includes("#f1e5cd"));
+  check("css: dark focus fix + color-scheme", css.includes('[data-theme="dark"] { --focus: #60a5fa; color-scheme: dark; }'));
+  check("css: unified radii tokens", css.includes("--r-card: 14px") && css.includes("--r-ctl: 10px"));
+  check("css: update toast", css.includes(".update-toast"));
   check("css: chain map + finder + mc styles", ["chain-node", "finder-opt", "mc-grid", "footer-links", "wc-chart"].every(c => css.includes(c)));
 }
 

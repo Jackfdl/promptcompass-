@@ -21,6 +21,8 @@ w.scrollTo = () => {};
 w.Element.prototype.scrollIntoView = function () {};
 if (!w.matchMedia) w.matchMedia = () => ({ matches: false, addEventListener() {}, removeEventListener() {} });
 w.confirm = () => true;
+w.URL.createObjectURL = w.URL.createObjectURL || (() => "blob:test");
+w.URL.revokeObjectURL = w.URL.revokeObjectURL || (() => {});
 
 const scripts = ["js/engine.js", "js/benchmarks.js", "js/chains.js", "js/i18n.js", "js/models-db.js", "js/merge.js", "js/charts.js", "js/glossary.js", "js/finder.js", "js/modelcompare.js", "js/app.js"];
 let bootError = null;
@@ -107,6 +109,25 @@ check("chains: move down reorders roadmap", d.querySelector("#chain-map .chain-n
 const removeBtns = [...d.querySelectorAll("#chain-steps .chain-step-tools button")].filter(b => b.textContent === "✕");
 removeBtns[3].click();
 check("chains: remove step → 3 nodes", d.querySelectorAll("#chain-map .chain-node").length === 3);
+
+/* --- v0.23: key storage, data tools, model deep link --- */
+w.location.hash = "#settings";
+await new Promise(r => setTimeout(r, 30));
+check("v23: key mode radios present, session default", d.getElementById("keymode-session").checked === true && d.getElementById("keymode-local").checked === false);
+d.getElementById("gemini-key").value = "AIza-test";
+d.getElementById("settings-save").click();
+check("v23: keys saved to sessionStorage by default", !!w.sessionStorage.getItem("pc_settings_v1") && !w.localStorage.getItem("pc_settings_v1"));
+d.getElementById("keymode-local").click();
+d.getElementById("keymode-local").dispatchEvent(new w.Event("change"));
+check("v23: switching mode moves keys to localStorage", !!w.localStorage.getItem("pc_settings_v1") && !w.sessionStorage.getItem("pc_settings_v1"));
+d.getElementById("keys-clear").click();
+check("v23: clear keys empties fields", d.getElementById("gemini-key").value === "" && JSON.parse(w.localStorage.getItem("pc_settings_v1")).geminiKey === "");
+check("v23: data tools present", !!d.getElementById("data-export") && !!d.getElementById("data-import") && !!d.getElementById("data-wipe"));
+d.getElementById("data-export").click();
+check("v23: export does not throw", true);
+w.location.hash = "#model=kimi-k3";
+await new Promise(r => setTimeout(r, 260));
+check("v23: #model= deep link opens detail", !d.getElementById("guide-view").hidden && d.getElementById("db-detail").textContent.includes("Kimi K3"));
 
 /* --- About anchors + language + theme --- */
 w.location.hash = "#about-faq";
