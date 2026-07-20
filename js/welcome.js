@@ -86,13 +86,14 @@
     var sy = to.height / from.height;
     if (isBrand) sx = sy = Math.min(1, to.height / from.height);
 
+    var finalTransform = "translate3d(" + dx + "px," + dy + "px,0) scale(" + sx + "," + sy + ")";
     var anim = clone.animate([
-      { transform: "translate3d(0,0,0) scale(1,1)", opacity: 1, filter: "blur(0)" },
-      { transform: "translate3d(" + dx + "px," + dy + "px,0) scale(" + sx + "," + sy + ")", opacity: 0.96, filter: "blur(0)" }
+      { transform: "translate3d(0,0,0) scale(1,1)", opacity: 1, filter: "blur(0)", offset: 0, easing: "cubic-bezier(.16,1,.3,1)" },
+      { transform: finalTransform, opacity: 0.96, filter: "blur(0)", offset: 0.76, easing: "ease-out" },
+      { transform: finalTransform, opacity: 0, filter: "blur(1.5px)", offset: 1 }
     ], {
-      duration: isBrand ? 720 : 650,
+      duration: isBrand ? 860 : 820,
       delay: delay,
-      easing: "cubic-bezier(.16,1,.3,1)",
       fill: "forwards"
     });
     return { clone: clone, animation: anim };
@@ -123,7 +124,9 @@
     });
 
     root.setTimeout(function () { body.classList.add("welcome-header-ready"); }, 330);
-    root.setTimeout(function () { complete(route, selectedTarget); }, 790);
+    /* The slowest menu clone ends at ~981 ms. Keep the welcome layer alive
+       until every clone has reached its target and faded, avoiding a hard cut. */
+    root.setTimeout(function () { complete(route, selectedTarget); }, 1050);
   }
 
   actions.forEach(function (action) {

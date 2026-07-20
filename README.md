@@ -3,7 +3,7 @@
 
 Turn a plain-language goal into prompts optimized for each AI model - and know which model to use for the job.
 
-**Live:** https://whichai.wiki · **Status:** Growth · v0.26.0 · zero-cost architecture (free tiers only) · responsive, installable (PWA) and offline-capable
+**Live:** https://whichai.wiki · **Status:** Growth · v0.27.0 · zero-cost architecture (free tiers only) · responsive, installable (PWA) and offline-capable
 
 **Two ways in.** Describe a goal and get optimized prompts - or take the **guided finder**: a few quick questions (task, budget, must-haves) and WhichAI recommends the right AI with reasons, honest limitations and pricing. No prompt needed.
 

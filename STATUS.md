@@ -1,10 +1,18 @@
 # WhichAI (ex PromptCompass) — STATUS
 
-Ultimo aggiornamento: 2026-07-20 (sessione 27 - GPT-5.6)
-Versione app: v0.26.0 (in cartella; live ancora v0.21: il prossimo deploy porta v0.22→v0.26 insieme)
+Ultimo aggiornamento: 2026-07-21 (sessione 28 - GPT-5.6)
+Versione app: v0.27.0 (in cartella; live ancora v0.21: il prossimo deploy porta v0.22→v0.27 insieme)
 Sito live: https://whichai.wiki · https://promptcompass.vercel.app resta come alias
 
 ## Fase corrente: Growth - fase 1 del piano brainstorming (SEO statico, sicurezza, retention di base)
+
+## Fatto (sessione 28, 2026-07-21 - GPT-5.6)
+
+- **FINALE MORPH SENZA TAGLIO**: i clone ora completano prima movimento e ridimensionamento, poi sfumano rapidamente nello stesso punto fino a opacità zero. Il layer welcome dissolve negli ultimi 240 ms e viene rimosso solo quando anche l'ultimo bottone è già trasparente; eliminato lo stacco tra riquadro animato e menu reale.
+- **WORDMARK LEGGIBILI IN DARK**: i logotipi SVG monocromatici caricati come immagini (il cui `currentColor` restava nero) ricevono ora una variante chiara via filtro solo sul wordmark. Le icone a colori non vengono alterate; restano disponibili le etichette testuali con font compatibili per i nomi modello.
+- **VERSIONE**: v0.27 in badge/footer/`APP_VERSION`, cache PWA `whichai-v0.27.0`.
+- **TEST E QA**: 103 statici + 60 smoke DOM = **163/163 PASSATI**; morph e wordmark ricontrollati in browser reale con tema dark.
+- [ ] **Jack pubblica v0.27** (include tutte le release non ancora pubblicate da v0.22).
 
 ## Fatto (sessione 27, 2026-07-20 - GPT-5.6)
 

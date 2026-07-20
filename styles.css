@@ -2483,13 +2483,14 @@ body.welcome-header-ready .site-header {
 body.welcome-leaving .welcome {
   background-color: transparent;
   pointer-events: none;
+  animation: welcomeLayerOut 0.24s 0.78s ease-out both;
 }
 
 body.welcome-leaving .welcome-value,
 body.welcome-leaving .welcome-orb { opacity: 0; }
 
-body.welcome-leaving .welcome-brand,
-body.welcome-leaving .welcome-action { opacity: 0; }
+body.welcome-leaving #welcome .welcome-brand,
+body.welcome-leaving #welcome .welcome-action { opacity: 0 !important; }
 
 .welcome-morph-clone {
   position: fixed !important;
@@ -2549,6 +2550,11 @@ body.app-reveal .view:not([hidden]) > :nth-child(3n) { animation-delay: 0.24s; }
 @keyframes welcomeOrb {
   from { transform: translate3d(-2%, -2%, 0) scale(0.96); }
   to { transform: translate3d(4%, 5%, 0) scale(1.08); }
+}
+
+@keyframes welcomeLayerOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 @keyframes appEdgeFromLeft {
@@ -2660,8 +2666,12 @@ body.app-reveal .view:not([hidden]) > :nth-child(3n) { animation-delay: 0.24s; }
 .ai-font-meta { font-family: "Optimistic Display", "Inter", system-ui, sans-serif; letter-spacing: -0.025em; }
 .ai-font-nvidia { font-family: "DIN Pro", "Arial Narrow", "Inter", sans-serif; letter-spacing: 0.01em; }
 
-[data-theme="dark"] .ai-brand-mono .ai-brand-icon,
-[data-theme="dark"] .ai-brand-wordmark.ai-brand-mono { filter: invert(1); }
+[data-theme="dark"] .ai-brand-mono .ai-brand-icon { filter: invert(1); }
+
+/* Wordmark SVGs are monochrome artwork rendered as external images, so their
+   internal currentColor defaults to black. In dark mode the light equivalent
+   is produced without recoloring the separate full-color product icon. */
+[data-theme="dark"] .ai-brand-wordmark { filter: invert(1) brightness(1.08); }
 
 [data-theme="sepia"] .ai-brand-mono .ai-brand-icon,
 [data-theme="sepia"] .ai-brand-wordmark.ai-brand-mono { filter: sepia(.35) saturate(.65) brightness(.56); }

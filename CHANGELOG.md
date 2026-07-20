@@ -2,6 +2,15 @@
 
 (Older release-by-release history lives in `STATUS.md`, the project's working memory.)
 
+## v0.27.0 (2026-07-21)
+
+### Fixed
+- The shared-element morph now reaches its header target and fades out in place before cleanup, removing the visible hard cut between the welcome controls and the real navigation.
+- Monochrome wordmark images now receive a dedicated light treatment in dark mode while full-color product icons keep their original colors.
+
+### Tests
+- Static suite: 103 checks. DOM smoke: 60 checks. Browser QA covers the final fade timing and dark wordmark contrast. **163/163 automated checks green.**
+
 ## v0.26.0 (2026-07-20)
 
 A cinematic but lightweight first impression: native welcome entrance, shared-element morph into the app, and consistent local AI branding across the app and static wiki.
